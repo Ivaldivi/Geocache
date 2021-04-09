@@ -30,7 +30,7 @@ findCoordinates = () => {
     error => Alert.alert(error.message),
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
   );
-console.log("hello");
+  
 };
 
 // const componentDidMount = () => {
