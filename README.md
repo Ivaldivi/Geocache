@@ -42,6 +42,6 @@ Assigns the top of the phone to represent 0 degrees, and based on its movement a
 
 
 ### Images within assets 
-All pngs with no copy right information found on the internet. 
+All pngs with no copy right information or labeled cliip art, found on the internet. 
 
 
