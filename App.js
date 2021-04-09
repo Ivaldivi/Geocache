@@ -30,7 +30,7 @@ findCoordinates = () => {
     error => Alert.alert(error.message),
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
   );
-  
+
 };
 
 // const componentDidMount = () => {
@@ -233,7 +233,7 @@ const CompassScreen = ({ navigation }) => {
     }
   };
 
-  // (By default 0° starts from the right of the device.)
+  //(current 0 degrees is set from the top of the phone)
   const _degree = (magnetometer) => {
     return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
   };
@@ -241,12 +241,12 @@ const CompassScreen = ({ navigation }) => {
 
   return (
 
-    <Grid style={{ backgroundColor: 'grey' }}>
+    <Grid style={{ backgroundColor: '#fff' }}>
       <Row style={{ alignItems: 'center' }} size={.9}>
         <Col style={{ alignItems: 'center' }}>
           <Text
             style={{
-              color: '#fff',
+              color: 'grey',
               fontSize: height / 26,
               fontWeight: 'bold'
             }}>
@@ -258,7 +258,7 @@ const CompassScreen = ({ navigation }) => {
       <Row style={{ alignItems: 'center' }} size={.1}>
         <Col style={{ alignItems: 'center' }}>
           <View style={{ position: 'absolute', width: width, alignItems: 'center', top: 0 }}>
-            <Image source={require('./assets/compass_pointer.png')} style={{
+            <Image source={require('./assets/arrow.png')} style={{
               height: height / 26,
               resizeMode: 'contain'
             }} />
@@ -268,7 +268,7 @@ const CompassScreen = ({ navigation }) => {
 
       <Row style={{ alignItems: 'center' }} size={2}>
         <Text style={{
-          color: '#fff',
+          color: 'grey',
           fontSize: height / 27,
           width: width,
           position: 'absolute',
@@ -279,7 +279,7 @@ const CompassScreen = ({ navigation }) => {
 
         <Col style={{ alignItems: 'center' }}>
 
-          <Image source={require("./assets/compass_bg.png")} style={{
+          <Image source={require("./assets/compass_bg_copy.png")} style={{
             height: width - 80,
             justifyContent: 'center',
             alignItems: 'center',
@@ -292,13 +292,13 @@ const CompassScreen = ({ navigation }) => {
 
       <Row style={{ alignItems: 'center' }} size={1}>
         <Col style={{ alignItems: 'center' }}>
-          <Text style={{ color: '#fff' }}>Find: 44.9379, -93.1691</Text>
-          <View style={[styles.bubble, styles.latlng]}>
+          <Text style={{ color: 'grey' }}>Find: 44.9379, -93.1691</Text>
+          {/* <View style={[styles.bubble, styles.latlng]}>
             <TouchableOpacity onPress={this.findCoordinates}>
               <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
               <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </Col>
       </Row>
 
