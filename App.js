@@ -67,6 +67,10 @@ const NavigateStack = () => {
           name='compass'
           component={CompassScreen}
           options={{ title: 'Compass' }} />
+        <Stack.Screen
+          name='victory'
+          component = {VictoryScreen}
+          options={{ title: 'Victory'}} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -155,6 +159,17 @@ const HomeScreen = ({ navigation }) => {
           navigation.navigate('map')} />
     </View>
 
+  )
+}
+
+const VictoryScreen = ({navigation}) => {
+  return (
+    <View>
+      <Button
+      title = "Congratulations, you spotted Scott! Click here to return to the Home Screen"
+      onPress={() =>
+        navigation.navigate('home')} />
+    </View>
   )
 }
 const CompassScreen = ({ navigation }) => {
