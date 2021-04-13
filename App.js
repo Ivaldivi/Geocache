@@ -9,6 +9,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import { Magnetometer } from 'expo-sensors';
 import { apisAreAvailable } from 'expo';
 import { Component } from 'react';
+import userMap from './components/UserMap';
 
 
 const Stack = createStackNavigator();
@@ -110,40 +111,7 @@ const MapScreen = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-
-      <MapView style={styles.map} ref={ref => {
-        this.map = ref;
-      }} showsUserLocation={true} initialRegion={{
-        latitude: (44.937950134),
-        longitude: (-93.168869019),
-        latitudeDelta: (44.937950134),
-        longitudeDelta: (93.168869019)
-      }}
-        initialRegion={this.state.region}
-      >
-
-        {/*marker with goal location*/}
-        <MapView.Marker
-          coordinate={{
-            latitude: 44.937950134,
-            longitude: -93.168869019
-          }}
-          title={'Find Me'} identifier={'mk1'}
-          image={
-            require("./assets/scot.png")}
-        />
-         {/*draggable marker for testing purposes*/}
-        <MapView.Marker draggable
-          coordinate={{
-            latitude: 44.9416,
-            longitude: -93.1974
-          }}
-          title={'Place Me (no purpose testing)'} identifier={'mk2'}
-          onDragEnd={(e) => { console.log('dragEnd', e.nativeEvent.coordinate) }}
-        />
-  
-      </MapView>
-
+      <userMap/>
       <Button
         title="Switch to Home Screen"
         onPress={() =>
