@@ -190,7 +190,7 @@ const CompassScreen = ({ navigation }) => {
   
   };
 
-  const useEffect(() => {
+  useEffect(() => {
     _toggle();
   }, []);
 
