@@ -34,21 +34,7 @@ function App() {
 
 // };
 
-// const componentDidMount = () => {
-//   navigator.geolocation.getCurrentPosition(
-//     position => {
-//       const location = JSON.stringify(position.coords.latitude.toPrecision(6)+ ", " + position.coords.longitude.toPrecision(6));
 
-//             this.setState({ location });
-//     },
-//     error => {
-//       this.setState({
-//         error: 'Error'
-//       });
-//     }
-//   );
-//   console.log("hello");
-// };
 
 
 const NavigateStack = () => {
@@ -88,27 +74,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const MapScreen = ({ navigation }) => {
 
-  this.state = {
-    region: {
-      latitude: 44.9379,
-      longitude: -93.1691,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0922 * ASPECT_RATIO,
-    },
-  };
-  const findCoordinates = () => {
 
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
-  
-        this.setState({ location });
-      },
-      error => Alert.alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-  
-  };
   return (
     <View style={styles.container}>
       <UserMap/>
@@ -116,13 +82,6 @@ const MapScreen = ({ navigation }) => {
         title="Switch to Home Screen"
         onPress={() =>
           navigation.navigate('home')} />
-      {/*TRYING TO SHOW USER Coordinates*/}
-      <View style={[styles.bubble, styles.latlng]}>
-        <TouchableOpacity onPress={this.findCoordinates}>
-          <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
-          <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
-        </TouchableOpacity>
-      </View>
     </View>
 
 
