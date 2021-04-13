@@ -19,19 +19,19 @@ function App() {
   )
 }
 
-findCoordinates = () => {
+// findCoordinates = () => {
 
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+//   navigator.geolocation.getCurrentPosition(
+//     position => {
+//       const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
 
-      this.setState({ location });
-    },
-    error => Alert.alert(error.message),
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  );
+//       this.setState({ location });
+//     },
+//     error => Alert.alert(error.message),
+//     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+//   );
 
-};
+// };
 
 // const componentDidMount = () => {
 //   navigator.geolocation.getCurrentPosition(
@@ -91,7 +91,19 @@ const MapScreen = ({ navigation }) => {
       longitudeDelta: 0.0922 * ASPECT_RATIO,
     },
   };
+  const findCoordinates = () => {
 
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+  
+        this.setState({ location });
+      },
+      error => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  
+  };
   return (
     <View style={styles.container}>
 
@@ -164,9 +176,21 @@ const CompassScreen = ({ navigation }) => {
   this.state = {
     location: null
   };
+  const findCoordinates = () => {
 
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+  
+        this.setState({ location });
+      },
+      error => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  
+  };
 
-  useEffect(() => {
+  const useEffect(() => {
     _toggle();
   }, []);
 
