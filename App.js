@@ -9,7 +9,7 @@ import { Grid, Col, Row } from "react-native-easy-grid";
 import { Magnetometer } from 'expo-sensors';
 import { apisAreAvailable } from 'expo';
 import { Component } from 'react';
-import userMap from './components/UserMap';
+import UserMap from './components/UserMap';
 
 
 const Stack = createStackNavigator();
@@ -111,7 +111,7 @@ const MapScreen = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <userMap/>
+      <UserMap/>
       <Button
         title="Switch to Home Screen"
         onPress={() =>
