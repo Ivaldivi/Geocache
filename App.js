@@ -144,12 +144,12 @@ const MapScreen = ({ navigation }) => {
         onPress={() =>
           navigation.navigate('home')} />
       {/*TRYING TO SHOW USER Coordinates*/}
-      {/* <View style={[styles.bubble, styles.latlng]}>
+      <View style={[styles.bubble, styles.latlng]}>
         <TouchableOpacity onPress={this.findCoordinates}>
           <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
           <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
         </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
 
   )
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height / 2,
+    height: Dimensions.get('window').height,
   },
 
   bubble: {
