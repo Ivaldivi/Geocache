@@ -19,19 +19,19 @@ function App() {
   )
 }
 
-findCoordinates = () => {
+// findCoordinates = () => {
 
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+//   navigator.geolocation.getCurrentPosition(
+//     position => {
+//       const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
 
-      this.setState({ location });
-    },
-    error => Alert.alert(error.message),
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  );
+//       this.setState({ location });
+//     },
+//     error => Alert.alert(error.message),
+//     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+//   );
 
-};
+// };
 
 // const componentDidMount = () => {
 //   navigator.geolocation.getCurrentPosition(
@@ -95,7 +95,19 @@ const MapScreen = ({ navigation }) => {
       longitudeDelta: 0.0922 * ASPECT_RATIO,
     },
   };
+  const findCoordinates = () => {
 
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+  
+        this.setState({ location });
+      },
+      error => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  
+  };
   return (
     <View style={styles.container}>
 
@@ -137,12 +149,12 @@ const MapScreen = ({ navigation }) => {
         onPress={() =>
           navigation.navigate('home')} />
       {/*TRYING TO SHOW USER Coordinates*/}
-      {/* <View style={[styles.bubble, styles.latlng]}>
+      <View style={[styles.bubble, styles.latlng]}>
         <TouchableOpacity onPress={this.findCoordinates}>
           <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
           <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
         </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
 
 
@@ -184,7 +196,19 @@ const CompassScreen = ({ navigation }) => {
   this.state = {
     location: null
   };
+  const findCoordinates = () => {
 
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+  
+        this.setState({ location });
+      },
+      error => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  
+  };
 
   useEffect(() => {
     _toggle();
@@ -313,12 +337,12 @@ const CompassScreen = ({ navigation }) => {
       <Row style={{ alignItems: 'center' }} size={1}>
         <Col style={{ alignItems: 'center' }}>
           <Text style={{ color: 'grey' }}>Find: 44.9379, -93.1691</Text>
-          {/* <View style={[styles.bubble, styles.latlng]}>
+          <View style={[styles.bubble, styles.latlng]}>
             <TouchableOpacity onPress={this.findCoordinates}>
               <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
               <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
             </TouchableOpacity>
-          </View> */}
+          </View>
         </Col>
       </Row>
 
@@ -336,7 +360,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height / 2,
+    height: Dimensions.get('window').height,
   },
 
   bubble: {
