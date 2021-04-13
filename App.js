@@ -1,6 +1,6 @@
 //import * as React from 'react';
 import React, { useState, useEffect } from 'react';
-import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -67,10 +67,10 @@ const NavigateStack = () => {
           name='compass'
           component={CompassScreen}
           options={{ title: 'Compass' }} />
-        <Stack.Screen
-          name='victory'
+          <Stack.Screen
+          name = 'victory'
           component = {VictoryScreen}
-          options={{ title: 'Victory'}} />
+          options = {{title: 'Victory'}} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -129,6 +129,7 @@ const MapScreen = ({ navigation }) => {
           title={'Place Me (no purpose testing)'} identifier={'mk2'}
           onDragEnd={(e) => { console.log('dragEnd', e.nativeEvent.coordinate) }}
         />
+  
       </MapView>
 
       <Button
@@ -143,6 +144,7 @@ const MapScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View> */}
     </View>
+
 
   )
 }
@@ -163,14 +165,17 @@ const HomeScreen = ({ navigation }) => {
 }
 
 const VictoryScreen = ({navigation}) => {
+
+  const [subscription, setSubscription] = useState(null);
+  const [magnetometer, setMagnetometer] = useState(0);
   return (
-    <View>
-      <Button
-      title = "Congratulations, you spotted Scott! Click here to return to the Home Screen"
-      onPress={() =>
-        navigation.navigate('home')} />
-    </View>
-  )
+  <View>
+    <Button
+    title = "Congratulations! You spotted Scot! Press here to return to the home screen"
+    onPress={() =>
+      navigation.navigate('home')} />
+  </View>
+    )
 }
 const CompassScreen = ({ navigation }) => {
 
