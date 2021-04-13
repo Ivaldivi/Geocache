@@ -3,6 +3,27 @@ import { View, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 const userMap = props =>{
+  this.state = {
+    region: {
+      latitude: 44.9379,
+      longitude: -93.1691,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0922 * ASPECT_RATIO,
+    },
+  };
+  const findCoordinates = () => {
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+  
+        this.setState({ location });
+      },
+      error => Alert.alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  
+  };
    
     return(
         <View style = {styles.mapContainer}>
@@ -52,8 +73,14 @@ const userMap = props =>{
                             image={require("./scot.png")}
                             /> 
                     {/* Takes the user to a bench on summit : ) */}
-
                 </MapView>
+                  {/*TRYING TO SHOW USER Coordinates*/}
+      <View style={[styles.bubble, styles.latlng]}>
+        <TouchableOpacity onPress={this.findCoordinates}>
+          <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
+          <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
+        </TouchableOpacity>
+      </View>
         </View>
     );
 };
