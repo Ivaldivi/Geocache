@@ -317,12 +317,12 @@ const CompassScreen = ({ navigation }) => {
       <Row style={{ alignItems: 'center' }} size={1}>
         <Col style={{ alignItems: 'center' }}>
           <Text style={{ color: 'grey' }}>Find: 44.9379, -93.1691</Text>
-          {/* <View style={[styles.bubble, styles.latlng]}>
+          <View style={[styles.bubble, styles.latlng]}>
             <TouchableOpacity onPress={this.findCoordinates}>
               <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
               <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
             </TouchableOpacity>
-          </View> */}
+          </View>
         </Col>
       </Row>
 
