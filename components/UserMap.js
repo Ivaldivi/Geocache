@@ -1,3 +1,4 @@
+//import React from 'react';
 import {
   StyleSheet,
   View,
@@ -19,7 +20,7 @@ function userMap(props) {
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-  const [location,setLocation] = useState("hello");
+  const [location,setLocation] = useState("-----");
 
  
   const region = useState({
@@ -31,12 +32,10 @@ function userMap(props) {
   
 
   const findCoordinates = () => {
-      setLocation("hello");
       navigator.geolocation.getCurrentPosition(
         position => {
           const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
-          setLocation( location );
-          console.log(location);
+          setLocation(location);
         },
         error => Alert.alert(error.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -44,23 +43,6 @@ function userMap(props) {
     
     };
      
-
-  // findCoordinates = () => {
-  //   useState(0);
-  //   this.setState({
-  //     location: "hello" 
-  //   });
-  //   navigator.geolocation.getCurrentPosition(
-  //     position => {
-  //       const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
-  //       // this.setState({ location });
-  //     },
-  //     error => Alert.alert(error.message),
-  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  //   );
-  
-  // };
-   
     return(
         <View style = {styles.mapContainer}>
             <MapView
@@ -143,5 +125,4 @@ const styles = StyleSheet.create({
   },
   centeredText: { textAlign: 'center' },
 });
-
 export default userMap;
