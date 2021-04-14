@@ -1,29 +1,65 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity, Alert, Platform
+} from 'react-native';
+import MapView, { MAP_TYPES, Marker } from 'react-native-maps';
+import React, { useState } from 'react';
+import { useEffect } from 'react/cjs/react.production.min';
 
-const userMap = props =>{
-  this.state = {
-    region: {
-      latitude: 44.9379,
-      longitude: -93.1691,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0922 * ASPECT_RATIO,
-    },
-  };
+function userMap(props) {
+
+  const { width, height } = Dimensions.get('window');
+
+  const ASPECT_RATIO = width / height;
+  const LATITUDE = 44.9379;
+  const LONGITUDE = -93.1691;
+  const LATITUDE_DELTA = 0.0922;
+  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
+  const [location,setLocation] = useState("hello");
+
+ 
+  const region = useState({
+    latitude: LATITUDE,
+    longitude: LONGITUDE,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+  });
+  
+
   const findCoordinates = () => {
+      setLocation("hello");
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+          setLocation( location );
+          console.log(location);
+        },
+        error => Alert.alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      );
     
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+    };
+     
+
+  // findCoordinates = () => {
+  //   useState(0);
+  //   this.setState({
+  //     location: "hello" 
+  //   });
+  //   navigator.geolocation.getCurrentPosition(
+  //     position => {
+  //       const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
+  //       // this.setState({ location });
+  //     },
+  //     error => Alert.alert(error.message),
+  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+  //   );
   
-        this.setState({ location });
-      },
-      error => Alert.alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-  
-  };
+  // };
    
     return(
         <View style = {styles.mapContainer}>
@@ -73,33 +109,39 @@ const userMap = props =>{
                             image={require("./scot.png")}
                             /> 
                     {/* Takes the user to a bench on summit : ) */}
-                </MapView>
-                  {/*TRYING TO SHOW USER Coordinates*/}
-      <View style={[styles.bubble, styles.latlng]}>
-        <TouchableOpacity onPress={this.findCoordinates}>
-          <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
-          <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
-        </TouchableOpacity>
-      </View>
+
+              </MapView>
+              <View style={[styles.bubble, styles.latlng]}>
+                <TouchableOpacity onPress={findCoordinates}>
+                    <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
+                    <Text style={styles.centeredText, { fontWeight: 'bold' }}>{location}</Text>
+                  </TouchableOpacity>
+              </View>
         </View>
     );
 };
 const styles = StyleSheet.create({
-    mapContainer: {
-        width: 350,
-        height: 600, 
-        alignSelf: 'center', 
-        marginBottom: 20,
-        marginTop: 20
-    }, 
-    
-    map: {
-        width: '100%', 
-        height: '100%', 
-        marginBottom: 0, 
-        alignSelf: 'center'
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  map: {
+    width: 350,
+    height: 600, 
+    alignSelf: 'center', 
+    marginBottom: 20,
+    marginTop: 20
+  },
+
+  bubble: {
+    backgroundColor: 'rgba(0, 0, 255, 0.3)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  centeredText: { textAlign: 'center' },
 });
-  
 
 export default userMap;
