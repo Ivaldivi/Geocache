@@ -2,7 +2,10 @@
 Geocaching app for Comp225
 
 ### Find Coordinates Method 
-This Method is needed by both the map and the compass. Currently, there is an issue with defining "this" and it appears there is confusion within the code about state (as Map View sets a state, that is different than the state the current compass is requesting for). This method works when putting Compass and Map in their own apps. 
+This Method is needed by both the map and the compass. Currently, there is an issue with defining "this" and it appears there is confusion within the code about state (as Map View sets a state, that is different than the state the current compass is requesting for). This method works when putting Compass and Map in their own apps.
+
+____________________
+
 ### Map Screen 
 Currently screen works, but needs to be adpated for user purposes. Warning occurs, and source appears to be from Find Coordinates Method in combination with the compass class. 
 ### References and Inspiration for Find Coordinates Method and Map Screen: 
@@ -13,6 +16,7 @@ Currently screen works, but needs to be adpated for user purposes. Warning occur
 
 ##### Example React Native Project where stylistic ideas were referenced: https://github.com/react-native-maps/react-native-maps
 
+____________________
 
 ### Compass Screen 
 This screen creates a simple arrow that points to the direction of the goal coordinates (AKA Scot). This screen currently works with hardcoded values, although we need to do further testing to be sure the arrow is pointing correctly. Utilizing the compass' magnetometer, the user coordinates, and the goal coordinates, this screen finds the bearing and heading in order to point in the correct direction. 
@@ -40,6 +44,8 @@ This function finds the angle of arrow image rotation by doing simple math with 
 ###### A compass app created by @Rahul Hague was referenced to better understand math to find angle. https://github.com/rahulhaque/compass-react-native-expo
 ###### The documentation for GeoLib helped with bearing understanding: https://www.npmjs.com/package/geolib
 ###### The following article helped understand the math and terminology to create the compass (heading, bearing, etc): http://www.movable-type.co.uk/scripts/latlong.html
+
+____________________
 
 
 ### Images within assets 
