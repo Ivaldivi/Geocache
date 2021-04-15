@@ -119,5 +119,5 @@ import {
     },
     centeredText: { textAlign: 'center' },
   });
-  export default userMap;
+  export default goalMap;
   
