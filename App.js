@@ -12,30 +12,15 @@ import { Component } from 'react';
 import UserMap from './components/UserMap';
 
 
-const Stack = createStackNavigator();
-function App() {
+const { width, height } = Dimensions.get('window');
 
+const Stack = createStackNavigator();
+
+function App() {
   return (
     <NavigateStack />
   )
 }
-
-// findCoordinates = () => {
-
-//   navigator.geolocation.getCurrentPosition(
-//     position => {
-//       const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
-
-//       this.setState({ location });
-//     },
-//     error => Alert.alert(error.message),
-//     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-//   );
-
-// };
-
-
-
 
 const NavigateStack = () => {
 
@@ -63,15 +48,6 @@ const NavigateStack = () => {
   )
 }
 
-const { width, height } = Dimensions.get('window');
-
-const ASPECT_RATIO = width / height;
-const LATITUDE = 44.9379;
-const LONGITUDE = -93.1691;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-
 const MapScreen = ({ navigation }) => {
 
 
@@ -87,6 +63,7 @@ const MapScreen = ({ navigation }) => {
 
   )
 }
+
 const HomeScreen = ({ navigation }) => {
   return (
     <View>
