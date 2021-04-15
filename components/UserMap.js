@@ -34,8 +34,8 @@ function userMap(props) {
   const findCoordinates = () => {
       navigator.geolocation.getCurrentPosition(
         position => {
-          const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
-          setLocation(location);
+          const loc =position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6);
+          setLocation(loc);
         },
         error => Alert.alert(error.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
