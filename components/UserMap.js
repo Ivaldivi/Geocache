@@ -4,11 +4,12 @@ import {
   View,
   Text,
   Dimensions,
-  TouchableOpacity, Alert, Platform
+  TouchableOpacity, Alert, Platform, ImageStore
 } from 'react-native';
 import MapView, { MAP_TYPES, Marker } from 'react-native-maps';
 import React, { useState } from 'react';
 import { useEffect } from 'react/cjs/react.production.min';
+
 
 function userMap(props) {
 
@@ -62,7 +63,7 @@ function userMap(props) {
                             longitude: -93.168869019}}
                             title={'CC Cache'}
                             key={Marker.snellAndGrand}
-                            image={require("./scot.png")}
+                            image={require("./images/scot.png")}
                           />
               </MapView>
               <View style={[styles.bubble, styles.latlng]}>

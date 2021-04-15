@@ -4,7 +4,7 @@ import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, De
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import UserMap from './components/UserMap';
-import GoalMap from './components/UserMap';
+import GoalMap from './components/GoalMap';
 import Compass from './components/Compass';
 
 const { width, height } = Dimensions.get('window');
