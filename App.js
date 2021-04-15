@@ -107,10 +107,6 @@ const VictoryScreen = ({navigation}) => {
 const CompassScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Button
-        title="Switch to Home Screen"
-        onPress={() =>
-          navigation.navigate('home')} />
       <Compass style={styles.compass}/>
     </View>
       )

@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 
 
 
-const Compass = (props) => {
+const Compass = () => {
 
     const [userLatitude,setUserLatitude] = useState(0);
     const [userLongitude,setUserLongitude] = useState(0);
