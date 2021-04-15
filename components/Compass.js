@@ -6,7 +6,7 @@
 
 
 import * as React from 'react';
-import { Image, View, Text} from 'react-native';
+import { Image, View} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer} from 'expo-sensors';
 import { useEffect, useState } from 'react';
@@ -95,10 +95,6 @@ const Compass = (props) => {
       }
       return angle;
     };
-
-    const _degree = (magnetometer) => {
-        return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
-      };
   
     //Mathematical Reasoning (A'di's): If the bearing is less than the heading then we need to 
     //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
@@ -123,7 +119,6 @@ const Compass = (props) => {
             transform: [{rotate: _finalAngle() + 'deg'}],
           }}
         />
-        <Text>{_finalAngle()}</Text>
         </View>
     )
         
