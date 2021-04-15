@@ -11,6 +11,7 @@ import { apisAreAvailable } from 'expo';
 import { Component } from 'react';
 import UserMap from './components/UserMap';
 import GoalMap from './components/UserMap';
+import Compass from './components/Compass';
 
 const { width, height } = Dimensions.get('window');
 
@@ -110,166 +111,15 @@ const VictoryScreen = ({navigation}) => {
     )
 }
 const CompassScreen = ({ navigation }) => {
-
-  const [subscription, setSubscription] = useState(null);
-  const [magnetometer, setMagnetometer] = useState(0);
-  this.state = {
-    location: null
-  };
-  const findCoordinates = () => {
-
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const location = JSON.stringify(position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6));
-  
-        this.setState({ location });
-      },
-      error => Alert.alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-  
-  };
-
-  useEffect(() => {
-    _toggle();
-  }, []);
-
-  const _toggle = () => {
-    if (subscription) {
-      _unsubscribe();
-    } else {
-      _subscribe();
-    }
-  };
-
-  const _subscribe = () => {
-    setSubscription(
-      Magnetometer.addListener((data) => {
-        setMagnetometer(_angle(data));
-      })
-    );
-  };
-
-  const _unsubscribe = () => {
-    subscription && subscription.remove();
-    subscription = null;
-  };
-
-  const _angle = (magnetometer) => {
-    if (magnetometer) {
-      let { x, y, z } = magnetometer;
-
-      if (Math.atan2(y, x) >= 0) {
-        angle = Math.atan2(y, x) * (180 / Math.PI);
-      }
-      else {
-        angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
-      }
-    }
-
-    return Math.round(angle);
-  };
-
-  const _direction = (degree) => {
-    if (degree >= 22.5 && degree < 67.5) {
-      return 'NE';
-    }
-    else if (degree >= 67.5 && degree < 112.5) {
-      return 'E';
-    }
-    else if (degree >= 112.5 && degree < 157.5) {
-      return 'SE';
-    }
-    else if (degree >= 157.5 && degree < 202.5) {
-      return 'S';
-    }
-    else if (degree >= 202.5 && degree < 247.5) {
-      return 'SW';
-    }
-    else if (degree >= 247.5 && degree < 292.5) {
-      return 'W';
-    }
-    else if (degree >= 292.5 && degree < 337.5) {
-      return 'NW';
-    }
-    else {
-      return 'N';
-    }
-  };
-
-  //(current 0 degrees is set from the top of the phone)
-  const _degree = (magnetometer) => {
-    return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
-  };
-
-
   return (
-
-    <Grid style={{ backgroundColor: '#fff' }}>
-      <Row style={{ alignItems: 'center' }} size={.9}>
-        <Col style={{ alignItems: 'center' }}>
-          <Text
-            style={{
-              color: 'grey',
-              fontSize: height / 26,
-              fontWeight: 'bold'
-            }}>
-            {_direction(_degree(magnetometer))}
-          </Text>
-        </Col>
-      </Row>
-
-      <Row style={{ alignItems: 'center' }} size={.1}>
-        <Col style={{ alignItems: 'center' }}>
-          <View style={{ position: 'absolute', width: width, alignItems: 'center', top: 0 }}>
-            <Image source={require('./assets/arrow.png')} style={{
-              height: height / 26,
-              resizeMode: 'contain'
-            }} />
-          </View>
-        </Col>
-      </Row>
-
-      <Row style={{ alignItems: 'center' }} size={2}>
-        <Text style={{
-          color: 'grey',
-          fontSize: height / 27,
-          width: width,
-          position: 'absolute',
-          textAlign: 'center'
-        }}>
-          {_degree(magnetometer)}°
-        </Text>
-
-        <Col style={{ alignItems: 'center' }}>
-
-          <Image source={require("./assets/compass_bg_copy.png")} style={{
-            height: width - 80,
-            justifyContent: 'center',
-            alignItems: 'center',
-            resizeMode: 'contain',
-            transform: [{ rotate: 360 - magnetometer + 'deg' }]
-          }} />
-
-        </Col>
-      </Row>
-
-      <Row style={{ alignItems: 'center' }} size={1}>
-        <Col style={{ alignItems: 'center' }}>
-          <Text style={{ color: 'grey' }}>Find: 44.9379, -93.1691</Text>
-          <View style={[styles.bubble, styles.latlng]}>
-            <TouchableOpacity onPress={this.findCoordinates}>
-              <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
-              <Text style={styles.centeredText, { fontWeight: 'bold' }}>{this.state.location}</Text>
-            </TouchableOpacity>
-          </View>
-        </Col>
-      </Row>
-
-    </Grid>
-
-
-  );
+    <View style={styles.container}>
+      <Compass/>
+      <Button
+        title="Switch to Home Screen"
+        onPress={() =>
+          navigation.navigate('home')} />
+    </View>
+      )
 }
 const styles = StyleSheet.create({
   container: {
