@@ -81,6 +81,8 @@ const Compass = (props) => {
       subscription = null;
     };
 
+
+
     //Uses magnetometer to find the angle of which the phone is at.
     //Based off of this stack overflow: https://stackoverflow.com/questions/57308560/smooth-orientation-compass-using-react-native-sensorss-magnetometer
     const _angle = (magnetometer) => {
@@ -94,6 +96,10 @@ const Compass = (props) => {
         }
       }
       return angle;
+    };
+
+    const _degree = (magnetometer) => {
+      return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
     };
   
     //Mathematical Reasoning (A'di's): If the bearing is less than the heading then we need to 
