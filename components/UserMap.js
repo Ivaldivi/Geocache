@@ -55,43 +55,15 @@ function userMap(props) {
                 region={props.userLocation}
                 showsUserLocation = {true}
                 style ={styles.map}>
+                  {/* This is an example of where a geocache could be based on
+                  what the user chooses*/}
                     <MapView.Marker 
                         coordinate={{latitude: 44.9379,
                             longitude: -93.168869019}}
                             title={'CC Cache'}
                             key={Marker.snellAndGrand}
-                            image={require("./scot.png")}
+                            image={require(".assets/scot.png")}
                           />
-                    <MapView.Marker
-                        coordinate ={{latitude: 44.9416,
-                            longitude: -93.1974}}
-                            title={'River Cache'}
-                            key={Marker.river}
-                            image={require("./scot.png")}
-                            />
-                     <MapView.Marker
-                        coordinate ={{latitude:44.934412433560745,
-                            longitude: -93.1777188451171}}
-                            title={'The Tap Cache'}
-                            key={Marker.river}
-                            image={require("./scot.png")}
-                            />
-                    <MapView.Marker
-                        coordinate ={{latitude:44.94031596574141, 
-                            longitude: -93.16657303880767}}
-                            title={'BreadSmith Cache'}
-                            key={Marker.river}
-                            image={require("./scot.png")}
-                            />
-                    <MapView.Marker
-                        coordinate ={{latitude:44.941529947250395, 
-                            longitude: -93.18443394690537}}
-                            title={'The Rest Cache'}
-                            key={Marker.river}
-                            image={require("./scot.png")}
-                            /> 
-                    {/* Takes the user to a bench on summit : ) */}
-
               </MapView>
               <View style={[styles.bubble, styles.latlng]}>
                 <TouchableOpacity onPress={findCoordinates}>
