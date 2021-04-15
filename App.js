@@ -10,7 +10,7 @@ import { Magnetometer } from 'expo-sensors';
 import { apisAreAvailable } from 'expo';
 import { Component } from 'react';
 import UserMap from './components/UserMap';
-import GoalMap from './components/UserMap';
+import GoalMap from './components/GoalMap';
 import Compass from './components/Compass';
 
 const { width, height } = Dimensions.get('window');
