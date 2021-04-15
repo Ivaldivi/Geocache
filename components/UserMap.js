@@ -62,7 +62,7 @@ function userMap(props) {
                             longitude: -93.168869019}}
                             title={'CC Cache'}
                             key={Marker.snellAndGrand}
-                            image={require("./Geocache/assets/scot.png")}
+                            image={require("./scot.png")}
                           />
               </MapView>
               <View style={[styles.bubble, styles.latlng]}>
