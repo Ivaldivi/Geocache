@@ -9,7 +9,7 @@ import {
   import MapView, { MAP_TYPES, Marker } from 'react-native-maps';
   import React, { useState } from 'react';
   import { useEffect } from 'react/cjs/react.production.min';
-  
+
   function goalMap(props) {
   
     const { width, height } = Dimensions.get('window');
@@ -60,35 +60,35 @@ import {
                               longitude: -93.168869019}}
                               title={'CC Cache'}
                               key={Marker.snellAndGrand}
-                              image={require("./scot.png")}
+                              image ={ require("./images/scot.png")}
                             />
                       <MapView.Marker
                           coordinate ={{latitude: 44.9416,
                               longitude: -93.1974}}
                               title={'River Cache'}
                               key={Marker.river}
-                              image={require("./scot.png")}
+                              image ={require("./images/scot.png")}
                               />
                        <MapView.Marker
                           coordinate ={{latitude:44.934412433560745,
                               longitude: -93.1777188451171}}
                               title={'The Tap Cache'}
                               key={Marker.river}
-                              image={require("./scot.png")}
+                              image={require(  "./images/scot.png")}
                               />
                       <MapView.Marker
                           coordinate ={{latitude:44.94031596574141, 
                               longitude: -93.16657303880767}}
                               title={'BreadSmith Cache'}
                               key={Marker.river}
-                              image={require("./scot.png")}
+                              image={require(  "./images/scot.png")}
                               />
                       <MapView.Marker
                           coordinate ={{latitude:44.941529947250395, 
                               longitude: -93.18443394690537}}
                               title={'The Rest Cache'}
                               key={Marker.river}
-                              image={require("./scot.png")}
+                              image={require(  "./images/scot.png")}
                               /> 
                       {/* Takes the user to a bench on summit : ) */}
                       
