@@ -3,12 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import { Callout } from 'react-native-maps';
-import { Grid, Col, Row } from "react-native-easy-grid";
-import { Magnetometer } from 'expo-sensors';
-import { apisAreAvailable } from 'expo';
-import { Component } from 'react';
 import UserMap from './components/UserMap';
 import GoalMap from './components/UserMap';
 import Compass from './components/Compass';
@@ -113,11 +107,11 @@ const VictoryScreen = ({navigation}) => {
 const CompassScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Compass/>
       <Button
         title="Switch to Home Screen"
         onPress={() =>
           navigation.navigate('home')} />
+      <Compass style={styles.compass}/>
     </View>
       )
 }
@@ -128,6 +122,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
@@ -140,6 +135,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   centeredText: { textAlign: 'center' },
+
+  compass: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height * 0.8
+  }
 });
 
 export default App;
