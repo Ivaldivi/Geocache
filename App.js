@@ -10,7 +10,7 @@ import { Magnetometer } from 'expo-sensors';
 import { apisAreAvailable } from 'expo';
 import { Component } from 'react';
 import UserMap from './components/UserMap';
-
+import GoalMap from './components/UserMap';
 
 const { width, height } = Dimensions.get('window');
 
@@ -39,18 +39,20 @@ const NavigateStack = () => {
           name='compass'
           component={CompassScreen}
           options={{ title: 'Compass' }} />
-          <Stack.Screen
+        <Stack.Screen
           name = 'victory'
           component = {VictoryScreen}
           options = {{title: 'Victory'}} />
+        <Stack.Screen
+          name = 'goals'
+          component = {GoalsScreen}
+          options = {{title: 'Goals'}} />
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
 
 const MapScreen = ({ navigation }) => {
-
-
   return (
     <View style={styles.container}>
       <UserMap/>
@@ -59,8 +61,18 @@ const MapScreen = ({ navigation }) => {
         onPress={() =>
           navigation.navigate('home')} />
     </View>
+  )
+}
 
-
+const GoalsScreen  = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <GoalMap/>
+      <Button
+        title="Switch to Home Screen"
+        onPress={() =>
+          navigation.navigate('home')} />
+    </View>
   )
 }
 
@@ -75,6 +87,10 @@ const HomeScreen = ({ navigation }) => {
         title="Switch to Map Screen"
         onPress={() =>
           navigation.navigate('map')} />
+      <Button
+        title="Switch to Goals Screen"
+        onPress={() =>
+          navigation.navigate('goals')} />
     </View>
 
   )
