@@ -6,7 +6,7 @@
 
 
 import * as React from 'react';
-import { Image, View} from 'react-native';
+import { ImageBackground, Image, View, StyleSheet} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer} from 'expo-sensors';
 import { useEffect, useState } from 'react';
@@ -116,19 +116,38 @@ const Compass = () => {
   
     return(
         <View>
-        
+        <ImageBackground source={require('./images/backgroundidea2.jpg')} style={styles.image}>
         <Image
-          source={{uri: 'https://cdns.iconmonstr.com/wp-content/assets/preview/2018/240/iconmonstr-arrow-up-thin.png'}}
+          source={require('./images/arrow.png')}
           style={{
-            height: 180,
-            width: 200,
             transform: [{rotate: _finalAngle() + 'deg'}],
           }}
         />
+            
+            </ImageBackground>
         </View>
     )
         
   }
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: "column"
+    },
+    image: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "center"
 
+    },
+    text: {
+      color: "white",
+      fontSize: 42,
+      fontWeight: "bold",
+      textAlign: "center",
+      backgroundColor: "#000000a0"
+    }
+  });
+  
   export default Compass;
