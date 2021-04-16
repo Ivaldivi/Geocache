@@ -6,7 +6,7 @@
 
 
 import * as React from 'react';
-import { ImageBackground, Image, View, StyleSheet} from 'react-native';
+import { ImageBackground, Image, View, Text, StyleSheet, Dimensions} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer} from 'expo-sensors';
 import { useEffect, useState } from 'react';
@@ -15,9 +15,13 @@ import { useEffect, useState } from 'react';
 
 const Compass = () => {
 
+    const { width, height } = Dimensions.get('window');
+
     const [userLatitude,setUserLatitude] = useState(0);
     const [userLongitude,setUserLongitude] = useState(0);
     const [bearing, setBearing] = useState(0);
+    const [distance, setDistance] = useState(-1);
+    
 
 
     //finds user coordinates and updates user latitude and longitude states
@@ -71,6 +75,7 @@ const Compass = () => {
         Magnetometer.addListener((data) => {
           setMagnetometer(_angle(data));
           changeBearing();
+          changeDistance();
         })
       );
     };
@@ -113,41 +118,33 @@ const Compass = () => {
         return 360 - bearing + ( _degree(magnetometer - bearing));
       }
     }
-  
+    const changeDistance = () =>{
+      findCoordinates(); 
+      const dist = getDistance(
+        { latitude: userLatitude, longitude: userLongitude },
+        { latitude: 44.940824, longitude: -93.16881} );// goal
+        setDistance(distance); 
+    
+    }
+  // style done by Julia to make it look better for testing.
     return(
-        <View>
-        <ImageBackground source={require('./images/backgroundidea2.jpg')} style={styles.image}>
-        <Image
-          source={require('./images/arrow.png')}
-          style={{
-            transform: [{rotate: _finalAngle() + 'deg'}],
-          }}
-        />
-            
-            </ImageBackground>
+        <View style ={{height: height, width: width, backgroundColor: 'orange', alignItems: 'center',}}>
+          <Image
+            style={{
+              height: height/2, 
+              width: width/2,
+              resizeMode: 'contain',
+              transform: [{rotate: _finalAngle() + 'deg'}]
+           }}
+            source={require('./images/arrow.png')}
+         
+          />
+          <Text>{distance}</Text>
         </View>
     )
         
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: "column"
-    },
-    image: {
-      flex: 1,
-      resizeMode: "cover",
-      justifyContent: "center"
 
-    },
-    text: {
-      color: "white",
-      fontSize: 42,
-      fontWeight: "bold",
-      textAlign: "center",
-      backgroundColor: "#000000a0"
-    }
-  });
   
   export default Compass;
