@@ -14,7 +14,7 @@ import {getDistance, getPreciseDistance} from 'geolib';
 
 
 
-const Compass = () => {
+const Compass = ({navigation}) => {
 
     const { width, height } = Dimensions.get('window');
 
@@ -36,7 +36,6 @@ const Compass = () => {
             setUserLongitude(long);
           },
         );
-      
       };
 
       //Updates bearing based on current user coordinates

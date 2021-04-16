@@ -1,8 +1,9 @@
 //import * as React from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as geolib from 'geolib';
 import UserMap from './components/UserMap';
 import GoalMap from './components/GoalMap';
 import Compass from './components/Compass';
@@ -52,6 +53,24 @@ const NavigateStack = () => {
 }
 
 const MapScreen = ({ navigation }) => {
+
+  //code on how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
+  const [location, setLocation] = useState(0);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if(geolib.getDistance(position.coords,position.coords) <= 0){
+          navigation.navigate('victory');
+        }
+        else{
+          console.log(geolib.getDistance(position.coords,position.coords))
+        }
+      }
+    )
+  }
+  );
+
   return (
     <View style={styles.container}>
       <UserMap/>
@@ -109,6 +128,19 @@ const VictoryScreen = ({navigation}) => {
     )
 }
 const CompassScreen = ({ navigation }) => {
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if(geolib.getDistance(position.coords,position.coords) <= 0){
+          navigation.navigate('victory');
+        }
+        else{
+          console.log(geolib.getDistance(position.coords,position.coords))
+        }
+      }
+    )
+  }
+  );
   return (
     <View style={styles.container}>
       <Compass style={styles.compass}/>
