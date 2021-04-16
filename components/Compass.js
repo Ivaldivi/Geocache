@@ -10,6 +10,7 @@ import { ImageBackground, Image, View, Text, StyleSheet, Dimensions} from 'react
 import * as geolib from 'geolib';
 import { Magnetometer} from 'expo-sensors';
 import { useEffect, useState } from 'react';
+import {getDistance, getPreciseDistance} from 'geolib';
 
 
 
@@ -75,7 +76,7 @@ const Compass = () => {
         Magnetometer.addListener((data) => {
           setMagnetometer(_angle(data));
           changeBearing();
-          changeDistance();
+          changeDistance(); 
         })
       );
     };
@@ -120,10 +121,10 @@ const Compass = () => {
     }
     const changeDistance = () =>{
       findCoordinates(); 
-      const dist = getDistance(
+      const dist = getPreciseDistance(
         { latitude: userLatitude, longitude: userLongitude },
-        { latitude: 44.940824, longitude: -93.16881} );// goal
-        setDistance(distance); 
+        { latitude: 44.940824, longitude: -93.16881}, {accuracy: 0.01} );// goal
+        setDistance(dist); 
     
     }
   // style done by Julia to make it look better for testing.
@@ -139,7 +140,8 @@ const Compass = () => {
             source={require('./images/arrow.png')}
          
           />
-          <Text>{distance}</Text>
+             <Text style={{alignItems:'center'}}>Distance To Goal: </Text>
+              <Text style={{alignItems:'center'}}>{distance} cm</Text>
         </View>
     )
         
