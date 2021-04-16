@@ -61,6 +61,7 @@ import {
                               title={'CC Cache'}
                               key={Marker.snellAndGrand}
                               image ={ require("./images/scot.png")}
+                              onPress={()=> console.log(props.coordinates)}
                             />
                       <MapView.Marker
                           coordinate ={{latitude: 44.9416,
@@ -68,6 +69,7 @@ import {
                               title={'River Cache'}
                               key={Marker.river}
                               image ={require("./images/scot.png")}
+                              onPress={()=> console.log(props.coordinates)}
                               />
                        <MapView.Marker
                           coordinate ={{latitude:44.934412433560745,
@@ -75,6 +77,7 @@ import {
                               title={'The Tap Cache'}
                               key={Marker.river}
                               image={require(  "./images/scot.png")}
+                              onPress={()=> console.log(props.coordinates)}
                               />
                       <MapView.Marker
                           coordinate ={{latitude:44.94031596574141, 
@@ -82,6 +85,7 @@ import {
                               title={'BreadSmith Cache'}
                               key={Marker.river}
                               image={require(  "./images/scot.png")}
+                              onPress={()=> console.log(props.coordinates)}
                               />
                       <MapView.Marker
                           coordinate ={{latitude:44.941529947250395, 
@@ -89,6 +93,7 @@ import {
                               title={'The Rest Cache'}
                               key={Marker.river}
                               image={require(  "./images/scot.png")}
+                              onPress={()=> console.log(props.coordinates)}
                               /> 
                       {/* Takes the user to a bench on summit : ) */}
                       
