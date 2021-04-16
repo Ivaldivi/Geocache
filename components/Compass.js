@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 
 
 
-const Compass = () => {
+const Compass = ({navigation}) => {
 
     const [userLatitude,setUserLatitude] = useState(0);
     const [userLongitude,setUserLongitude] = useState(0);
@@ -31,7 +31,6 @@ const Compass = () => {
             setUserLongitude(long);
           },
         );
-      
       };
 
       //Updates bearing based on current user coordinates
