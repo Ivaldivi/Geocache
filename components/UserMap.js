@@ -22,8 +22,8 @@ function userMap(props) {
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
   const [location,setLocation] = useState("-----");
+  const [userLocation,setUserLocation] = useState("-----");
 
- 
   const region = useState({
     latitude: LATITUDE,
     longitude: LONGITUDE,
@@ -32,11 +32,11 @@ function userMap(props) {
   });
   
 
-  const findCoordinates = () => {
+  const findUserCoordinates = () => {
       navigator.geolocation.getCurrentPosition(
         position => {
           const loc =position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6);
-          setLocation(loc);
+          setUserLocation(loc);
         },
         error => Alert.alert(error.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -67,9 +67,9 @@ function userMap(props) {
                           />
               </MapView>
               <View style={[styles.bubble, styles.latlng]}>
-                <TouchableOpacity onPress={findCoordinates}>
+                <TouchableOpacity onPress={findUserCoordinates}>
                     <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
-                    <Text style={styles.centeredText}>{location}</Text>
+                    <Text style={styles.centeredText}>{userLocation}</Text>
                   </TouchableOpacity>
               </View>
         </View>
