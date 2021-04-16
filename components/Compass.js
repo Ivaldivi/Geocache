@@ -140,12 +140,21 @@ const Compass = () => {
             source={require('./images/arrow.png')}
          
           />
-             <Text style={{alignItems:'center'}}>Distance To Goal: </Text>
-              <Text style={{alignItems:'center'}}>{distance} cm</Text>
+             <Text style={styles.text}>Distance To Goal: </Text>
+              <Text style={styles.text}>{distance} cm</Text>
         </View>
     )
         
   }
+  const styles = StyleSheet.create({
+    text: {
+      alignItems:'center', 
+      color: 'white', 
+      fontWeight: 'bold',
+      fontFamily: 'Futura',
+      
+    },
+  });
 
 
   
