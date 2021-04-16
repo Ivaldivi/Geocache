@@ -6,7 +6,7 @@
 
 
 import * as React from 'react';
-import { ImageBackground, Image, View, Text, StyleSheet, Dimensions} from 'react-native';
+import { ImageBackground, Image, View, Text, StyleSheet, Dimensions, Button, TouchableOpacity} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer} from 'expo-sensors';
 import { useEffect, useState } from 'react';
@@ -140,8 +140,11 @@ const Compass = () => {
             source={require('./images/arrow.png')}
          
           />
-             <Text style={styles.text}>Distance To Goal: </Text>
-              <Text style={styles.text}>{distance} cm</Text>
+           <TouchableOpacity onPress={changeDistance}>
+            <Text style={styles.text}> Press to find distance to goal:  </Text>
+            <Text style={styles.text}> {distance} cm </Text>
+         </TouchableOpacity>
+        
         </View>
     )
         
