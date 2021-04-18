@@ -34,7 +34,10 @@ Repersents if the app(specifically the compass screen) is subscribed (it is on a
 Turns Magnetometer on and sends angle of phone, removes subscription and should stop the whole screen. 
 
 #### const _angle 
-Uses magnetometer to find the angle the phone is pointing in degrees east of North. At the bottom of method descriptions will be references to where Math was refrenced from. 
+Uses magnetometer to find the angle the phone is pointing in degrees east of North. At the bottom of method descriptions will be references to where Math was refrenced from.
+
+#### const _degree
+Adjusts magnetometer to be in correct degrees for rotation.
 
 #### const _finalAngle
 This function finds the angle of arrow image rotation by doing simple math with bearing and heading (magnetometer) states. 
@@ -44,6 +47,31 @@ This function finds the angle of arrow image rotation by doing simple math with 
 ###### A compass app created by @Rahul Hague was referenced to better understand math to find angle. https://github.com/rahulhaque/compass-react-native-expo
 ###### The documentation for GeoLib helped with bearing understanding: https://www.npmjs.com/package/geolib
 ###### The following article helped understand the math and terminology to create the compass (heading, bearing, etc): http://www.movable-type.co.uk/scripts/latlong.html
+
+____________________
+
+### Victory Screen
+This screen appears when the user reaches goal. It allows users to make comments on location using Firebase Firestore database. It also allows users to view the comments made by others previously. 
+
+#### const saveMessage
+This function saves the user's message to the text state and also pushes the message to the Messages collection in Firestore. 
+
+#### const onResult
+If there aren't errors reaching the Firestore Messages collection, this function loops through each message and puts it in the data stack to be used for the list of comments later on.
+
+#### const Item
+Creates a stylized text with the message as the text. 
+
+#### const renderItem
+Creates an item with correct comment message. 
+
+#### function onError
+If there is an error accessing the Message collection in Firestore this function returns the appropriate error message to the console. 
+
+### References and Inspiration for Victory Screen: 
+###### General guide for using Firebase with a react native expo app: https://docs.expo.io/guides/using-firebase/
+###### Guide to using Firebase's Firestore with react native expo app: /https://rnfirebase.io/firestore/usage
+###### Used to format text box and save input to a const: https://reactnative.dev/docs/textinput
 
 ____________________
 
