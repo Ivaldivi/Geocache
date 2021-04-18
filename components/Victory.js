@@ -5,10 +5,10 @@
 //Allows users to make comments on location using firebase firestore database. 
 //Also allows users to view the comments made by others previously. 
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { SafeAreaView, TextInput, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
-import { useState } from 'react/cjs/react.production.min';
+import * as firebase from 'firebase';
+import "firebase/firestore";
 
 //TODO: adjust database for goal variable
 
@@ -21,51 +21,58 @@ const firebaseConfig = {
     projectId: 'geocache-f983a',
     storageBucket: 'geocache-f983a.appspot.com',
   };
+  
+
 firebase.initializeApp(firebaseConfig);
 
+
+const firestore = firebase.firestore();
+
 //variable to reference the Message collection database 
-const messageCollection = firestore().collection('Messages');
+const messageCollection = firestore.collection('Messages');
 
-
-const [data, setData] = useState([])
 
 const Victory = () => {
 
+    const [data, setData] = useState([])
+
     //State of message input by user -- used for inputing into firestore
-    const [text, setText] = useState("Comment");
+    const [text, setText] = useState("");
 
     //Saves message to both the state and the firestore message collection
-    const saveMessage = (props) => {
-        setText(props.message);
-        messageCollection.add({ message: props.text});
+    const saveMessage = (message) => {
+        setText(message);
+        messageCollection.add({ message: text});
     }
 
 
     //The code related to reading collection data is adjusted from
     //https://rnfirebase.io/firestore/usage
     function onResult(QuerySnapshot){
-        firestore().collection('Messages').get().then(querySnapshot => {
-            //For every document in the message collection, put the message into the data 
-            //stack to be used for the flat list. 
-            querySnapshot.forEach(documentSnapshot => {
-                const newData = data.slice();
-                newData.push({id: documentSnapshot.id, title: documentSnapshot.get('message')});
-                setData(newData);
-            })
+        firestore.collection('Messages').get().then(querySnapshot => {
+            if (querySnapshot.exists){
+                //For every document in the message collection, put the message into the data 
+                //stack to be used for the flat list. 
+                querySnapshot.forEach(documentSnapshot => {
+                    const newData = data.slice();
+                    newData.push({id: documentSnapshot.id, title: documentSnapshot.get('message')});
+                    setData(newData);
+                    console.log('yes')
+                })
+            }
         })
     }
 
     //Creates a view that contains a label with given text (used for comments)
-    const Item = ({ props }) => (
+    const Item = ({ title }) => (
         <View style = {styles.item}>
-            <Text style = {styles.title}>{props.title}</Text>
+            <Text style = {styles.title}>{title}</Text>
         </View>
     )
 
-    //creates a flatlist item based on message
-    const renderItem = ({ props }) => (
-        <Item title={props.title}/>
-    );
+    const renderItem = ({ item }) => (
+        <Item title={item.title} />
+      );
 
     //If retrieval of data from firestore has an error, print to console
     function onError(error){
@@ -73,7 +80,11 @@ const Victory = () => {
     }
 
     //Constantly looks for new messages 
-    firestore().collection('Messages').onSnapshot(onResult, onError)
+    useEffect(() => {
+        firestore.collection('Messages').onSnapshot(onResult, onError)
+    });
+    
+    
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment, and flat list of comments given by others
@@ -85,8 +96,8 @@ const Victory = () => {
             placeholder="Tell us what you think about Scot!"
             value={text}/>
             <FlatList
-                data = {data} 
-                renderItem={renderItem(Item(title=text))}
+                data = {data}
+                renderItem={renderItem}
                 keyExtractor={item => item.id}
                 />
         </SafeAreaView>

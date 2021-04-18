@@ -16,6 +16,7 @@
     "expo": "~40.0.0",
     "expo-sensors": "~9.2.0",
     "expo-status-bar": "~1.0.3",
+    "firebase": "^8.4.1",
     "geolib": "^3.3.1",
     "lpf": "^1.0.0",
     "react": "16.13.1",

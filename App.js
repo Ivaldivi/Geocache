@@ -12,6 +12,7 @@ import UserMap2 from './components/UserMap2';
 import GoalCoords from './components/GoalCoords';
 import MapView from 'react-native-maps';
 import ScottMarker from './components/ScottMarker';
+import Victory from './components/Victory';
 
 
 const { width, height } = Dimensions.get('window');
@@ -139,10 +140,7 @@ const VictoryScreen = ({navigation}) => {
   const [magnetometer, setMagnetometer] = useState(0);
   return (
   <View>
-    <Button
-    title = "Congratulations! You spotted Scot! Press here to return to the home screen"
-    onPress={() =>
-      navigation.navigate('home')} />
+    <Victory/>
   </View>
     )
 }
