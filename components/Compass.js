@@ -104,7 +104,7 @@ const Compass = ({navigation}) => {
     };
 
     //Adjusts magnetometer to be in correct degrees for rotation
-    const _degree = (magnetometer) => {
+    const _normalizeCompassDirection = (magnetometer) => {
       return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
     };
   
@@ -112,11 +112,11 @@ const Compass = ({navigation}) => {
     //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
     //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
     const _finalAngle = () =>{
-      if (bearing >= _degree(magnetometer)){
-        return 360 - bearing - _degree(magnetometer);
+      if (bearing >= _normalizeCompassDirection(magnetometer)){
+        return 360 - bearing - _normalizeCompassDirection(magnetometer);
       }
       else{
-        return 360 - bearing + ( _degree(magnetometer - bearing));
+        return 360 - bearing + ( _normalizeCompassDirection(magnetometer - bearing));
       }
     }
     const changeDistance = () =>{
