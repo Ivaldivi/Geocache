@@ -10,19 +10,29 @@ import Compass from './components/Compass';
 import { Component } from 'react';
 import UserMap2 from './components/UserMap2';
 import GoalCoords from './components/GoalCoords';
-import MapView from 'react-native-maps';
-import ScottMarker from './components/ScottMarker';
-import Victory from './components/Victory';
+import MapView, {Marker} from 'react-native-maps';
 
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-
 const Stack = createStackNavigator();
 
 function App() {
+  global.goalCache = 0; 
   return (
     <NavigateStack />
+  )
+}
+
+const ScottMarker = props =>{
+  return(
+      <MapView.Marker 
+          coordinate={props.coordinates}
+          title={props.title}
+          key={Marker.snellAndGrand}
+          image={require("./components/images/scot.png")}
+          onPress={()=> {global.goalCache = props.coordinates; console.log(global.goalCache);}}
+        />
   )
 }
 
@@ -89,7 +99,7 @@ const MapScreen = ({ navigation }) => {
 const GoalsScreen  = ({ navigation }) => {
   return (
       <View style = {styles.mapContainer}>
-            <MapView
+        <MapView
                 initialRegion={{
                     latitude: (44.94000),
                     longitude: (-93.1746),
