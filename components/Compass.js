@@ -103,6 +103,7 @@ const Compass = ({navigation}) => {
       return angle;
     };
 
+    //Adjusts magnetometer to be in correct degrees for rotation
     const _degree = (magnetometer) => {
       return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
     };
