@@ -10,10 +10,12 @@ import Compass from './components/Compass';
 import { Component } from 'react';
 import UserMap2 from './components/UserMap2';
 import GoalCoords from './components/GoalCoords';
+import MapView from 'react-native-maps';
+import ScottMarker from './components/ScottMarker';
 
 
 const { width, height } = Dimensions.get('window');
-
+const ASPECT_RATIO = width / height;
 
 const Stack = createStackNavigator();
 
@@ -85,8 +87,24 @@ const MapScreen = ({ navigation }) => {
 
 const GoalsScreen  = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <GoalMap/>
+      <View style = {styles.mapContainer}>
+            <MapView
+                initialRegion={{
+                    latitude: (44.94000),
+                    longitude: (-93.1746),
+                    latitudeDelta: 0.0922,
+                    longitudeDelta:  0.0922 * ASPECT_RATIO,
+                  }}
+                showsUserLocation = {true}
+                style ={styles.map}>
+                <ScottMarker coordinates = {{latitude: 44.9379, longitude: -93.168869019}} title = "Snelling and Grand Cache"/>
+                <ScottMarker coordinates = {{latitude: 44.9416, longitude: -93.1974}} title = "River Cache"/>
+                <ScottMarker coordinates = {{latitude:44.934412433560745, longitude: -93.1777188451171}} title = "The Tap Cache"/>
+                <ScottMarker coordinates = {{latitude:44.94031596574141, longitude: -93.16657303880767}} title = "BreadSmith Cache"/>                  
+                <ScottMarker coordinates = {{latitude:44.941529947250395, longitude: -93.18443394690537}} title = "The Rest Cache" />                  
+                    {/* Takes the user to a bench on summit : ) */}
+
+                </MapView>
       <Button
         title="Switch to Home Screen"
         onPress={() =>
@@ -154,11 +172,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
+    mapContainer: {
+        width: 350,
+        height: 600, 
+        alignSelf: 'center', 
+        marginBottom: 20,
+        marginTop: 20
+    }, 
+    map: {
+        width: '100%', 
+        height: '100%', 
+        marginBottom: 0, 
+        alignSelf: 'center'
+    },
 
   bubble: {
     backgroundColor: 'rgba(0, 0, 255, 0.3)',
