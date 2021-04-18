@@ -1,4 +1,5 @@
-//Created by A'di (probably graphics help from others later)
+//Created by A'di (probably graphics help from others later -- feel free to add to this comment
+//when we get to that point ^_^)
 //
 //This component appears when user reaches goal (logic for that is in App.js).
 //Allows users to make comments on location using firebase firestore database. 
@@ -30,7 +31,7 @@ const [data, setData] = useState([])
 
 const Victory = () => {
 
-    //State of message input by user -- used for inputing into firestor
+    //State of message input by user -- used for inputing into firestore
     const [text, setText] = useState("Comment");
 
     //Saves message to both the state and the firestore message collection
