@@ -55,17 +55,17 @@ const NavigateStack = () => {
 
 const MapScreen = ({ navigation }) => {
 
-  //code on how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
+  //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
   const [location, setLocation] = useState(0);
 
+
+  //Constantly checks user position and sees if within distance of goal coordinates. 
+  //If close enough, changes to victory screen. 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         if(geolib.getDistance(position.coords,position.coords) <= 0){
           navigation.navigate('victory');
-        }
-        else{
-          console.log(geolib.getDistance(position.coords,position.coords))
         }
       }
     )
@@ -116,7 +116,7 @@ const HomeScreen = ({ navigation }) => {
 }
 
 const VictoryScreen = ({navigation}) => {
-
+  //TODO: eventually use victory component with goal coordinates as a prop
   const [subscription, setSubscription] = useState(null);
   const [magnetometer, setMagnetometer] = useState(0);
   return (
@@ -129,14 +129,13 @@ const VictoryScreen = ({navigation}) => {
     )
 }
 const CompassScreen = ({ navigation }) => {
+  //Constantly checks user position and sees if within distance of goal coordinates. 
+  //If close enough, changes to victory screen. 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         if(geolib.getDistance(position.coords,position.coords) <= 0){
           navigation.navigate('victory');
-        }
-        else{
-          console.log(geolib.getDistance(position.coords,position.coords))
         }
       }
     )

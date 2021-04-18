@@ -1,3 +1,9 @@
+//Created by A'di (probably graphics help from others later)
+//
+//This component appears when user reaches goal (logic for that is in App.js).
+//Allows users to make comments on location using firebase firestore database. 
+//Also allows users to view the comments made by others previously. 
+
 import React from 'react';
 import { SafeAreaView, TextInput, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
