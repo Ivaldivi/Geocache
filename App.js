@@ -8,6 +8,7 @@ import UserMap from './components/UserMap';
 import GoalMap from './components/GoalMap';
 import Compass from './components/Compass';
 
+
 const { width, height } = Dimensions.get('window');
 
 const Stack = createStackNavigator();
