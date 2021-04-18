@@ -7,9 +7,13 @@ import * as geolib from 'geolib';
 import UserMap from './components/UserMap';
 import GoalMap from './components/GoalMap';
 import Compass from './components/Compass';
+import { Component } from 'react';
+import UserMap2 from './components/UserMap2';
+import GoalCoords from './components/GoalCoords';
 
 
 const { width, height } = Dimensions.get('window');
+
 
 const Stack = createStackNavigator();
 
