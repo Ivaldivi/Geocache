@@ -6,7 +6,7 @@
 //Also allows users to view the comments made by others previously. 
 
 import React, {useState, useEffect} from 'react';
-import { SafeAreaView, TextInput, View, FlatList, StyleSheet, Text, StatusBar, Button, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { TextInput, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
 
@@ -30,8 +30,6 @@ const firestore = firebase.firestore();
 
 //variable to reference the Message collection database 
 const messageCollection = firestore.collection('Messages');
-
-const DATA = [{id: 'numberOne', title: 'I spotted Scott'}];
 
 
 const Victory = () => {
@@ -103,12 +101,6 @@ const styles = StyleSheet.create({
       flex: 1,
       marginTop: StatusBar.currentHeight || 0,
       flex:1,
-    },
-    item: {
-      backgroundColor: '#f9c2ff',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
     },
     title: {
       fontSize: 32,
