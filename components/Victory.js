@@ -41,8 +41,9 @@ const Victory = () => {
     const [comment, setComment] = useState('');
 
 
-    //taken from https://rnfirebase.io/firestore/usage-with-flatlists
+    //Adding comments to flatlist was inspired by https://rnfirebase.io/firestore/usage-with-flatlists
     
+    //Constantly looks for and updates 'data' with new comments left by users using firestore. 
     useEffect(() => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
             const comments = [];
@@ -57,11 +58,12 @@ const Victory = () => {
         });
         return () => subscriber();
 },[]);
-
     if(loading) {
         return <ActivityIndicator/>;
     }
 
+
+    //Saves given message to firestore when user clicks 'leave comments here' button. 
     const saveMessage = () => {
         firestore.collection('Messages').add({
             message: comment
