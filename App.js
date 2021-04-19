@@ -10,6 +10,7 @@ import Compass from './components/Compass';
 import { Component } from 'react';
 import UserMap2 from './components/UserMap2';
 import GoalCoords from './components/GoalCoords';
+import Victory from './components/Victory';
 import MapView, {Marker} from 'react-native-maps';
 
 

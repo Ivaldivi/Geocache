@@ -6,7 +6,7 @@
 //Also allows users to view the comments made by others previously. 
 
 import React, {useState, useEffect} from 'react';
-import { SafeAreaView, TextInput, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { SafeAreaView, TextInput, View, FlatList, StyleSheet, Text, StatusBar, Button, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
 
@@ -31,77 +31,50 @@ const firestore = firebase.firestore();
 //variable to reference the Message collection database 
 const messageCollection = firestore.collection('Messages');
 
+const DATA = [{id: 'numberOne', title: 'I spotted Scott'}];
+
 
 const Victory = () => {
 
-    const [data, setData] = useState([])
-
-    //State of message input by user -- used for inputing into firestore
-    const [text, setText] = useState("");
-
-    //Saves message to both the state and the firestore message collection
-    const saveMessage = (message) => {
-        setText(message);
-        messageCollection.add({ message: text});
-    }
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
-    //The code related to reading collection data is adjusted from
-    //https://rnfirebase.io/firestore/usage
-    function onResult(QuerySnapshot){
-        firestore.collection('Messages').get().then(querySnapshot => {
-            if (querySnapshot.exists){
-                //For every document in the message collection, put the message into the data 
-                //stack to be used for the flat list. 
-                querySnapshot.forEach(documentSnapshot => {
-                    const newData = data.slice();
-                    newData.push({id: documentSnapshot.id, title: documentSnapshot.get('message')});
-                    setData(newData);
-                    console.log('yes')
-                })
-            }
-        })
-    }
-
-    //Creates a view that contains a label with given text (used for comments)
-    const Item = ({ title }) => (
-        <View style = {styles.item}>
-            <Text style = {styles.title}>{title}</Text>
-        </View>
-    )
-
-    const renderItem = ({ item }) => (
-        <Item title={item.title} />
-      );
-
-    //If retrieval of data from firestore has an error, print to console
-    function onError(error){
-        console.error(error);
-    }
-
-    //Constantly looks for new messages 
+    //taken from https://rnfirebase.io/firestore/usage-with-flatlists
+    
     useEffect(() => {
-        firestore.collection('Messages').onSnapshot(onResult, onError)
-    });
-    
-    
+        const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
+            const comments = [];
+            querySnapshot.forEach(documentSnapshot => {
+                comments.push({
+                    title: documentSnapshot.get('message'),
+                    key: documentSnapshot.id,
+                });
+                console.log(documentSnapshot.get('message'))
+            });
+            setData(comments);
+            setLoading(false);
+        });
+        return () => subscriber();
+},[]);
+
+    if(loading) {
+        return <ActivityIndicator/>;
+    }
+
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment, and flat list of comments given by others
     return(
-        <SafeAreaView style={styles.container}>
-            <TextInput 
-            style={styles.input}
-            onChangeText={(text) => saveMessage(text = text)}
-            placeholder="Tell us what you think about Scot!"
-            value={text}/>
             <FlatList
-                data = {data}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                />
-        </SafeAreaView>
-    )
+                data = {DATA}
+                renderItem={({ item }) => (
+                    <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text>{item.title}</Text>
+                    </View>
+                )}
+            />
+    );
 
 }
 
@@ -111,6 +84,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       marginTop: StatusBar.currentHeight || 0,
+      flex:1,
     },
     item: {
       backgroundColor: '#f9c2ff',
