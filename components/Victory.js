@@ -38,6 +38,7 @@ const Victory = () => {
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [comment, setComment] = useState('');
 
 
     //taken from https://rnfirebase.io/firestore/usage-with-flatlists
@@ -50,7 +51,6 @@ const Victory = () => {
                     title: documentSnapshot.get('message'),
                     key: documentSnapshot.id,
                 });
-                console.log(documentSnapshot.get('message'))
             });
             setData(comments);
             setLoading(false);
@@ -62,12 +62,25 @@ const Victory = () => {
         return <ActivityIndicator/>;
     }
 
+    const saveMessage = () => {
+        firestore.collection('Messages').add({
+            message: comment
+        })
+    }
+
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment, and flat list of comments given by others
     return(
         <View>
-            <TextInput placeholder={'leave comments here!'} style={styles.input}/>
+            <TextInput 
+            placeholder={'leave comments here!'} 
+            style={styles.input}
+            onChangeText = {(currentComment) => setComment(currentComment)}/>
+            <Button 
+            title= {'Submit your comment!'}
+            onPress={saveMessage}
+            />
             <FlatList
                 data = {data}
                 renderItem={({ item }) => (
