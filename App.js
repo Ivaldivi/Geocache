@@ -32,8 +32,8 @@ const NavigateStack = () => {
       <Stack.Navigator>
         <Stack.Screen
           name='home'
-          component={HomeScreen}
-          options={{ title: 'Home' }} />
+          component={WelcomeScreen}
+          options={{ title: 'Mac Cache' }} />
         <Stack.Screen
           name='map'
           component={MapScreen}
@@ -50,6 +50,10 @@ const NavigateStack = () => {
           name = 'goals'
           component = {GoalsScreen}
           options = {{title: 'Goals'}} />
+          <Stack.Screen
+          name='AboutPage'
+          component={AboutPage}
+          options={{ title: 'About' }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -125,6 +129,45 @@ const GoalsScreen  = ({ navigation }) => {
         onPress={() =>
           navigation.navigate('home')} />
     </View>
+  )
+}
+
+const WelcomeScreen = ({ navigation }) => {
+  return (
+
+    <View style = {styles.welcomePg}>
+      <View style={styles.imgz}>
+          <Image source={require('./components/images/macCache.png')}/>
+      </View>
+      <View style = {styles.WelcomeB}>
+          <Button 
+            style = {styles.WelcomeB}
+            title = "Start"
+            color = '#fff'
+            onPress={() =>
+              navigation.navigate('goals')}/>
+        </View>
+        <View style = {styles.WelcomeB}>
+          <Button 
+            style = {styles.WelcomeB}
+            title="About"
+            color = '#fff'
+            onPress={() =>
+              navigation.navigate('AboutPage')} />
+        </View>
+          
+      
+      
+    </View>
+  )
+}
+
+const AboutPage = ({ navigation }) => {
+  return (
+    <View>
+      <Text>Hello!</Text>
+    </View>
+
   )
 }
 
@@ -214,7 +257,33 @@ const styles = StyleSheet.create({
   compass: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.8
-  }
+  }, 
+  imgz: {
+    width: 375,
+    height: 375,
+    alignContent: 'center', 
+    alignItems: 'center',
+    backgroundColor: '#214683', 
+    marginBottom: -10
+  },
+  welcomePg: {
+    alignItems: 'center',
+    backgroundColor: `#214683`,
+    height: Dimensions.get('window').height,
+    flex: 1,
+    justifyContent: 'flex-start',
+    
+  },
+  WelcomeB: {
+      backgroundColor: 'rgba(223, 108, 22, .9)',
+      paddingHorizontal: 18,
+      paddingVertical: 10,
+      borderRadius: 20,
+      alignContent: 'center', 
+      color: 'white',
+      marginBottom: 45,
+      display: 'flex'
+    }
 });
 
 export default App;
