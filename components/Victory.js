@@ -66,6 +66,8 @@ const Victory = () => {
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment, and flat list of comments given by others
     return(
+        <View>
+            <TextInput placeholder={'leave comments here!'} style={styles.input}/>
             <FlatList
                 data = {data}
                 renderItem={({ item }) => (
@@ -74,6 +76,7 @@ const Victory = () => {
                     </View>
                 )}
             />
+        </View>
     );
 
 }
