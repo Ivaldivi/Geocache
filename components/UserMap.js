@@ -4,7 +4,10 @@ import {
   View,
   Text,
   Dimensions,
-  TouchableOpacity, Alert, Platform, ImageStore
+  TouchableOpacity,
+  Alert,
+  Platform, 
+  ImageStore
 } from 'react-native';
 import MapView, { MAP_TYPES, Marker } from 'react-native-maps';
 import React, { useState } from 'react';
@@ -16,8 +19,6 @@ function userMap(props) {
   const { width, height } = Dimensions.get('window');
 
   const ASPECT_RATIO = width / height;
-  // const LATITUDE = 44.9379;
-  // const LONGITUDE = -93.1691;
   const LATITUDE = global.goalCache.latitude;
   const LONGITUDE = global.goalCache.longitude;
   const LATITUDE_DELTA = 0.0922;
@@ -67,6 +68,7 @@ function userMap(props) {
                             key={Marker.snellAndGrand}
                             image={require("./images/scot.png")}
                           />
+                  
               </MapView>
               <View style={[styles.bubble, styles.latlng]}>
                 <TouchableOpacity onPress={findUserCoordinates}>
@@ -75,6 +77,7 @@ function userMap(props) {
                   </TouchableOpacity>
               </View>
         </View>
+                        
     );
 };
 const styles = StyleSheet.create({

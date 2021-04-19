@@ -64,7 +64,6 @@ const MapScreen = ({ navigation }) => {
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
   const [location, setLocation] = useState(0);
 
-
   //Constantly checks user position and sees if within distance of goal coordinates. 
   //If close enough, changes to victory screen. 
   useEffect(() => {
@@ -81,10 +80,6 @@ const MapScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <UserMap/>
-      {/* <Button
-        title="Switch to Home Screen"
-        onPress={() =>
-          navigation.navigate('home')} /> */}
       <Button
         title="Switch to Compass Screen"
         onPress={() =>
@@ -166,26 +161,6 @@ const AboutPage = ({ navigation }) => {
   return (
     <View>
       <Text>Hello!</Text>
-    </View>
-
-  )
-}
-
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View>
-      {/* <Button
-        title="Switch to Compass Screen"
-        onPress={() =>
-          navigation.navigate('compass')} /> */}
-      {/* <Button
-        title="Switch to Map Screen"
-        onPress={() =>
-          navigation.navigate('map')} /> */}
-      <Button
-        title="Switch to Goals Screen"
-        onPress={() =>
-          navigation.navigate('goals')} />
     </View>
 
   )

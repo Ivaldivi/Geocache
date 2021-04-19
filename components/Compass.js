@@ -6,7 +6,7 @@
 
 
 import * as React from 'react';
-import { ImageBackground, Image, View, Text, StyleSheet, Dimensions, Button, TouchableOpacity} from 'react-native';
+import { Alert, ImageBackground, Image, View, Text, StyleSheet, Dimensions, Button, TouchableOpacity} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer} from 'expo-sensors';
 import { useEffect, useState } from 'react';
@@ -46,10 +46,25 @@ const Compass = ({navigation}) => {
         //Explanation/docs here: https://www.npmjs.com/package/geolib
         //Gets bearing as angle (bearing is the cardinal angle between one coordinate
         //point and another. In this case from user to goal)
-        const userBear = geolib.getGreatCircleBearing( 
+        if(GOAL_LATITUDE != 0 ){
+          const userBear = geolib.getGreatCircleBearing( 
             {latitude: userLatitude, longitude: userLongitude}, //user location
             { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE}); //goal
-        setBearing(userBear);
+          setBearing(userBear);
+        }else{
+          Alert.alert(
+            "Error",
+            "Return to Map of All Mac Caches To Pick Your Goal",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+          );
+        }
       }
       
     //magnetometer returns the cardinal angle in degrees east of north the user is facing
@@ -123,16 +138,33 @@ const Compass = ({navigation}) => {
     }
     const changeDistance = () =>{
       //must write check here as well for if goal cache is null 
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-       let dis = geolib.getDistance(
-        { latitude: position.coords.latitude, longitude: position.coords.longitude },
-        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE} );// goal
+      findCoordinates();
+      if(GOAL_LATITUDE!=0){
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+        let dis = geolib.getDistance(
+          { latitude: position.coords.latitude, longitude: position.coords.longitude },
+          { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE} 
+          );
         setDistance(dis); 
-      }); 
+        }); 
+      }else{
+        Alert.alert(
+          "Error",
+          "Return to Map of All Mac Caches To Pick Your Goal",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
       
+        } 
     
-    }
+  }
   // style done by Julia to make it look better for testing.
     return(
         <View style ={[styles.compass]}>
@@ -146,13 +178,10 @@ const Compass = ({navigation}) => {
             source={require('./images/arrow.png')}
          
           />
-           <TouchableOpacity onPress={changeDistance}>
-            <Text style={styles.text}> Press to find distance to goal:  </Text>
+            <Text style={styles.text}> Distance to Goal:  </Text>
             <Text style={styles.text}> {distance} m </Text>
-         </TouchableOpacity>
-        
         </View>
-    )
+    );
         
   }
   const styles = StyleSheet.create({

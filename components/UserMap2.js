@@ -5,6 +5,7 @@ import ScottMarker from './ScottMarker';
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 
+// this is the goal map 
 const userMap2 = props =>{
     return(
         <View style = {styles.mapContainer}>
