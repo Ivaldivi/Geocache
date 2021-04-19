@@ -1,4 +1,4 @@
-//Created by A'di (probably graphics help from others later -- feel free to add to this comment
+//Created by A'di and James (probably graphics help from others later -- feel free to add to this comment
 //when we get to that point ^_^)
 //
 //This component appears when user reaches goal (logic for that is in App.js).
