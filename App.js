@@ -5,11 +5,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as geolib from 'geolib';
 import UserMap from './components/UserMap';
-import GoalMap from './components/GoalMap';
 import Compass from './components/Compass';
 import { Component } from 'react';
 import UserMap2 from './components/UserMap2';
-import GoalCoords from './components/GoalCoords';
 import Victory from './components/Victory';
 import MapView, {Marker} from 'react-native-maps';
 
@@ -25,17 +23,7 @@ function App() {
   )
 }
 
-const ScottMarker = props =>{
-  return(
-      <MapView.Marker 
-          coordinate={props.coordinates}
-          title={props.title}
-          key={Marker.snellAndGrand}
-          image={require("./components/images/scot.png")}
-          onPress={()=> {global.goalCache = props.coordinates; console.log(global.goalCache);}}
-        />
-  )
-}
+
 
 const NavigateStack = () => {
 
@@ -78,7 +66,7 @@ const MapScreen = ({ navigation }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        if(geolib.getDistance(position.coords,position.coords) <= 0){
+        if(geolib.getDistance(position.coords,global.goalCache) <= 0){
           navigation.navigate('victory');
         }
       }
@@ -89,15 +77,30 @@ const MapScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <UserMap/>
-      <Button
+      {/* <Button
         title="Switch to Home Screen"
         onPress={() =>
-          navigation.navigate('home')} />
+          navigation.navigate('home')} /> */}
+      <Button
+        title="Switch to Compass Screen"
+        onPress={() =>
+          navigation.navigate('compass')} />
     </View>
   )
 }
 
 const GoalsScreen  = ({ navigation }) => {
+  const ScottMarker = props =>{
+    return(
+        <MapView.Marker 
+            coordinate={props.coordinates}
+            title={props.title}
+            key={Marker.snellAndGrand}
+            image={require("./components/images/scot.png")}
+            onPress={()=> {global.goalCache = props.coordinates; navigation.navigate('map');}}
+          />
+    )
+  }
   return (
       <View style = {styles.mapContainer}>
         <MapView
@@ -128,14 +131,14 @@ const GoalsScreen  = ({ navigation }) => {
 const HomeScreen = ({ navigation }) => {
   return (
     <View>
-      <Button
+      {/* <Button
         title="Switch to Compass Screen"
         onPress={() =>
-          navigation.navigate('compass')} />
-      <Button
+          navigation.navigate('compass')} /> */}
+      {/* <Button
         title="Switch to Map Screen"
         onPress={() =>
-          navigation.navigate('map')} />
+          navigation.navigate('map')} /> */}
       <Button
         title="Switch to Goals Screen"
         onPress={() =>
@@ -161,7 +164,8 @@ const CompassScreen = ({ navigation }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        if(geolib.getDistance(position.coords,position.coords) <= 0){
+        //must take into account if global.goalcache is not coordinates.... 
+        if(geolib.getDistance(position.coords,global.goalCache) <= 0){
           navigation.navigate('victory');
         }
       }
@@ -171,6 +175,10 @@ const CompassScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Compass style={styles.compass}/>
+      <Button
+        title="Switch to Map Screen"
+        onPress={() =>
+          navigation.navigate('map')} />
     </View>
       )
 }

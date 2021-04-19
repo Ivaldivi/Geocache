@@ -16,8 +16,10 @@ function userMap(props) {
   const { width, height } = Dimensions.get('window');
 
   const ASPECT_RATIO = width / height;
-  const LATITUDE = 44.9379;
-  const LONGITUDE = -93.1691;
+  // const LATITUDE = 44.9379;
+  // const LONGITUDE = -93.1691;
+  const LATITUDE = global.goalCache.latitude;
+  const LONGITUDE = global.goalCache.longitude;
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -59,8 +61,8 @@ function userMap(props) {
                   {/* This is an example of where a geocache could be based on
                   what the user chooses*/}
                     <MapView.Marker 
-                        coordinate={{latitude: 44.9379,
-                            longitude: -93.168869019}}
+                        coordinate={{latitude: LATITUDE,
+                            longitude: LONGITUDE}}
                             title={'CC Cache'}
                             key={Marker.snellAndGrand}
                             image={require("./images/scot.png")}

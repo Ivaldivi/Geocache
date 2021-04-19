@@ -17,6 +17,8 @@ import {getDistance, getPreciseDistance} from 'geolib';
 const Compass = ({navigation}) => {
 
     const { width, height } = Dimensions.get('window');
+    const GOAL_LATITUDE = global.goalCache.latitude;
+    const GOAL_LONGITUDE = global.goalCache.longitude;
 
     const [userLatitude,setUserLatitude] = useState(0);
     const [userLongitude,setUserLongitude] = useState(0);
@@ -46,7 +48,7 @@ const Compass = ({navigation}) => {
         //point and another. In this case from user to goal)
         const userBear = geolib.getGreatCircleBearing( 
             {latitude: userLatitude, longitude: userLongitude}, //user location
-            { latitude: 44.940824, longitude: -93.16881}); //goal
+            { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE}); //goal
         setBearing(userBear);
       }
       
@@ -120,16 +122,20 @@ const Compass = ({navigation}) => {
       }
     }
     const changeDistance = () =>{
-      findCoordinates(); 
-      const dist = getPreciseDistance(
-        { latitude: userLatitude, longitude: userLongitude },
-        { latitude: 44.940824, longitude: -93.16881}, {accuracy: 0.01} );// goal
-        setDistance(dist); 
+      //must write check here as well for if goal cache is null 
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+       let dis = geolib.getDistance(
+        { latitude: position.coords.latitude, longitude: position.coords.longitude },
+        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE} );// goal
+        setDistance(dis); 
+      }); 
+      
     
     }
   // style done by Julia to make it look better for testing.
     return(
-        <View style ={{height: height, width: width, backgroundColor: 'orange', alignItems: 'center',}}>
+        <View style ={[styles.compass]}>
           <Image
             style={{
               height: height/2, 
@@ -142,7 +148,7 @@ const Compass = ({navigation}) => {
           />
            <TouchableOpacity onPress={changeDistance}>
             <Text style={styles.text}> Press to find distance to goal:  </Text>
-            <Text style={styles.text}> {distance} cm </Text>
+            <Text style={styles.text}> {distance} m </Text>
          </TouchableOpacity>
         
         </View>
@@ -156,6 +162,15 @@ const Compass = ({navigation}) => {
       fontWeight: 'bold',
       fontFamily: 'Futura',
       
+    },
+    compass: {
+      width: 350,
+      height: 600, 
+      alignSelf: 'center', 
+      marginBottom: 20,
+      marginTop: 20,
+      backgroundColor: 'orange' ,
+      alignItems: 'center',
     },
   });
 
