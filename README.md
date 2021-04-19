@@ -53,25 +53,17 @@ ____________________
 ### Victory Screen
 This screen appears when the user reaches goal. It allows users to make comments on location using Firebase Firestore database. It also allows users to view the comments made by others previously. 
 
+#### useEffect
+This hook constantly searches for changes in the firestore database, and when a change is detected it adds the data to the data state. 
+
 #### const saveMessage
-This function saves the user's message to the text state and also pushes the message to the Messages collection in Firestore. 
-
-#### const onResult
-If there aren't errors reaching the Firestore Messages collection, this function loops through each message and puts it in the data stack to be used for the list of comments later on.
-
-#### const Item
-Creates a stylized text with the message as the text. 
-
-#### const renderItem
-Creates an item with correct comment message. 
-
-#### function onError
-If there is an error accessing the Message collection in Firestore this function returns the appropriate error message to the console. 
+This function reacts to a button press in order to save the user's message (entered through a text input) as a message in the firestore database. 
 
 ### References and Inspiration for Victory Screen: 
 ###### General guide for using Firebase with a react native expo app: https://docs.expo.io/guides/using-firebase/
 ###### Guide to using Firebase's Firestore with react native expo app: /https://rnfirebase.io/firestore/usage
 ###### Used to format text box and save input to a const: https://reactnative.dev/docs/textinput
+###### Guide for how to use flatlists with firestore database: https://rnfirebase.io/firestore/usage-with-flatlists
 
 ____________________
 
