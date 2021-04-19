@@ -69,7 +69,7 @@ const Victory = () => {
             <FlatList
                 data = {data}
                 renderItem={({ item }) => (
-                    <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ height: 20, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                         <Text>{item.title}</Text>
                     </View>
                 )}
