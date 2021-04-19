@@ -67,7 +67,7 @@ const Victory = () => {
     //View contains place to write comment, and flat list of comments given by others
     return(
             <FlatList
-                data = {DATA}
+                data = {data}
                 renderItem={({ item }) => (
                     <View style={{ height: 50, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                         <Text>{item.title}</Text>
