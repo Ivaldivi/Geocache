@@ -81,8 +81,9 @@ const MapScreen = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
-      <View style={{alignContent: 'center', flexDirection:"row" }}>
+
+    <View style= {styles.container}>
+            <View style={{alignContent: 'center', flexDirection:"row" }}>
         <TouchableOpacity activeOpacity={0.5} onPress={() =>
           navigation.navigate('home')}>
           <Image
@@ -92,7 +93,6 @@ const MapScreen = ({ navigation }) => {
             borderRadius = {5}
             height= {25}
             width = {25}
-            justifyContent= 'left'
             marginTop = {15}
             marginRight = {10}
           />
@@ -141,17 +141,18 @@ const GoalsScreen  = ({ navigation }) => {
                 <ScottMarker coordinates = {{latitude:44.94031596574141, longitude: -93.16657303880767}} title = "BreadSmith Cache"/>                  
                 <ScottMarker coordinates = {{latitude:44.941529947250395, longitude: -93.18443394690537}} title = "The Rest Cache" />                  
                     {/* Takes the user to a bench on summit : ) */}
-
+                     <View style={{alignContent: 'center', flexDirection:"row" }}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() =>
+            navigation.navigate('home')}>
+            <Image
+              source={require('./components/images/home.png')}
+              style={styles.homeLogo}
+            />
+            </TouchableOpacity>
+            </View>
+           
                 </MapView>
     </View>
-     <View style = {styles.otherB}>
-      <Button 
-        style = {styles.otherB}
-        title="Home"
-        color = '#fff'
-        onPress={() =>
-          navigation.navigate('home')} />
-      </View>
   </View>
   )
 }
@@ -252,15 +253,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
+    
   },
     mapContainer: {
-        width: 350,
-        height: 600, 
+        width: Dimensions.get('window').width,
+        height: 650, 
         alignSelf: 'center', 
         marginBottom: 20,
-        marginTop: 20
+        marginTop: 20,
+        backgroundColor: 'orange'
     }, 
     map: {
         width: '100%', 
@@ -312,7 +314,17 @@ const styles = StyleSheet.create({
       bottom: 0, 
       top: 0, 
       alignItems: 'center',
+      alignSelf: 'center',
     }, 
+    homeLogo: {
+      backgroundColor : 'orange',
+      height : 50,
+      width : 50,
+      resizeMode : 'contain',
+      position: 'absolute',
+      marginTop : 0,
+      marginRight : 10, 
+    },
 });
 
 export default App;

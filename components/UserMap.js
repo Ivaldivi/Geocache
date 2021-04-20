@@ -75,13 +75,13 @@ function userMap(props) {
 
     return(
       <View style ={styles.container}>
-        <View style={[styles.bubble, styles.latlng]}>
-                <TouchableOpacity onPress={findUserCoordinates}>
-                    <Text style={styles.text}>Click to Find Your Coordinates: </Text>
-                    <Text style={styles.text}>{userLocation}</Text>
-                  </TouchableOpacity>
-              </View>
         <View style = {styles.mapContainer}>
+        <View style={[styles.bubble, styles.latlng]}>
+             <TouchableOpacity onPress={findUserCoordinates}>
+                 <Text style={styles.text}>Click to Find Your Coordinates: </Text>
+                 <Text style={styles.text}>{userLocation}</Text>
+               </TouchableOpacity>
+           </View>
             <MapView
                 initialRegion={{  
                     latitude: GOAL_LATITUDE,
@@ -93,8 +93,8 @@ function userMap(props) {
                 showsUserLocation = {true}
                 style ={styles.map}>
                 <GoalMarker coordinates = {{latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE}} title = "Goal Cache"/>
-                  
               </MapView>
+      
           </View>
        
         </View>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+   // justifyContent: 'flex-start',
   },
   map: {
     width: 350,
@@ -123,12 +123,17 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     alignItems: 'center',
     borderRadius: 20,
-    top: 10, 
+    top: 0, 
+      marginRight : 20, 
+      alignSelf: 'center',
   },
   text: { 
-    color: 'white', 
+    color: 'black', 
     fontWeight: 'bold',
     fontFamily: 'Futura',
+    alignSelf: 'center',
+    alignItems:'center',
+
     },
 });
 export default userMap;
