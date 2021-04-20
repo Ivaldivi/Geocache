@@ -19,8 +19,8 @@ function userMap(props) {
   const { width, height } = Dimensions.get('window');
 
   const ASPECT_RATIO = width / height;
-  const LATITUDE = global.goalCache.latitude;
-  const LONGITUDE = global.goalCache.longitude;
+  const GOAL_LATITUDE = global.goalCache.latitude;
+  const GOAL_LONGITUDE = global.goalCache.longitude;
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -28,8 +28,8 @@ function userMap(props) {
   const [userLocation,setUserLocation] = useState("-----");
 
   const region = useState({
-    latitude: LATITUDE,
-    longitude: LONGITUDE,
+    latitude: GOAL_LATITUDE,
+    longitude: GOAL_LONGITUDE,
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
@@ -38,7 +38,7 @@ function userMap(props) {
   const findUserCoordinates = () => {
       navigator.geolocation.getCurrentPosition(
         position => {
-          const loc =position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6);
+          const loc=position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6);
           setUserLocation(loc);
         },
         error => Alert.alert(error.message),
@@ -46,32 +46,50 @@ function userMap(props) {
       );
     
     };
+
+    const GoalMarker = props =>{
+      if(GOAL_LATITUDE==0 && GOAL_LONGITUDE==0){
+        Alert.alert(
+          "Error",
+          "Return to Map of All Mac Caches To Pick Your Goal",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
+      }
+      return(
+        <MapView.Marker 
+        coordinate={props.coordinates}
+            title={props.title}
+            key={Marker.goal}
+            image={require("./images/scot.png")}
+          />
+      );
+    }
      
+
     return(
         <View style = {styles.mapContainer}>
             <MapView
-                initialRegion={{
-                    latitude: (44.94000),
-                    longitude: (-93.1746),
+                initialRegion={{  
+                    latitude: GOAL_LATITUDE,
+                    longitude: GOAL_LONGITUDE,
                     latitudeDelta: 0.0725,
                     longitudeDelta: 0.0420,
                   }}
                 region={props.userLocation}
                 showsUserLocation = {true}
                 style ={styles.map}>
-                  {/* This is an example of where a geocache could be based on
-                  what the user chooses*/}
-                    <MapView.Marker 
-                        coordinate={{latitude: LATITUDE,
-                            longitude: LONGITUDE}}
-                            title={'CC Cache'}
-                            key={Marker.snellAndGrand}
-                            image={require("./images/scot.png")}
-                          />
+                <GoalMarker coordinates = {{latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE}} title = "Goal Cache"/>
                   
               </MapView>
               <View style={[styles.bubble, styles.latlng]}>
-                <TouchableOpacity onPress={findUserCoordinates}>
+                <TouchableOpacity onPress={findUserCoordinates()}>
                     <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
                     <Text style={styles.centeredText}>{userLocation}</Text>
                   </TouchableOpacity>
