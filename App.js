@@ -1,6 +1,6 @@
 //import * as React from 'react';
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter } from 'react-native';
+import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as geolib from 'geolib';
@@ -10,6 +10,7 @@ import { Component } from 'react';
 import UserMap2 from './components/UserMap2';
 import Victory from './components/Victory';
 import MapView, {Marker} from 'react-native-maps';
+import { apisAreAvailable } from 'expo';
 
 
 const { width, height } = Dimensions.get('window');
@@ -79,6 +80,22 @@ const MapScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <View style={{alignContent: 'center', flexDirection:"row" }}>
+        <TouchableOpacity activeOpacity={0.5} onPress={() =>
+          navigation.navigate('home')}>
+          <Image
+            source={require('./components/images/home.png')}
+            style={styles.ImageIconStyle}
+            backgroundColor= 'orange'
+            borderRadius = {5}
+            height= {25}
+            width = {25}
+            justifyContent= 'left'
+            marginTop = {15}
+            marginRight = {10}
+          />
+          </TouchableOpacity>
+          </View>
       <UserMap/>
       <View style = {styles.otherB}>
         <Button 
@@ -166,12 +183,38 @@ const WelcomeScreen = ({ navigation }) => {
     </View>
   )
 }
+const B = (props) => <Text style={{fontWeight: 'bold', fontSize: 20}}>{props.children}</Text>
+//https://stackoverflow.com/questions/35718143/react-native-add-bold-or-italics-to-single-words-in-text-field#:~:text=You%20can%20use%20like,...
 
 const AboutPage = ({ navigation }) => {
   return (
-    <View>
-      <Text>Hello!</Text>
-    </View>
+    <ScrollView style = {{backgroundColor: 'rgba(223, 108, 22, 1)', height: Dimensions.get('window').height}}>
+    <Text style = {{ fontSize: 25, fontWeight: 'bold', marginLeft: 4, marginBottom: 5, borderColor: 'white',borderWidth: 2, borderRadius: 8,
+      color:'#183592',marginRight: 285}}>
+        Rules:  </Text>
+    <Text style = {styles.AboutPageP}>
+      <B>1.</B> Be nice in the message log! No mean-spirited, hateful, or discriminatory messages. 
+      {'\n'}{'\n'}<B>2.</B> Be careful when using the map! Make sure to look up from your phone and stay aware of your surroundings
+       </Text>
+    <Text style = {styles.AboutPageP}>
+      {'\n'}<B>3.</B> Obey traffic safety laws when using the compass.
+      Our compass feature points you directly to the goal. The compass does not take into account roads, private property, or other hazards.{'\n'}
+      </Text>
+    <Text style = {{ fontSize: 25, fontWeight: 'bold', marginLeft: 4, marginBottom: 5, borderColor: 'white',borderWidth: 2, borderRadius: 8, color:'#183592',marginRight: 195}}>
+      Who Are We?
+      </Text>
+    <Text style = {styles.AboutPageP}>
+      #izadjaju-- This app was created as a software development project for the Macalester College class COMP225 Software Development.
+      The four main authors of the project are: Julia Kispert, A'di Dust, James Bellitto, and Izzy Valdivia with lots of help from our instructor! {'\n'} 
+      </Text>
+    <Text style = {{ fontSize: 25, fontWeight: 'bold', marginLeft: 4, marginBottom: 5, borderColor: 'white',borderWidth: 2, borderRadius: 8, color:'#183592',marginRight: 105}}>
+      Acknowledgements:
+      </Text>
+    <Text style = {styles.AboutPageP}>
+      - React Native documentation (woohoo, we love you, thank you) {'\n'}- Our instructor: Paul Cantrell 
+      {'\n'}- Some of our other commonly used resources below : P  
+      </Text>
+  </ScrollView>
 
   )
 }
@@ -277,6 +320,17 @@ const styles = StyleSheet.create({
       width: '50%', 
       bottom: 0, 
       top: 0, 
+      alignItems: 'center',
+    }, 
+    AboutPageP: {
+      fontSize: 15, 
+      fontWeight: 'normal', 
+      backgroundColor: 'rgba(223, 108, 22, 1)', 
+      textAlign: 'justify', 
+      marginRight: 5,
+      marginLeft: 5, 
+      lineHeight: 25, 
+      color: 'white'
     }
 });
 

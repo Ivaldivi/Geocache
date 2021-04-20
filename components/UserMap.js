@@ -96,6 +96,7 @@ function userMap(props) {
                   
               </MapView>
           </View>
+       
         </View>
                         
     );
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: 350,
-    height: 600, 
+    height: 555, 
     alignSelf: 'center', 
     marginBottom: 20,
     marginTop: 20,
