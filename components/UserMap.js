@@ -89,7 +89,7 @@ function userMap(props) {
                   
               </MapView>
               <View style={[styles.bubble, styles.latlng]}>
-                <TouchableOpacity onPress={findUserCoordinates()}>
+                <TouchableOpacity onPress={findUserCoordinates}>
                     <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
                     <Text style={styles.centeredText}>{userLocation}</Text>
                   </TouchableOpacity>
