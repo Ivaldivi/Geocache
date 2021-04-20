@@ -80,10 +80,14 @@ const MapScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <UserMap/>
-      <Button
-        title="Switch to Compass Screen"
-        onPress={() =>
-          navigation.navigate('compass')} />
+      <View style = {styles.otherB}>
+        <Button 
+          style = {styles.otherB}
+          title="Compass"
+          color = '#fff'
+          onPress={() =>
+            navigation.navigate('compass')} />
+      </View>
     </View>
   )
 }
@@ -101,6 +105,7 @@ const GoalsScreen  = ({ navigation }) => {
     )
   }
   return (
+    <View style = {styles.container}>
       <View style = {styles.mapContainer}>
         <MapView
                 initialRegion={{
@@ -119,11 +124,16 @@ const GoalsScreen  = ({ navigation }) => {
                     {/* Takes the user to a bench on summit : ) */}
 
                 </MapView>
-      <Button
-        title="Switch to Home Screen"
+    </View>
+     <View style = {styles.otherB}>
+      <Button 
+        style = {styles.otherB}
+        title="Home"
+        color = '#fff'
         onPress={() =>
           navigation.navigate('home')} />
-    </View>
+      </View>
+  </View>
   )
 }
 
@@ -134,17 +144,17 @@ const WelcomeScreen = ({ navigation }) => {
       <View style={styles.imgz}>
           <Image source={require('./components/images/macCache.png')}/>
       </View>
-      <View style = {styles.WelcomeB}>
+      <View style = {styles.welcomeB}>
           <Button 
-            style = {styles.WelcomeB}
+            style = {styles.welcomeB}
             title = "Start"
             color = '#fff'
             onPress={() =>
               navigation.navigate('goals')}/>
         </View>
-        <View style = {styles.WelcomeB}>
+        <View style = {styles.welcomeB}>
           <Button 
-            style = {styles.WelcomeB}
+            style = {styles.welcomeB}
             title="About"
             color = '#fff'
             onPress={() =>
@@ -193,10 +203,14 @@ const CompassScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Compass style={styles.compass}/>
-      <Button
-        title="Switch to Map Screen"
-        onPress={() =>
-          navigation.navigate('map')} />
+      <View style = {styles.otherB}>
+        <Button 
+          style = {styles.otherB}
+          title="Map"
+          color = '#fff'
+          onPress={() =>
+            navigation.navigate('map')} />
+      </View>
     </View>
       )
 }
@@ -221,17 +235,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
 
-  bubble: {
-    backgroundColor: 'rgba(0, 0, 255, 0.3)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
   centeredText: { textAlign: 'center' },
 
   compass: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.8
+    height: Dimensions.get('window').height * 0.8,
+    backgroundColor: 'orange', 
   }, 
   imgz: {
     width: 375,
@@ -249,7 +258,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     
   },
-  WelcomeB: {
+  welcomeB: {
       backgroundColor: 'rgba(223, 108, 22, .9)',
       paddingHorizontal: 18,
       paddingVertical: 10,
@@ -258,6 +267,16 @@ const styles = StyleSheet.create({
       color: 'white',
       marginBottom: 45,
       display: 'flex'
+    }, 
+  otherB: {
+      backgroundColor: 'orange',
+      paddingHorizontal: 18,
+      paddingVertical: 5,
+      borderRadius: 20,
+      color: 'white',
+      width: '50%', 
+      bottom: 0, 
+      top: 0, 
     }
 });
 

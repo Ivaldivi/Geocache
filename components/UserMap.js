@@ -24,8 +24,8 @@ function userMap(props) {
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-  const [location,setLocation] = useState("-----");
-  const [userLocation,setUserLocation] = useState("-----");
+
+  const [userLocation,setUserLocation] = useState("- - - - -");
 
   const region = useState({
     latitude: GOAL_LATITUDE,
@@ -48,7 +48,7 @@ function userMap(props) {
     };
 
     const GoalMarker = props =>{
-      if(GOAL_LATITUDE==0 && GOAL_LONGITUDE==0){
+      if(props.coordinate==0 && props.coordinate==0){
         Alert.alert(
           "Error",
           "Return to Map of All Mac Caches To Pick Your Goal",
@@ -64,7 +64,7 @@ function userMap(props) {
       }
       return(
         <MapView.Marker 
-        coordinate={props.coordinates}
+            coordinate={props.coordinates}
             title={props.title}
             key={Marker.goal}
             image={require("./images/scot.png")}
@@ -74,6 +74,13 @@ function userMap(props) {
      
 
     return(
+      <View style ={styles.container}>
+        <View style={[styles.bubble, styles.latlng]}>
+                <TouchableOpacity onPress={findUserCoordinates}>
+                    <Text style={styles.text}>Click to Find Your Coordinates: </Text>
+                    <Text style={styles.text}>{userLocation}</Text>
+                  </TouchableOpacity>
+              </View>
         <View style = {styles.mapContainer}>
             <MapView
                 initialRegion={{  
@@ -88,12 +95,7 @@ function userMap(props) {
                 <GoalMarker coordinates = {{latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE}} title = "Goal Cache"/>
                   
               </MapView>
-              <View style={[styles.bubble, styles.latlng]}>
-                <TouchableOpacity onPress={findUserCoordinates}>
-                    <Text style={styles.centeredText}>Click to Find Your Coordinates</Text>
-                    <Text style={styles.centeredText}>{userLocation}</Text>
-                  </TouchableOpacity>
-              </View>
+          </View>
         </View>
                         
     );
@@ -110,15 +112,22 @@ const styles = StyleSheet.create({
     height: 600, 
     alignSelf: 'center', 
     marginBottom: 20,
-    marginTop: 20
+    marginTop: 20,
+    alignItems:'center', 
   },
 
   bubble: {
-    backgroundColor: 'rgba(0, 0, 255, 0.3)',
+    backgroundColor: 'deepskyblue',
     paddingHorizontal: 18,
-    paddingVertical: 12,
+    paddingVertical: 5,
+    alignItems: 'center',
     borderRadius: 20,
+    top: 10, 
   },
-  centeredText: { textAlign: 'center' },
+  text: { 
+    color: 'white', 
+    fontWeight: 'bold',
+    fontFamily: 'Futura',
+    },
 });
 export default userMap;
