@@ -190,6 +190,20 @@ const WelcomeScreen = ({ navigation }) => {
 const AboutPage = ({ navigation }) => {
   return (
  <View>
+   <View style={{alignContent: 'center', flexDirection:"row", backgroundColor:'rgba(223, 108, 22, 1)'}}>
+        <TouchableOpacity activeOpacity={0.5} onPress={() =>
+          navigation.navigate('home')}>
+          <Image
+            source={require('./components/images/home.png')}
+            style={styles.ImageIconStyle}
+            backgroundColor= 'rgba(223, 108, 22, 1)'
+            borderRadius = {5}
+            height= {50}
+            width = {50}
+            justifyContent= 'left'
+          />
+          </TouchableOpacity>
+          </View>
     <About/>
   </View>
   )
@@ -205,6 +219,7 @@ const VictoryScreen = ({navigation}) => {
   </View>
     )
 }
+
 const CompassScreen = ({ navigation }) => {
   //Constantly checks user position and sees if within distance of goal coordinates. 
   //If close enough, changes to victory screen. 
@@ -298,16 +313,6 @@ const styles = StyleSheet.create({
       top: 0, 
       alignItems: 'center',
     }, 
-    AboutPageP: {
-      fontSize: 15, 
-      fontWeight: 'normal', 
-      backgroundColor: 'rgba(223, 108, 22, 1)', 
-      textAlign: 'justify', 
-      marginRight: 5,
-      marginLeft: 5, 
-      lineHeight: 25, 
-      color: 'white'
-    }
 });
 
 export default App;
