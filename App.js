@@ -83,7 +83,8 @@ const MapScreen = ({ navigation }) => {
   return (
 
     <View style={styles.container}>
-      <UserMap style={styles.map} />
+      <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
+      <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}>
         <Button
           style={styles.otherB}
@@ -91,7 +92,7 @@ const MapScreen = ({ navigation }) => {
           color='#fff'
           onPress={() =>
             navigation.navigate('compass')} />
-      </View>
+       </View>
     </View>
   )
 }
@@ -226,6 +227,11 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.8,
+    // alignContent: 'center',
+    // alignItems: 'center',
+    // position: 'absolute',
+    // justifyContent: 'center',
+
   },
 
   centeredText: { textAlign: 'center' },
