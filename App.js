@@ -190,7 +190,7 @@ const WelcomeScreen = ({ navigation }) => {
 
 const AboutPage = ({ navigation }) => {
   return (
- <View>
+ <View style={styles.container}> 
    <View style={{alignContent: 'center', flexDirection:"row", backgroundColor:'rgba(223, 108, 22, 1)'}}>
         <TouchableOpacity activeOpacity={0.5} onPress={() =>
           navigation.navigate('home')}>
@@ -201,7 +201,7 @@ const AboutPage = ({ navigation }) => {
             borderRadius = {5}
             height= {50}
             width = {50}
-            justifyContent= 'left'
+           textAlign = 'justify'
           />
           </TouchableOpacity>
           </View>
