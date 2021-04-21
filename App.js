@@ -104,7 +104,7 @@ const CompassScreen = ({ navigation }) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         //must take into account if global.goalcache is not coordinates.... 
-        if (geolib.getDistance(position.coords, global.goalCache) <= 0) {
+        if (geolib.getDistance(position.coords, global.goalCache) >= 0) {
           navigation.navigate('victory');
         }
       }
@@ -113,7 +113,7 @@ const CompassScreen = ({ navigation }) => {
   );
   return (
     <View style={styles.container}>
-      <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
+      <Compass style={styles.compass, StyleSheet.absoluteFillObject} location={global.goalCache}/>
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}>
         <Button
@@ -201,7 +201,7 @@ const VictoryScreen = ({ navigation }) => {
   const [magnetometer, setMagnetometer] = useState(0);
   return (
     <View>
-      <Victory />
+      <Victory location={global.goalCache}/>
     </View>
   )
 }

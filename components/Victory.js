@@ -32,7 +32,7 @@ const firestore = firebase.firestore();
 const messageCollection = firestore.collection('Messages');
 
 
-const Victory = () => {
+const Victory = (props) => {
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -46,10 +46,12 @@ const Victory = () => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
             const comments = [];
             querySnapshot.forEach(documentSnapshot => {
-                comments.push({
-                    title: documentSnapshot.get('message'),
-                    key: documentSnapshot.id,
-                });
+                if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))){
+                    comments.push({
+                        title: documentSnapshot.get('message'),
+                        key: documentSnapshot.id,
+                    });
+                }
             });
             setData(comments);
             setLoading(false);
@@ -63,8 +65,10 @@ const Victory = () => {
 
     //Saves given message to firestore when user clicks 'leave comments here' button. 
     const saveMessage = () => {
+        console.log(props.location)
         firestore.collection('Messages').add({
-            message: comment
+            message: comment,
+            location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude)
         })
     }
 
