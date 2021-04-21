@@ -143,7 +143,6 @@ const Compass = ({ navigation }) => {
   }
   const changeDistance = () => {
     //must write check here as well for if goal cache is null 
-    findCoordinates();
     if (GOAL_LATITUDE != 0) {
       navigator.geolocation.getCurrentPosition(
         (position) => {

@@ -35,18 +35,6 @@ function userMap(props) {
   });
 
 
-  const findUserCoordinates = () => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const loc = position.coords.latitude.toPrecision(6) + ", " + position.coords.longitude.toPrecision(6);
-        setUserLocation(loc);
-      },
-      error => Alert.alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-
-  };
-
   const GoalMarker = props => {
     if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0) {
       Alert.alert(
@@ -77,12 +65,6 @@ function userMap(props) {
 
   return (
     <View style={[styles.map]}>
-      {/* <View style={[styles.bubble, styles.latlng]}>
-             <TouchableOpacity onPress={findUserCoordinates}>
-                 <Text style={styles.text}>Click to Find Your Coordinates: </Text>
-                 <Text style={styles.text}>{userLocation}</Text>
-               </TouchableOpacity>
-           </View> */}
       <MapView
         initialRegion={{
           latitude: GOAL_LATITUDE,
