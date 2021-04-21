@@ -75,6 +75,9 @@ const Compass = ({ navigation }) => {
   //Turns compass and runs toggle methods
   useEffect(() => {
     _toggle();
+    return () => {
+      _unsubscribe();
+    };
   }, []);
 
   //Shows if the app(specifically the compass screen) is subscribed (it is on and running).
@@ -99,8 +102,10 @@ const Compass = ({ navigation }) => {
 
   //removes subscription and should stop the whole screen
   const _unsubscribe = () => {
-    subscription && subscription.remove();
-    subscription = null;
+   // subscription && subscription.remove();
+    setSubscription(null);
+    setMagnetometer(0); 
+    Magnetometer.removeAllListeners(); 
   };
 
 

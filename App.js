@@ -113,7 +113,8 @@ const CompassScreen = ({ navigation }) => {
   );
   return (
     <View style={styles.container}>
-      <Compass style={styles.compass} />
+      <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
+      <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}>
         <Button
           style={styles.otherB}
