@@ -141,6 +141,9 @@ const GoalsScreen = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
+         <Text style={styles.baseText}>
+        {"Click On The Goal You Would Like To Go To"}
+      </Text>
       <View style={styles.map}>
         <MapView
           initialRegion={{
@@ -223,6 +226,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center'
 
+  },
+
+  baseText: {
+    fontFamily: "Futura",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: 'center',
+    color: 'orange',
   },
 
   map: {
