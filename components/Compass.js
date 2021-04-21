@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
   compass: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.8,
+    height: Dimensions.get('window').height * 0.7,
     alignSelf: 'center',
     marginBottom: 20,
     marginTop: 20,

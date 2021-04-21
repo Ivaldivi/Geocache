@@ -82,7 +82,7 @@ const MapScreen = ({ navigation }) => {
 
   return (
 
-    <View style={styles.container}>
+    <View style={styles.mapContainer}>
       <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}> 
@@ -112,8 +112,13 @@ const CompassScreen = ({ navigation }) => {
   }
   );
   return (
+<<<<<<< HEAD
     <View style={styles.container}>
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} location={global.goalCache}/>
+=======
+    <View style={styles.compassContainer}>
+      <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
+>>>>>>> 60207070af41f2255aaad460c6b4ecb69016e258
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}>
         <Button
@@ -141,6 +146,9 @@ const GoalsScreen = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
+         <Text style={styles.baseText}>
+        {"Click On The Goal You Would Like To Go To"}
+      </Text>
       <View style={styles.map}>
         <MapView
           initialRegion={{
@@ -224,17 +232,37 @@ const styles = StyleSheet.create({
     alignItems: 'center'
 
   },
+  compassContainer: {
+    flex: 1,
+    backgroundColor: 'orange',
+    alignItems: 'center'
+
+  },
+  mapContainer: {
+    flex: 1,
+    backgroundColor: 'whitesmoke',
+    alignItems: 'center'
+
+  },
+
+  baseText: {
+    fontFamily: "Futura",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: 'center',
+    color: 'orange',
+  },
 
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.8,
+    height: Dimensions.get('window').height * 0.75,
   },
 
   centeredText: { textAlign: 'center' },
 
   compass: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.8,
+    height: Dimensions.get('window').height * 0.75,
     backgroundColor: 'orange',
   },
   imgz: {
@@ -264,7 +292,7 @@ const styles = StyleSheet.create({
     display: 'flex'
   },
   otherB: {
-    backgroundColor: 'orange',
+    backgroundColor: 'skyblue',
     paddingHorizontal: 18,
     paddingVertical: 5,
     borderRadius: 20,
@@ -272,6 +300,7 @@ const styles = StyleSheet.create({
     width: '50%',
     alignItems: 'center',
     alignSelf: 'center',
+
   },
   homeLogo: {
     backgroundColor: 'orange',
