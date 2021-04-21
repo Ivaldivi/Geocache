@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: 350,
-    height: 600,
+    height: 400,
     marginBottom: 20,
     marginTop: 10,
   },
