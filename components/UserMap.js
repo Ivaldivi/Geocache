@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   map: {
-    width: 350,
-    height: 400,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height * 0.8,
     marginBottom: 20,
     marginTop: 10,
   },
