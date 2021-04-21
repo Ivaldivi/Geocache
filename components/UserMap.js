@@ -91,9 +91,10 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.8,
-    marginBottom: 20,
+    height: Dimensions.get('window').height * 0.7,
+    marginBottom: 35,
     marginTop: 10,
+  
   },
 
   bubble: {
