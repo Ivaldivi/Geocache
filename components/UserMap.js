@@ -48,7 +48,7 @@ function userMap(props) {
     };
 
     const GoalMarker = props =>{
-      if(props.coordinate==0 && props.coordinate==0){
+      if(GOAL_LATITUDE==0 && GOAL_LONGITUDE==0){
         Alert.alert(
           "Error",
           "Return to Map of All Mac Caches To Pick Your Goal",
@@ -61,6 +61,8 @@ function userMap(props) {
             { text: "OK", onPress: () => console.log("OK Pressed") }
           ]
         );
+        GOAL_LATITUDE=44.9379;
+        GOAL_LONGITUDE=-93.68869019; //snelling and grand cache if no marker
       }
       return(
         <MapView.Marker 
@@ -74,14 +76,13 @@ function userMap(props) {
      
 
     return(
-      <View style ={styles.container}>
-        <View style = {styles.mapContainer}>
-        <View style={[styles.bubble, styles.latlng]}>
+        <View style = {[styles.map]}>
+        {/* <View style={[styles.bubble, styles.latlng]}>
              <TouchableOpacity onPress={findUserCoordinates}>
                  <Text style={styles.text}>Click to Find Your Coordinates: </Text>
                  <Text style={styles.text}>{userLocation}</Text>
                </TouchableOpacity>
-           </View>
+           </View> */}
             <MapView
                 initialRegion={{  
                     latitude: GOAL_LATITUDE,
@@ -97,7 +98,6 @@ function userMap(props) {
       
           </View>
        
-        </View>
                         
     );
 };
@@ -106,29 +106,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-   // justifyContent: 'flex-start',
   },
   map: {
-    width: 350,
-    height: 555, 
-    alignSelf: 'center', 
-    marginBottom: 20,
-    marginTop: 20,
-    alignItems:'center', 
+      width: 350,
+      height: 600,
+      marginBottom: 20,
+      marginTop: 10,
   },
 
   bubble: {
-    backgroundColor: 'deepskyblue',
+    backgroundColor: 'orange',
     paddingHorizontal: 18,
     paddingVertical: 5,
     alignItems: 'center',
     borderRadius: 20,
-    top: 0, 
-      marginRight : 20, 
-      alignSelf: 'center',
+    marginRight : 20, 
+    alignSelf: 'center',
   },
   text: { 
-    color: 'black', 
+    color: 'white', 
     fontWeight: 'bold',
     fontFamily: 'Futura',
     alignSelf: 'center',

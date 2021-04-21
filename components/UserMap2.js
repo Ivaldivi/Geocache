@@ -19,7 +19,7 @@ const userMap2 = props =>{
                 region={props.userLocation}
                 showsUserLocation = {true}
                 style ={styles.map}>
-                <ScottMarker coordinates = {{latitude: 44.9379, longitude: -93.168869019}} title = "Snelling and Grand Cache"/>
+                <ScottMarker coordinates = {{latitude: 44.93791, longitude: -93.68869019}} title = "Snelling and Grand Cache"/>
                 <ScottMarker coordinates = {{latitude: 44.9416, longitude: -93.1974}} title = "River Cache"/>
                 <ScottMarker coordinates = {{latitude:44.934412433560745, longitude: -93.1777188451171}} title = "The Tap Cache"/>
                 <ScottMarker coordinates = {{latitude:44.94031596574141, longitude: -93.16657303880767}} title = "BreadSmith Cache"/>                  

@@ -83,29 +83,14 @@ const MapScreen = ({ navigation }) => {
   return (
 
     <View style= {styles.container}>
-            <View style={{alignContent: 'center', flexDirection:"row" }}>
-        <TouchableOpacity activeOpacity={0.5} onPress={() =>
-          navigation.navigate('home')}>
-          <Image
-            source={require('./components/images/home.png')}
-            style={styles.ImageIconStyle}
-            backgroundColor= 'orange'
-            borderRadius = {5}
-            height= {25}
-            width = {25}
-            marginTop = {15}
-            marginRight = {10}
-          />
-          </TouchableOpacity>
-          </View>
-      <UserMap/>
-      <View style = {styles.otherB}>
-        <Button 
-          style = {styles.otherB}
-          title="Compass"
-          color = '#fff'
-          onPress={() =>
-            navigation.navigate('compass')} />
+        <UserMap style= {styles.map}/>
+        <View style = {styles.otherB}>
+          <Button 
+            style = {styles.otherB}
+            title="Compass"
+            color = '#fff'
+            onPress={() =>
+              navigation.navigate('compass')} />
       </View>
     </View>
   )
@@ -191,20 +176,6 @@ const WelcomeScreen = ({ navigation }) => {
 const AboutPage = ({ navigation }) => {
   return (
  <View style={styles.container}> 
-   <View style={{alignContent: 'center', flexDirection:"row", backgroundColor:'rgba(223, 108, 22, 1)'}}>
-        <TouchableOpacity activeOpacity={0.5} onPress={() =>
-          navigation.navigate('home')}>
-          <Image
-            source={require('./components/images/home.png')}
-            style={styles.ImageIconStyle}
-            backgroundColor= 'rgba(223, 108, 22, 1)'
-            borderRadius = {5}
-            height= {50}
-            width = {50}
-           textAlign = 'justify'
-          />
-          </TouchableOpacity>
-          </View>
     <About/>
   </View>
   )
@@ -253,22 +224,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'flex-start'
+    alignItems: 'center'
     
   },
-    mapContainer: {
-        width: Dimensions.get('window').width,
-        height: 650, 
-        alignSelf: 'center', 
-        marginBottom: 20,
-        marginTop: 20,
-        backgroundColor: 'orange'
-    }, 
+
     map: {
-        width: '100%', 
-        height: '100%', 
-        marginBottom: 0, 
-        alignSelf: 'center'
+        width: Dimensions.get('window').width, 
+        height: Dimensions.get('window').height * 0.8, 
     },
 
   centeredText: { textAlign: 'center' },
