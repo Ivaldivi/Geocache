@@ -5,7 +5,7 @@
 //Allows users to make comments on location using firebase firestore database. 
 //Also allows users to view the comments made by others previously. 
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextInput, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
@@ -20,8 +20,8 @@ const firebaseConfig = {
     databaseURL: 'https://Geocache.firebaseio.com',
     projectId: 'geocache-f983a',
     storageBucket: 'geocache-f983a.appspot.com',
-  };
-  
+};
+
 
 firebase.initializeApp(firebaseConfig);
 
@@ -40,7 +40,7 @@ const Victory = () => {
 
 
     //Adding comments to flatlist was inspired by https://rnfirebase.io/firestore/usage-with-flatlists
-    
+
     //Constantly looks for and updates 'data' with new comments left by users using firestore. 
     useEffect(() => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
@@ -55,9 +55,9 @@ const Victory = () => {
             setLoading(false);
         });
         return () => subscriber();
-},[]);
-    if(loading) {
-        return <ActivityIndicator/>;
+    }, []);
+    if (loading) {
+        return <ActivityIndicator />;
     }
 
 
@@ -71,18 +71,18 @@ const Victory = () => {
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment, and flat list of comments given by others
-    return(
+    return (
         <View>
-            <TextInput 
-            placeholder={'leave comments here!'} 
-            style={styles.input}
-            onChangeText = {(currentComment) => setComment(currentComment)}/>
-            <Button 
-            title= {'Submit your comment!'}
-            onPress={saveMessage}
+            <TextInput
+                placeholder={'leave comments here!'}
+                style={styles.input}
+                onChangeText={(currentComment) => setComment(currentComment)} />
+            <Button
+                title={'Submit your comment!'}
+                onPress={saveMessage}
             />
             <FlatList
-                data = {data}
+                data={data}
                 renderItem={({ item }) => (
                     <View style={{ height: 20, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                         <Text>{item.title}</Text>
@@ -98,18 +98,18 @@ const Victory = () => {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-      flex:1,
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+        flex: 1,
     },
     title: {
-      fontSize: 32,
+        fontSize: 32,
     },
     input: {
         height: 40,
         margin: 12,
         borderWidth: 1,
-      },
-  });
-  
-  export default Victory
+    },
+});
+
+export default Victory
