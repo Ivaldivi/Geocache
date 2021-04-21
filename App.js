@@ -270,8 +270,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     color: 'white',
     width: '50%',
-    bottom: 0,
-    top: 0,
     alignItems: 'center',
     alignSelf: 'center',
   },
