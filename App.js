@@ -112,13 +112,8 @@ const CompassScreen = ({ navigation }) => {
   }
   );
   return (
-<<<<<<< HEAD
-    <View style={styles.container}>
-      <Compass style={styles.compass, StyleSheet.absoluteFillObject} location={global.goalCache}/>
-=======
     <View style={styles.compassContainer}>
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
->>>>>>> 60207070af41f2255aaad460c6b4ecb69016e258
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}>
         <Button
