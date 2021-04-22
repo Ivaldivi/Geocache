@@ -123,13 +123,14 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 15,
         fontWeight: 'bold',
-        borderColor: 'white',
+        borderColor: 'lightblue',
         borderWidth: 2,
         borderRadius: 2,
         color: 'rgba(223, 108, 22, .9)',
     },
     comments: {
         fontWeight: 'bold',
+        borderColor: 'white',
     },
     submitButton: {
         backgroundColor: 'rgba(223, 108, 22, .9)',
