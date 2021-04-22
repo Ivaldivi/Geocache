@@ -1,22 +1,6 @@
 # Geocache
 Geocaching app for Comp225
 
-### Find Coordinates Method 
-This Method is needed by both the map and the compass. Currently, there is an issue with defining "this" and it appears there is confusion within the code about state (as Map View sets a state, that is different than the state the current compass is requesting for). This method works when putting Compass and Map in their own apps.
-
-____________________
-
-### Map Screen 
-Currently screen works, but needs to be adpated for user purposes. Warning occurs, and source appears to be from Find Coordinates Method in combination with the compass class. 
-### References and Inspiration for Find Coordinates Method and Map Screen: 
-
-###### Prashant Gond's "How to Use Geolocation and Geocding in React Native Apps", published December 18, 2019 to Web Dev Zone: https://dzone.com/articles/how-to-use-geo-location-geo-coding-in-react-native
-
-##### Aman Mittal's "Using Geolocation in React Native", published September 30, 2018 to Digital Ocean: https://www.digitalocean.com/community/tutorials/react-geolocation-react-native
-
-##### Example React Native Project where stylistic ideas were referenced: https://github.com/react-native-maps/react-native-maps
-
-
 ____________________
 
 
@@ -38,13 +22,26 @@ ____________________
 ### Map Screen
 This screen creates a google map that shows the user location and the goal location (with a marker picture of Scot). When user is within a certain distance of the goal, the screen switches to the Victory Screen. The user can switch betwen the Compass Screen and Map Screen at will by selecting a button.
 
+##### Find Coordinates Method 
+Finds user coordinates using geolocation navigator. 
+
 ##### const GoalMarker
 Sets the goal marker coordinates according to user goal selection (snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates. 
 
+### References and Inspiration for Find Coordinates Method and Map Screen: 
+
+###### Prashant Gond's "How to Use Geolocation and Geocding in React Native Apps", published December 18, 2019 to Web Dev Zone: https://dzone.com/articles/how-to-use-geo-location-geo-coding-in-react-native
+
+##### Aman Mittal's "Using Geolocation in React Native", published September 30, 2018 to Digital Ocean: https://www.digitalocean.com/community/tutorials/react-geolocation-react-native
+
+##### Example React Native Project where stylistic ideas were referenced: https://github.com/react-native-maps/react-native-maps
 ____________________
 
 ### Compass Screen 
 This screen creates a simple arrow that points to the direction of the goal coordinates (AKA Scot). Utilizing the compass' magnetometer, the user coordinates, and the goal coordinates, this screen finds the bearing and heading in order to point in the correct direction. When user is within a certain distance of the goal, the screen switches to the Victory Screen. The user can switch betwen the Compass Screen and Map Screen at will by selecting a button. 
+
+##### Find Coordinates Method 
+Finds user coordinates using geolocation navigator. 
 
 ##### const changeBearing
 Adjusts the bearing state (cardinal angle between user and goal coordinates) as coordinate information changes. Uses 'getGreatCircleBearing' function from Geolib package.
