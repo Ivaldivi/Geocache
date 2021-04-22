@@ -213,17 +213,10 @@ const VictoryScreen = ({ navigation }) => {
 const AboutPage = ({ navigation }) => {
   return (
     //View style={styles.container}>
-    <View style ={styles.container}>
-  <View style = {styles.aboutContainer}>
-     <Image
-        style={styles.homelogoTry2}
-        source={require('./components/images/home.png')}
-      />
-      <View style={{ alignContent: 'center', flexDirection: "row" }}>
+    <View style={{ alignContent: 'center', flexDirection: "row" }}>
       <About />
-      </View>
-      </View>
     </View>
+   
   )
 }
 

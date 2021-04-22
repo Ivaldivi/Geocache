@@ -16,7 +16,7 @@ const About = props => {
   return (
     <ScrollView style={{ backgroundColor: 'rgba(223, 108, 22, 1)', height: Dimensions.get('window').height }}>
       <Text style={{
-        fontSize: 25, fontWeight: 'bold', marginLeft: 4, marginBottom: 5, borderColor: 'white', borderWidth: 2, borderRadius: 8,
+        fontSize: 25, fontWeight: 'bold', marginLeft: 4, borderColor: 'white', borderWidth: 2, borderRadius: 8,
         color: '#183592', marginRight: 285
       }}>
         Rules:  </Text>
@@ -28,17 +28,21 @@ const About = props => {
         {'\n'}<B>3.</B> Obey traffic safety laws when using the compass.
   Our compass feature points you directly to the goal. The compass does not take into account roads, private property, or other hazards.{'\n'}
       </Text>
-      <Text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 4, marginBottom: 5, borderColor: 'white', borderWidth: 2, borderRadius: 8, color: '#183592', marginRight: 195 }}>
+      <Text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 4, borderColor: 'white', borderWidth: 2, borderRadius: 8, color: '#183592', marginRight: 195 }}>
         Who Are We?
   </Text>
       <Text style={styles.AboutPageP}>
         #izadjaju-- This app was created as a software development project for the Macalester College class COMP225 Software Development.
   The four main authors of the project are: Julia Kispert, A'di Dust, James Bellitto, and Izzy Valdivia with lots of help from our instructor! {'\n'}
       </Text>
-      <Text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 4, marginBottom: 5, borderColor: 'white', borderWidth: 2, borderRadius: 8, color: '#183592', marginRight: 105 }}>
+      <Text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 4,  borderColor: 'white', borderWidth: 2, borderRadius: 8, color: '#183592', marginRight: 105 }}>
         Acknowledgements:
   </Text>
       <Text style={styles.AboutPageP}>
+        - React Native documentation (woohoo, we love you, thank you) {'\n'}- Our instructor: Paul Cantrell
+  {'\n'}- Some of our other commonly used resources below : P
+  </Text>
+  <Text style={styles.AboutPageP}>
         - React Native documentation (woohoo, we love you, thank you) {'\n'}- Our instructor: Paul Cantrell
   {'\n'}- Some of our other commonly used resources below : P
   </Text>
