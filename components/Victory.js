@@ -1,5 +1,4 @@
-//Created by A'di and James (probably graphics help from others later -- feel free to add to this comment
-//when we get to that point ^_^)
+//Created by A'di and James (graphics by Julia)
 //
 //This component appears when user reaches goal (logic for that is in App.js).
 //Allows users to make comments on location using firebase firestore database. 
@@ -9,8 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
-
-//TODO: adjust database for goal variable
+import { useCardAnimation } from '@react-navigation/stack';
 
 // Initialize Firebase -- taken and adjusted from 
 //https://docs.expo.io/guides/using-firebase/
@@ -28,20 +26,20 @@ firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 
-//variable to reference the Message collection database 
-const messageCollection = firestore.collection('Messages');
-
 
 const Victory = (props) => {
 
+    //Various states to handle comment loading and data
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [comment, setComment] = useState('');
+    const [name, setName] = useState('Anonymous');
 
 
     //Adding comments to flatlist was inspired by https://rnfirebase.io/firestore/usage-with-flatlists
 
-    //Constantly looks for and updates 'data' with new comments left by users using firestore. 
+    //Constantly looks for and updates 'data' with new comments and usernames
+    //(if user doesn't enter name simply saves as "anonymous") left by users using firestore. 
     useEffect(() => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
             const comments = [];
@@ -49,6 +47,7 @@ const Victory = (props) => {
                 if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))){
                     comments.push({
                         title: documentSnapshot.get('message'),
+                        name: documentSnapshot.get('userName'),
                         key: documentSnapshot.id,
                     });
                 }
@@ -61,19 +60,23 @@ const Victory = (props) => {
     if (loading) {
         return <ActivityIndicator />;
     }
-    //Saves given message to firestore when user clicks 'leave comments here' button. 
+
+
+    //Saves given message and name (set to "anonymous if there isn't a name given) 
+    //to firestore when user clicks 'leave comments here' button. 
     const saveMessage = () => {
         console.log(props.location)
         firestore.collection('Messages').add({
             message: comment,
-            location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude)
+            location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
+            userName: name
         })
     }
 
     
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
-    //View contains place to write comment, and flat list of comments given by others
+    //View contains place to write comment and user name, and flat list of comments and names given by others
     return (
         <View style={styles.victoryScreenContainer}>
             <TextInput
@@ -81,7 +84,13 @@ const Victory = (props) => {
                 placeholder={'leave comments here!'}
                 style={styles.input}
                 onChangeText={(currentComment) => setComment(currentComment)} />
-            <View style={styles.submitButton} >
+                <TextInput 
+                style={styles.submitButton} 
+                clearButtonMode= {'always'}
+                placeholder={'Add your name here'}
+                style={styles.input}
+                onChangeText={(currentName) => setName(currentName)}/>
+            <View>
                 <Button
                     style={styles.submitButton}
                     color={'white'}
@@ -95,6 +104,7 @@ const Victory = (props) => {
                 data={data}
                 renderItem={({ item }) => (
                     <View style={{ height: 20, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text >{item.name}</Text>
                         <Text style={styles.comments}>{item.title}</Text>
                     </View>
                 )}
