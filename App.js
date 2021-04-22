@@ -45,6 +45,7 @@ const NavigateStack = () => {
           name='victory'
           component={VictoryScreen}
           options={{ title: 'Victory' }} />
+          
         <Stack.Screen
           name='goals'
           component={GoalsScreen}
@@ -212,8 +213,16 @@ const VictoryScreen = ({ navigation }) => {
 const AboutPage = ({ navigation }) => {
   return (
     //View style={styles.container}>
-    <View style={{ alignContent: 'center', flexDirection: "row" }}>
+    <View style ={styles.container}>
+  <View style = {styles.aboutContainer}>
+     <Image
+        style={styles.homelogoTry2}
+        source={require('./components/images/home.png')}
+      />
+      <View style={{ alignContent: 'center', flexDirection: "row" }}>
       <About />
+      </View>
+      </View>
     </View>
   )
 }
@@ -303,6 +312,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     position: 'absolute',
     marginTop: 0,
+  },
+  homelogoTry2: {
+    width: 50,
+    height: 50,
+  },
+  aboutContainer: {
+    backgroundColor: 'rgba(223, 108, 22, 1)'
   },
 });
 
