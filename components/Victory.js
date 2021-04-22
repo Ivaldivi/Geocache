@@ -81,16 +81,16 @@ const Victory = (props) => {
         <View style={styles.victoryScreenContainer}>
             <TextInput
                 clearButtonMode= {'always'}
-                placeholder={'leave comments here!'}
+                placeholder={'Leave comment here'}
                 style={styles.input}
                 onChangeText={(currentComment) => setComment(currentComment)} />
-                <TextInput 
-                style={styles.submitButton} 
+            <TextInput 
+               // style={styles.submitButton} 
                 clearButtonMode= {'always'}
                 placeholder={'Add your name here'}
                 style={styles.input}
                 onChangeText={(currentName) => setName(currentName)}/>
-            <View>
+            <View style={styles.submitButton}>
                 <Button
                     style={styles.submitButton}
                     color={'white'}
@@ -104,8 +104,8 @@ const Victory = (props) => {
                 data={data}
                 renderItem={({ item }) => (
                     <View style={{ height: 20, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text >{item.name}</Text>
-                        <Text style={styles.comments}>{item.title}</Text>
+                  
+                        <Text style={styles.comments}>{item.name}: {item.title}</Text>
                     </View>
                 )}
             />
@@ -119,7 +119,6 @@ const Victory = (props) => {
 const styles = StyleSheet.create({
     victoryScreenContainer: {
         backgroundColor: 'lightblue',
-        alignItems: 'center',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },
@@ -133,13 +132,15 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 15,
         fontWeight: 'bold',
-        borderColor: 'white',
+        borderColor: 'lightblue',
         borderWidth: 2,
         borderRadius: 2,
+        alignSelf: 'center',
         color: 'rgba(223, 108, 22, .9)',
     },
     comments: {
         fontWeight: 'bold',
+        borderColor: 'white',
     },
     submitButton: {
         backgroundColor: 'rgba(223, 108, 22, .9)',
@@ -149,7 +150,8 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         color: 'white',
         marginBottom: 5,
-        display: 'flex'
+        display: 'flex',
+        alignSelf: 'center'
 
     }
 
