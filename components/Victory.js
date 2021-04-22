@@ -9,6 +9,7 @@ import React, { useState, useEffect } from 'react';
 import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
+import { useCardAnimation } from '@react-navigation/stack';
 
 //TODO: adjust database for goal variable
 
@@ -37,6 +38,7 @@ const Victory = (props) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [comment, setComment] = useState('');
+    const [name, setName] = useState('Anonymous');
 
 
     //Adding comments to flatlist was inspired by https://rnfirebase.io/firestore/usage-with-flatlists
@@ -45,10 +47,12 @@ const Victory = (props) => {
     useEffect(() => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
             const comments = [];
+            const names = [];
             querySnapshot.forEach(documentSnapshot => {
                 if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))){
                     comments.push({
                         title: documentSnapshot.get('message'),
+                        name: documentSnapshot.get('userName'),
                         key: documentSnapshot.id,
                     });
                 }
@@ -66,7 +70,8 @@ const Victory = (props) => {
         console.log(props.location)
         firestore.collection('Messages').add({
             message: comment,
-            location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude)
+            location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
+            userName: name
         })
     }
 
@@ -81,7 +86,13 @@ const Victory = (props) => {
                 placeholder={'leave comments here!'}
                 style={styles.input}
                 onChangeText={(currentComment) => setComment(currentComment)} />
-            <View style={styles.submitButton} >
+                <TextInput 
+                style={styles.submitButton} 
+                clearButtonMode= {'always'}
+                placeholder={'Add your name here'}
+                style={styles.input}
+                onChangeText={(currentName) => setName(currentName)}/>
+            <View>
                 <Button
                     style={styles.submitButton}
                     color={'white'}
@@ -95,6 +106,7 @@ const Victory = (props) => {
                 data={data}
                 renderItem={({ item }) => (
                     <View style={{ height: 20, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text >{item.name}</Text>
                         <Text style={styles.comments}>{item.title}</Text>
                     </View>
                 )}
