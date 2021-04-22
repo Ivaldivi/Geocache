@@ -61,8 +61,6 @@ const Victory = (props) => {
     if (loading) {
         return <ActivityIndicator />;
     }
-
-
     //Saves given message to firestore when user clicks 'leave comments here' button. 
     const saveMessage = () => {
         console.log(props.location)
@@ -72,15 +70,18 @@ const Victory = (props) => {
         })
     }
 
+    
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment, and flat list of comments given by others
     return (
         <View>
             <TextInput
+                clearButtonMode= {'always'}
                 placeholder={'leave comments here!'}
                 style={styles.input}
-                onChangeText={(currentComment) => setComment(currentComment)} />
+                onChangeText={(currentComment) => setComment(currentComment)}
+                />
             <Button
                 title={'Submit your comment!'}
                 onPress={saveMessage}
