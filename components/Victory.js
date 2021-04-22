@@ -42,6 +42,7 @@ const Victory = (props) => {
     //(if user doesn't enter name simply saves as "anonymous") left by users using firestore. 
     useEffect(() => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
+            const comments = [];
             querySnapshot.forEach(documentSnapshot => {
                 if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))){
                     comments.push({
