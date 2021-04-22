@@ -1,5 +1,4 @@
-//Created by A'di and James (probably graphics help from others later -- feel free to add to this comment
-//when we get to that point ^_^)
+//Created by A'di and James (graphics by Julia)
 //
 //This component appears when user reaches goal (logic for that is in App.js).
 //Allows users to make comments on location using firebase firestore database. 
@@ -10,8 +9,6 @@ import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, StatusBar, But
 import * as firebase from 'firebase';
 import "firebase/firestore";
 import { useCardAnimation } from '@react-navigation/stack';
-
-//TODO: adjust database for goal variable
 
 // Initialize Firebase -- taken and adjusted from 
 //https://docs.expo.io/guides/using-firebase/
@@ -29,12 +26,10 @@ firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 
-//variable to reference the Message collection database 
-const messageCollection = firestore.collection('Messages');
-
 
 const Victory = (props) => {
 
+    //Various states to handle comment loading and data
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [comment, setComment] = useState('');
@@ -43,11 +38,10 @@ const Victory = (props) => {
 
     //Adding comments to flatlist was inspired by https://rnfirebase.io/firestore/usage-with-flatlists
 
-    //Constantly looks for and updates 'data' with new comments left by users using firestore. 
+    //Constantly looks for and updates 'data' with new comments and usernames
+    //(if user doesn't enter name simply saves as "anonymous") left by users using firestore. 
     useEffect(() => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
-            const comments = [];
-            const names = [];
             querySnapshot.forEach(documentSnapshot => {
                 if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))){
                     comments.push({
@@ -65,7 +59,10 @@ const Victory = (props) => {
     if (loading) {
         return <ActivityIndicator />;
     }
-    //Saves given message to firestore when user clicks 'leave comments here' button. 
+
+
+    //Saves given message and name (set to "anonymous if there isn't a name given) 
+    //to firestore when user clicks 'leave comments here' button. 
     const saveMessage = () => {
         console.log(props.location)
         firestore.collection('Messages').add({
@@ -78,7 +75,7 @@ const Victory = (props) => {
     
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
-    //View contains place to write comment, and flat list of comments given by others
+    //View contains place to write comment and user name, and flat list of comments and names given by others
     return (
         <View style={styles.victoryScreenContainer}>
             <TextInput
