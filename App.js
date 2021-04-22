@@ -215,10 +215,13 @@ const AboutPage = ({ navigation }) => {
     //View style={styles.container}>
     <View style = {styles.container}>
         <View style = {styles.aboutContainer}>
+        <TouchableOpacity onPress={()=>navigation.navigate('home')}>
       <Image
-        style={styles.homelogoTry2}
+        style={styles.homelogo}
         source={require('./components/images/home.png')}
+        
       />
+      </TouchableOpacity>
       <About />
       </View>
     </View>
@@ -304,15 +307,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
 
   },
-  homeLogo: {
-    backgroundColor: 'orange',
-    height: 50,
-    width: 50,
-    resizeMode: 'contain',
-    position: 'absolute',
-    marginTop: 0,
-  },
-  homelogoTry2: {
+  homelogo: {
     width: 50,
     height: 50,
   },
