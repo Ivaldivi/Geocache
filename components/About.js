@@ -35,14 +35,10 @@ const About = props => {
         #izadjaju-- This app was created as a software development project for the Macalester College class COMP225 Software Development.
   The four main authors of the project are: Julia Kispert, A'di Dust, James Bellitto, and Izzy Valdivia with lots of help from our instructor! {'\n'}
       </Text>
-      <Text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 4,  borderColor: 'white', borderWidth: 2, borderRadius: 8, color: '#183592', marginRight: 105 }}>
+      <Text style={styles.AboutPageT}>
         Acknowledgements:
   </Text>
       <Text style={styles.AboutPageP}>
-        - React Native documentation (woohoo, we love you, thank you) {'\n'}- Our instructor: Paul Cantrell
-  {'\n'}- Some of our other commonly used resources below : P
-  </Text>
-  <Text style={styles.AboutPageP}>
         - React Native documentation (woohoo, we love you, thank you) {'\n'}- Our instructor: Paul Cantrell
   {'\n'}- Some of our other commonly used resources below : P
   </Text>
@@ -55,10 +51,22 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     backgroundColor: 'rgba(223, 108, 22, 1)',
     textAlign: 'justify',
-    marginRight: 5,
-    marginLeft: 5,
+    marginRight: 8,
+    marginLeft: 8,
     lineHeight: 25,
     color: 'white',
+    marginBottom: 20,
   },
+  AboutPageT: {
+    fontSize: 25, 
+    fontWeight: 'bold',
+     marginLeft: 4,  
+     borderColor: 'white',
+      borderWidth: 2, 
+      borderRadius: 8,
+       color: '#183592', 
+       marginRight: 105,
+      }
+  ,
 });
 export default About;
