@@ -216,7 +216,7 @@ const AboutPage = ({ navigation }) => {
     <View style = {styles.container}>
         <View style = {styles.aboutContainer}>
       <Image
-        style={styles.homeLogo}
+        style={styles.homelogoTry2}
         source={require('./components/images/home.png')}
       />
       <About />
