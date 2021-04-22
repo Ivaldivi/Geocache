@@ -1,18 +1,14 @@
 //import * as React from 'react';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as geolib from 'geolib';
 import UserMap from './components/UserMap';
 import Compass from './components/Compass';
-import { Component } from 'react';
-import UserMap2 from './components/UserMap2';
 import Victory from './components/Victory';
 import About from './components/About';
 import MapView, { Marker } from 'react-native-maps';
-import { apisAreAvailable } from 'expo';
-import { Grid, Col, Row } from "react-native-easy-grid";
 
 
 const { width, height } = Dimensions.get('window');
@@ -20,14 +16,14 @@ const ASPECT_RATIO = width / height;
 const Stack = createStackNavigator();
 
 function App() {
-  global.goalCache = 0;
+  global.goalCache = 0; //Global variable containing goal coordinates
   return (
     <NavigateStack />
   )
 }
 
 
-
+//Handles navigation between different screens
 const NavigateStack = () => {
 
   return (
@@ -63,10 +59,10 @@ const NavigateStack = () => {
   )
 }
 
+//Uses Map component visual and allows to switch to compass screen
 const MapScreen = ({ navigation }) => {
 
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
-  const [location, setLocation] = useState(0);
 
   //Constantly checks user position and sees if within distance of goal coordinates. 
   //If close enough, changes to victory screen. 
@@ -98,6 +94,7 @@ const MapScreen = ({ navigation }) => {
   )
 }
 
+//Uses Compass component and allows to switch to Map Screen. 
 const CompassScreen = ({ navigation }) => {
   //Constantly checks user position and sees if within distance of goal coordinates. 
   //If close enough, changes to victory screen. 
@@ -112,6 +109,7 @@ const CompassScreen = ({ navigation }) => {
     )
   }
   );
+
   return (
     <View style={styles.compassContainer}>
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
@@ -128,6 +126,8 @@ const CompassScreen = ({ navigation }) => {
   )
 }
 
+//A google-maps styled screen displaying goal markers as Mac the Scot. 
+//Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers.
 const GoalsScreen = ({ navigation }) => {
   const ScottMarker = props => {
     return (
@@ -167,6 +167,7 @@ const GoalsScreen = ({ navigation }) => {
   )
 }
 
+//Simple home screen to switch to About Screen or Goal Map.
 const WelcomeScreen = ({ navigation }) => {
 
   return (
@@ -198,11 +199,9 @@ const WelcomeScreen = ({ navigation }) => {
   )
 }
 
-
+//Uses Victory component to show comments and congrats!
 const VictoryScreen = ({ navigation }) => {
-  //TODO: eventually use victory component with goal coordinates as a prop
-  const [subscription, setSubscription] = useState(null);
-  const [magnetometer, setMagnetometer] = useState(0);
+  //TODO: add home button, probably disable back button
   return (
     <View>
       <Victory location={global.goalCache}/>
@@ -210,7 +209,7 @@ const VictoryScreen = ({ navigation }) => {
   )
 }
 
-
+//Simple page that shows instructions, rules, and credits for the app. 
 const AboutPage = ({ navigation }) => {
   return (
     //View style={styles.container}>

@@ -71,6 +71,7 @@ const Victory = (props) => {
             location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
             userName: name
         })
+        setComment('');
     }
 
     
@@ -83,7 +84,8 @@ const Victory = (props) => {
                 clearButtonMode= {'always'}
                 placeholder={'Leave comment here'}
                 style={styles.input}
-                onChangeText={(currentComment) => setComment(currentComment)} />
+                onChangeText={(currentComment) => setComment(currentComment)} 
+                value={comment}/>
             <TextInput 
                // style={styles.submitButton} 
                 clearButtonMode= {'always'}

@@ -6,15 +6,14 @@
 
 
 import * as React from 'react';
-import { Alert, ImageBackground, Image, View, Text, StyleSheet, Dimensions, Button, TouchableOpacity } from 'react-native';
+import { Alert, Image, View, Text, StyleSheet, Dimensions} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer } from 'expo-sensors';
 import { useEffect, useState } from 'react';
-import { getDistance, getPreciseDistance } from 'geolib';
 
 
 
-const Compass = ({ navigation }) => {
+const Compass = () => {
 
   const { width, height } = Dimensions.get('window');
   const GOAL_LATITUDE = global.goalCache.latitude;
@@ -141,6 +140,8 @@ const Compass = ({ navigation }) => {
       return 360 - bearing + (_normalizeCompassDirection(magnetometer - bearing));
     }
   }
+
+  //Finds distance between user and goal coordinates and updates distance text component appropriately.
   const changeDistance = () => {
     //must write check here as well for if goal cache is null 
     if (GOAL_LATITUDE != 0) {
