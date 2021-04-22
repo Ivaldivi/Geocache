@@ -2,17 +2,11 @@
 import {
   StyleSheet,
   View,
-  Text,
   Dimensions,
-  TouchableOpacity,
-  Alert,
-  Platform,
-  ImageStore
+  Alert
 } from 'react-native';
 import MapView, { MAP_TYPES, Marker } from 'react-native-maps';
 import React, { useState } from 'react';
-import { useEffect } from 'react/cjs/react.production.min';
-
 
 function userMap(props) {
 
@@ -25,8 +19,6 @@ function userMap(props) {
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 
-  const [userLocation, setUserLocation] = useState("- - - - -");
-
   const region = useState({
     latitude: GOAL_LATITUDE,
     longitude: GOAL_LONGITUDE,
@@ -35,6 +27,8 @@ function userMap(props) {
   });
 
 
+  //Sets the goal marker coordinates according to user goal selection
+  //(snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates.
   const GoalMarker = props => {
     if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0) {
       Alert.alert(
