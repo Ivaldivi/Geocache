@@ -65,13 +65,27 @@ const Victory = (props) => {
     //Saves given message and name (set to "anonymous if there isn't a name given) 
     //to firestore when user clicks 'leave comments here' button. 
     const saveMessage = () => {
-        console.log(props.location)
+        if (name === null || name.trim() === ''){
+            setName('Anonymous');
+            console.log('plz')
+        }
         firestore.collection('Messages').add({
             message: comment,
             location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
             userName: name
         })
         setComment('');
+    }
+
+    //Sets name to anonymous if text input is empty, otherwise sets name state appropriately with given name. 
+    const handlingSetName = (currentName) => {
+        if (currentName === null || currentName.trim() === ''){
+            setName('Anonymous');
+            console.log('plz')
+        }
+        else{
+            setName(currentName);
+        }
     }
 
     
@@ -91,7 +105,7 @@ const Victory = (props) => {
                 clearButtonMode= {'always'}
                 placeholder={'Add your name here'}
                 style={styles.input}
-                onChangeText={(currentName) => setName(currentName)}/>
+                onChangeText={(userName) => handlingSetName(currentName = userName)}/>
             <View style={styles.submitButton}>
                 <Button
                     style={styles.submitButton}
