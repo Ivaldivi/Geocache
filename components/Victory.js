@@ -6,7 +6,7 @@
 //Also allows users to view the comments made by others previously. 
 
 import React, { useState, useEffect } from 'react';
-import { TextInput, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator } from 'react-native';
+import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
 
@@ -75,22 +75,27 @@ const Victory = (props) => {
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment, and flat list of comments given by others
     return (
-        <View>
+        <View style={styles.victoryScreenContainer}>
             <TextInput
                 clearButtonMode= {'always'}
                 placeholder={'leave comments here!'}
                 style={styles.input}
-                onChangeText={(currentComment) => setComment(currentComment)}
+                onChangeText={(currentComment) => setComment(currentComment)} />
+            <View style={styles.submitButton} >
+                <Button
+                    style={styles.submitButton}
+                    color={'white'}
+                    title={'Submit your comment!'}
+                    onPress={saveMessage}
                 />
-            <Button
-                title={'Submit your comment!'}
-                onPress={saveMessage}
-            />
+            </View>
+            <Text style={styles.text}>
+                Scroll To See All Comments  </Text>
             <FlatList
                 data={data}
                 renderItem={({ item }) => (
                     <View style={{ height: 20, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text>{item.title}</Text>
+                        <Text style={styles.comments}>{item.title}</Text>
                     </View>
                 )}
             />
@@ -102,19 +107,42 @@ const Victory = (props) => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
-        flex: 1,
-    },
-    title: {
-        fontSize: 32,
+    victoryScreenContainer: {
+        backgroundColor: 'lightblue',
+        alignItems: 'center',
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
     },
     input: {
         height: 40,
         margin: 12,
         borderWidth: 1,
+        fontWeight: 'bold',
+
     },
+    text: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        borderColor: 'white',
+        borderWidth: 2,
+        borderRadius: 2,
+        color: 'rgba(223, 108, 22, .9)',
+    },
+    comments: {
+        fontWeight: 'bold',
+    },
+    submitButton: {
+        backgroundColor: 'rgba(223, 108, 22, .9)',
+        paddingHorizontal: 18,
+        paddingVertical: 10,
+        borderRadius: 20,
+        alignContent: 'center',
+        color: 'white',
+        marginBottom: 5,
+        display: 'flex'
+
+    }
+
 });
 
 export default Victory
