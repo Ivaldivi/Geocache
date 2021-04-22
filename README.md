@@ -28,7 +28,8 @@ Finds user coordinates using geolocation navigator.
 ##### const GoalMarker
 Sets the goal marker coordinates according to user goal selection (snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates. 
 
-### References and Inspiration for Find Coordinates Method and Map Screen: 
+
+#### References and Inspiration for Map Screen: 
 
 ###### Prashant Gond's "How to Use Geolocation and Geocding in React Native Apps", published December 18, 2019 to Web Dev Zone: https://dzone.com/articles/how-to-use-geo-location-geo-coding-in-react-native
 
@@ -67,7 +68,7 @@ This function finds the angle of arrow image rotation by doing simple math with 
 #### const changeDistance
 Finds distance between user and goal coordinates and updates distance text component appropriately. 
 
-### References and Inspiration for Compass Screen: 
+#### References and Inspiration for Compass Screen: 
 ###### Stack Overflow post for angle math: https://stackoverflow.com/questions/57308560/smooth-orientation-compass-using-react-native-sensorss-magnetometer
 ###### A compass app created by @Rahul Hague was referenced to better understand math to find angle. https://github.com/rahulhaque/compass-react-native-expo
 ###### The documentation for GeoLib helped with bearing understanding: https://www.npmjs.com/package/geolib
