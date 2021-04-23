@@ -346,7 +346,8 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center',
     alignContent: 'center',
-    marginTop: 25
+    marginTop: 30, 
+    marginLeft: 20
   },
 
   map: {
