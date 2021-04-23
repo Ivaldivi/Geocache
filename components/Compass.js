@@ -29,6 +29,7 @@ const Compass = () => {
   //finds user coordinates and updates user latitude and longitude states
   //Code by Julia and modified for compass by A'di
   const findCoordinates = () => {
+    if(subscription){
     navigator.geolocation.getCurrentPosition(
       position => {
         const lat = position.coords.latitude;
@@ -37,6 +38,8 @@ const Compass = () => {
         setUserLongitude(long);
       },
     );
+    }
+
   };
 
   //Updates bearing based on current user coordinates
