@@ -5,7 +5,7 @@
 //Also allows users to view the comments made by others previously. 
 
 import React, { useState, useEffect } from 'react';
-import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator, SafeAreaView } from 'react-native';
+import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, Image, Button, ActivityIndicator, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
 import { useCardAnimation } from '@react-navigation/stack';
@@ -90,7 +90,7 @@ const Victory = (props) => {
     //View contains place to write comment and user name, and flat list of comments and names given by others
     return (
         <SafeAreaView style={styles.victoryScreenContainer}>
-            <StatusBar translucent backgroundColor="transparent" />
+            <Image style = {{width: Dimensions.get('window').width , height: Dimensions.get('window').height/3}} source={require('./images/contratsScreen.png')} />
             <TextInput
                 clearButtonMode= {'always'}
                 placeholder={'Leave comment here'}
