@@ -5,7 +5,7 @@
 //Also allows users to view the comments made by others previously. 
 
 import React, { useState, useEffect } from 'react';
-import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator } from 'react-native';
+import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, StatusBar, Button, ActivityIndicator, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
 import { useCardAnimation } from '@react-navigation/stack';
@@ -20,12 +20,9 @@ const firebaseConfig = {
     storageBucket: 'geocache-f983a.appspot.com',
 };
 
-
 firebase.initializeApp(firebaseConfig);
 
-
 const firestore = firebase.firestore();
-
 
 const Victory = (props) => {
 
@@ -89,11 +86,11 @@ const Victory = (props) => {
     }
 
     
-
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment and user name, and flat list of comments and names given by others
     return (
-        <View style={styles.victoryScreenContainer}>
+        <SafeAreaView style={styles.victoryScreenContainer}>
+            <StatusBar translucent backgroundColor="transparent" />
             <TextInput
                 clearButtonMode= {'always'}
                 placeholder={'Leave comment here'}
@@ -125,15 +122,15 @@ const Victory = (props) => {
                     </View>
                 )}
             />
-        </View>
+        </SafeAreaView>
     );
-
 }
 
 
 
 const styles = StyleSheet.create({
     victoryScreenContainer: {
+        
         backgroundColor: 'lightblue',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,

@@ -1,13 +1,7 @@
 //import * as React from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter, ScrollView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as geolib from 'geolib';
-import { Component } from 'react';
-import MapView, { Marker } from 'react-native-maps';
-import { apisAreAvailable } from 'expo';
-import { Grid, Col, Row } from "react-native-easy-grid";
+
 
 const B = (props) => <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{props.children}</Text>
 //https://stackoverflow.com/questions/35718143/react-native-add-bold-or-italics-to-single-words-in-text-field#:~:text=You%20can%20use%20like,...

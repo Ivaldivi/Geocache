@@ -28,7 +28,8 @@ const NavigateStack = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator   
+      screenOptions={{headerShown: false}}>
         <Stack.Screen
           name='home'
           component={WelcomeScreen}
@@ -61,7 +62,6 @@ const NavigateStack = () => {
 
 //Uses Map component visual and allows to switch to compass screen
 const MapScreen = ({ navigation }) => {
-
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
 
   //Constantly checks user position and sees if within distance of goal coordinates. 
@@ -78,8 +78,7 @@ const MapScreen = ({ navigation }) => {
   );
 
   return (
-
-    <View style={styles.mapContainer}>
+    <View style={styles.mapContainer} backgroundColor = {'orange'}>
       <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}> 
@@ -141,9 +140,15 @@ const GoalsScreen = ({ navigation }) => {
     )
   }
   return (
-    <View style={styles.container}>
-         <Text style={styles.baseText}>
-        {"Click On The Goal You Would Like To Go To"}
+    <View style={styles.container} backgroundColor = {'orange'}>
+      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+      <Image
+        style={styles.homelogo}
+        source={require('./components/images/home.png')}
+      />
+      </TouchableOpacity>
+         <Text style={styles.baseText} color= {"white"}>
+        {"CLICK ON THE GOAL YOU WANT TO FIND!"}
       </Text>
       <View style={styles.map}>
         <MapView
@@ -170,7 +175,6 @@ const GoalsScreen = ({ navigation }) => {
 
 //Simple home screen to switch to About Screen or Goal Map.
 const WelcomeScreen = ({ navigation }) => {
-
   return (
 
     <View style={styles.welcomePg}>
@@ -193,9 +197,6 @@ const WelcomeScreen = ({ navigation }) => {
           onPress={() =>
             navigation.navigate('AboutPage')} />
       </View>
-
-
-
     </View>
   )
 }
@@ -220,7 +221,6 @@ const AboutPage = ({ navigation }) => {
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
-        
       />
       </TouchableOpacity>
       <About />
@@ -233,10 +233,11 @@ const AboutPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     backgroundColor: '#fff',
-    alignItems: 'center'
-
+    alignItems: 'center', 
+    alignContent: 'center', 
+    justifyContent: 'center'
   },
   compassContainer: {
     flex: 1,
@@ -247,7 +248,8 @@ const styles = StyleSheet.create({
   mapContainer: {
     flex: 1,
     backgroundColor: 'whitesmoke',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
 
   },
 
@@ -256,12 +258,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: 'center',
-    color: 'orange',
+    color: 'white',
+
   },
 
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.75,
+    height: Dimensions.get('window').height * 0.80,
   },
 
   centeredText: { textAlign: 'center' },
@@ -269,7 +272,7 @@ const styles = StyleSheet.create({
   compass: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.75,
-    backgroundColor: 'orange',
+    backgroundColor: 'rgba(223, 108, 22, 1)',
   },
   imgz: {
     width: 375,
@@ -277,7 +280,8 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: '#214683',
-    marginBottom: -10
+    marginBottom: -15, 
+    marginTop: Dimensions.get('window').height*0.1
   },
   welcomePg: {
     alignItems: 'center',
@@ -309,8 +313,11 @@ const styles = StyleSheet.create({
 
   },
   homelogo: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
+    marginTop: 25, 
+    alignItems: 'center', 
+    
   },
   aboutContainer: {
     backgroundColor: 'rgba(223, 108, 22, 1)'
