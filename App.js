@@ -79,6 +79,13 @@ const MapScreen = ({ navigation }) => {
 
   return (
     <View style={styles.mapContainer} backgroundColor = {'orange'}>
+
+      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+      <Image
+        style={styles.homelogo}
+        source={require('./components/images/home.png')}
+      />
+      </TouchableOpacity>
       <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}> 
@@ -182,7 +189,18 @@ const WelcomeScreen = ({ navigation }) => {
         <Image source={require('./components/images/macCache.png')} />
       </View>
       <View style={styles.welcomeB}>
-      {/* <Image style = {{width:150, height: 150}} source={require('./components/images/titleScott.png')} /> */}
+      <Image style = {{transform: [{ rotate: '15deg' }], width:100, height: 100,position: 'absolute', right: 130, bottom: 30}} source={require('./components/images/rotated.png')} />
+      <Image style = {{transform: [{ rotate: '295deg' }], width:100, height: 100,position: 'absolute', right: 90, top: 60}} source={require('./components/images/rotated.png')} />
+      <Image style = {{transform: [{ rotate: '350deg' }], width:100, height: 100,position: 'absolute', left: 140, bottom: 10}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '220deg' }], width:100, height: 100,position: 'absolute', top: 100, left: 110}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '60deg' }], width:100, height: 100, position: 'absolute', top: 165, right: 135}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '30deg' }], width:100, height: 100, position: 'absolute', top: 245, left: 120}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '160deg' }], width:100, height: 100, position: 'absolute', top: 186}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '270deg' }], width:100, height: 100, position: 'absolute', top: 265, right: 75}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '200deg' }], width:100, height: 100,position: 'absolute', right: 140, bottom: 360}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '350deg' }], width:100, height: 100,position: 'absolute', left: 140, bottom: 330}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '60deg' }], width:100, height: 100,position: 'absolute', left: 130, bottom: 230}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '360deg' }], width:100, height: 100,position: 'absolute', right: 155, bottom: 215}} source={require('./components/images/titleScott.png')} />
         <Button
           title="Start"
           color='#fff'
@@ -280,8 +298,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(223, 108, 22, 1)',
   },
   imgz: {
-    width: 375,
-    height: 375,
+    width: 370,
+    height: 370,
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: '#214683',
