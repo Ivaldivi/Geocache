@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height * 0.7,
     alignSelf: 'center',
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 55,
     backgroundColor: 'orange',
     alignItems: 'center',
   },

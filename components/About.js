@@ -9,6 +9,19 @@ const B = (props) => <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{props.c
 const About = props => {
   return (
     <ScrollView style={{ backgroundColor: 'rgba(223, 108, 22, 1)', height: Dimensions.get('window').height }}>
+        <Text style={{
+        fontSize: 25, fontWeight: 'bold', marginLeft: 4, borderColor: 'white', borderWidth: 2, borderRadius: 8,
+        color: '#183592', marginRight: 220
+      }}>
+        How to Play:  </Text>
+      <Text style={styles.AboutPageP}>
+        <B>1.</B> Click start on home page to be taken to a map with all possible goals. 
+  {'\n'}{'\n'}<B>2.</B> Choose which goal you would like to go to. Your location is represented by the blue dot. 
+  {'\n'}{'\n'}<B>3.</B> After choosing, use the map and the compass tool to reach the destination. You may use both tools as much as you want, but relying on compass tool leads to a much more challenging journey. 
+  At any point you want to return home you may click the home icon in the top left, or if you want to return to the instructions you may click the question mark. To return back to searching for your goal after reviewing the rules, you must go back to home screen, press start, and reselect your goal.
+  {'\n'}{'\n'}<B>4.</B> Once arriving at the destination you will be directed to a victory screen where you can read comments that were left by other who also went to the same location as well as leave your own.
+   </Text>
+ 
       <Text style={{
         fontSize: 25, fontWeight: 'bold', marginLeft: 4, borderColor: 'white', borderWidth: 2, borderRadius: 8,
         color: '#183592', marginRight: 285

@@ -57,9 +57,10 @@ const NavigateStack = () => {
           component={GoalsScreen}
           options={{ title: 'Goals'}} />
         <Stack.Screen
-          name='AboutPage'
+          name='about'
           component={AboutPage}
-          options={{ title: 'About'}} />
+          options={{ title: 'About',
+          gestureEnabled: false} }/>
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -84,13 +85,20 @@ const MapScreen = ({ navigation }) => {
 
   return (
     <View style={styles.mapContainer} backgroundColor = {'orange'}>
-
+      <View style = {styles.buttonContainer}>
+      <TouchableOpacity onPress={()=>navigation.navigate('about')}>
+      <Image
+        style={styles.aboutlogo}
+        source={require('./components/images/questionmark.png')}
+      />
+      </TouchableOpacity>
       <TouchableOpacity onPress={()=>navigation.navigate('home')}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
       />
       </TouchableOpacity>
+      </View>
       <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
       <View style={styles.otherB}> 
@@ -113,7 +121,7 @@ const CompassScreen = ({ navigation }) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         //must take into account if global.goalcache is not coordinates.... 
-        if (geolib.getDistance(position.coords, global.goalCache) >= 0) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 0) {
           navigation.navigate('victory');
         }
       }
@@ -123,8 +131,22 @@ const CompassScreen = ({ navigation }) => {
 
   return (
     <View style={styles.compassContainer}>
+       <View style = {styles.buttonContainer}>
+      <TouchableOpacity onPress={()=>navigation.navigate('about')}>
+      <Image
+        style={styles.aboutlogo}
+        source={require('./components/images/questionmark.png')}
+      />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+      <Image
+        style={styles.homelogo}
+        source={require('./components/images/home.png')}
+      />
+      </TouchableOpacity>
+      </View>
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
-      <View style={{ position: 'absolute', top: 100, left: 50 }}/>
+      <View style={{ position: 'absolute', top: 0, left: 50 }}/>
       <View style={styles.otherB}>
         <Button
           style={styles.otherB}
@@ -218,7 +240,7 @@ const WelcomeScreen = ({ navigation }) => {
           title="About"
           color='#fff'
           onPress={() =>
-            navigation.navigate('AboutPage')} />
+            navigation.navigate('about')} />
       </View>
     </View>
   )
@@ -270,15 +292,13 @@ const styles = StyleSheet.create({
   compassContainer: {
     flex: 1,
     backgroundColor: 'orange',
-    alignItems: 'center'
+  // alignItems: 'center'
 
   },
   mapContainer: {
     flex: 1,
     backgroundColor: 'whitesmoke',
-    alignItems: 'center',
-    justifyContent: 'center'
-
+    justifyContent: 'center',
   },
 
   baseText: {
@@ -338,16 +358,26 @@ const styles = StyleSheet.create({
     width: '50%',
     alignItems: 'center',
     alignSelf: 'center',
-
+    top: 0,
   },
   homelogo: {
     width: 45,
     height: 45,
+    marginTop: 25,  
+  },
+  aboutlogo: {
+    width: 45,
+    height: 45,
     marginTop: 25,    
+    left: Dimensions.get('window').width-100,
   },
   aboutContainer: {
     backgroundColor: 'rgba(223, 108, 22, 1)'
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+  }
 });
 
 export default App;
