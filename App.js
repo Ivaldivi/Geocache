@@ -1,6 +1,6 @@
 //import * as React from 'react';
 import React, { useState, useEffect} from 'react';
-import { Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter, ScrollView } from 'react-native';
+import {Alert, Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as geolib from 'geolib';
@@ -66,6 +66,7 @@ const NavigateStack = () => {
   )
 }
 
+
 //Uses Map component visual and allows to switch to compass screen
 const MapScreen = ({ navigation }) => {
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
@@ -82,11 +83,23 @@ const MapScreen = ({ navigation }) => {
     )
   }
   );
+  
 
   return (
     <View style={styles.mapContainer} backgroundColor = {'orange'}>
       <View style = {styles.buttonContainer}>
-      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+      <TouchableOpacity onPress={Alert.alert(
+  "Want To Return To Home Page?",
+  "If you return home you will have to restart your journey.",
+  [
+    {
+      text: "Cancel",
+      onPress: () => console.log("Cancel Pressed"),
+      style: "cancel"
+    },
+    { text: "Ok", onPress: () => navigation.navigate('home') }
+  ]
+)}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
@@ -129,7 +142,18 @@ const CompassScreen = ({ navigation }) => {
   return (
     <View style={styles.compassContainer}>
        <View style = {styles.buttonContainer}>
-      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+      <TouchableOpacity onPress={()=>{Alert.alert(
+  "Want To Return To Home Page?",
+  "If you return home you will have to restart your journey.",
+  [
+    {
+      text: "Cancel",
+      onPress: () => console.log("Cancel Pressed"),
+      style: "cancel"
+    },
+    { text: "Ok", onPress: () => navigation.navigate('home') }
+  ]
+)}}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
@@ -244,7 +268,18 @@ const WelcomeScreen = ({ navigation }) => {
 const VictoryScreen = ({ navigation }) => {
   return (
     <View  backgroundColor="lightblue">
-      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+      <TouchableOpacity onPress={Alert.alert(
+  "Want To Return To Home Page?",
+  "If you return home you will have to restart your journey.",
+  [
+    {
+      text: "Cancel",
+      onPress: () => console.log("Cancel Pressed"),
+      style: "cancel"
+    },
+    { text: "Ok", onPress: () => navigation.navigate('home') }
+  ]
+      )}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
