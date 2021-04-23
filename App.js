@@ -33,28 +33,33 @@ const NavigateStack = () => {
         <Stack.Screen
           name='home'
           component={WelcomeScreen}
-          options={{ title: 'Mac Cache' }} />
+          options={{ title: 'Mac Cache',
+          gestureEnabled: false}} />
         <Stack.Screen
           name='map'
           component={MapScreen}
-          options={{ title: 'Map' }} />
+          options={{ title: 'Map',
+          gestureEnabled: false }} />
         <Stack.Screen
           name='compass'
           component={CompassScreen}
-          options={{ title: 'Compass' }} />
+          options={{ 
+            title: 'Compass',
+          gestureEnabled: false }} />
         <Stack.Screen
           name='victory'
           component={VictoryScreen}
-          options={{ title: 'Victory' }} />
-          
+          options={{ 
+            title: 'Victory',
+            gestureEnabled: false}} />
         <Stack.Screen
           name='goals'
           component={GoalsScreen}
-          options={{ title: 'Goals' }} />
+          options={{ title: 'Goals'}} />
         <Stack.Screen
           name='AboutPage'
           component={AboutPage}
-          options={{ title: 'About' }} />
+          options={{ title: 'About'}} />
       </Stack.Navigator>
     </NavigationContainer>
   )
