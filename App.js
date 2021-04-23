@@ -182,8 +182,8 @@ const WelcomeScreen = ({ navigation }) => {
         <Image source={require('./components/images/macCache.png')} />
       </View>
       <View style={styles.welcomeB}>
+      {/* <Image style = {{width:150, height: 150}} source={require('./components/images/titleScott.png')} /> */}
         <Button
-          style={styles.welcomeB}
           title="Start"
           color='#fff'
           onPress={() =>
@@ -203,9 +203,14 @@ const WelcomeScreen = ({ navigation }) => {
 
 //Uses Victory component to show comments and congrats!
 const VictoryScreen = ({ navigation }) => {
-  //TODO: add home button, probably disable back button
   return (
-    <View>
+    <View  backgroundColor="lightblue">
+      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+      <Image
+        style={styles.homelogo}
+        source={require('./components/images/home.png')}
+      />
+      </TouchableOpacity>
       <Victory location={global.goalCache}/>
     </View>
   )
@@ -315,9 +320,7 @@ const styles = StyleSheet.create({
   homelogo: {
     width: 45,
     height: 45,
-    marginTop: 25, 
-    alignItems: 'center', 
-    
+    marginTop: 25,    
   },
   aboutContainer: {
     backgroundColor: 'rgba(223, 108, 22, 1)'
