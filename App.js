@@ -86,18 +86,15 @@ const MapScreen = ({ navigation }) => {
   return (
     <View style={styles.mapContainer} backgroundColor = {'orange'}>
       <View style = {styles.buttonContainer}>
-      <TouchableOpacity onPress={()=>navigation.navigate('about')}>
-      <Image
-        style={styles.aboutlogo}
-        source={require('./components/images/questionmark.png')}
-      />
-      </TouchableOpacity>
       <TouchableOpacity onPress={()=>navigation.navigate('home')}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
       />
       </TouchableOpacity>
+      <Text style={styles.topText} color= {"white"}>
+        {"MAKE THE JOURNEY TO THE SCOTT"}
+      </Text>
       </View>
       <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
@@ -132,18 +129,15 @@ const CompassScreen = ({ navigation }) => {
   return (
     <View style={styles.compassContainer}>
        <View style = {styles.buttonContainer}>
-      <TouchableOpacity onPress={()=>navigation.navigate('about')}>
-      <Image
-        style={styles.aboutlogo}
-        source={require('./components/images/questionmark.png')}
-      />
-      </TouchableOpacity>
       <TouchableOpacity onPress={()=>navigation.navigate('home')}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
       />
       </TouchableOpacity>
+      <Text style={styles.topText} color= {"white"}>
+        {"FOLLOW THE ARROW TO SCOTT"}
+      </Text>
       </View>
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 0, left: 50 }}/>
@@ -309,6 +303,16 @@ const styles = StyleSheet.create({
     color: 'white',
 
   },
+  topText: {
+    fontFamily: "Futura",
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: 'center',
+    color: 'white',
+    alignSelf: 'center',
+    alignContent: 'center',
+    marginTop: 25
+  },
 
   map: {
     width: Dimensions.get('window').width,
@@ -363,12 +367,13 @@ const styles = StyleSheet.create({
   homelogo: {
     width: 45,
     height: 45,
-    marginTop: 25,  
+    marginTop: 25, 
+    right: 0, 
   },
   aboutlogo: {
     width: 45,
     height: 45,
-    marginTop: 25,    
+    marginTop: -5,    
     left: Dimensions.get('window').width-100,
   },
   aboutContainer: {
