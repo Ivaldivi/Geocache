@@ -199,7 +199,7 @@ const WelcomeScreen = ({ navigation }) => {
       <Image style = {{transform: [{ rotate: '270deg' }], width:100, height: 100, position: 'absolute', top: 265, right: 75}} source={require('./components/images/titleScott.png')} />
       <Image style = {{transform: [{ rotate: '200deg' }], width:100, height: 100,position: 'absolute', right: 140, bottom: 360}} source={require('./components/images/titleScott.png')} />
       <Image style = {{transform: [{ rotate: '350deg' }], width:100, height: 100,position: 'absolute', left: 140, bottom: 330}} source={require('./components/images/titleScott.png')} />
-      <Image style = {{transform: [{ rotate: '60deg' }], width:100, height: 100,position: 'absolute', left: 130, bottom: 230}} source={require('./components/images/titleScott.png')} />
+      <Image style = {{transform: [{ rotate: '50deg' }], width:100, height: 100,position: 'absolute', left: 135, bottom: 230}} source={require('./components/images/titleScott.png')} />
       <Image style = {{transform: [{ rotate: '360deg' }], width:100, height: 100,position: 'absolute', right: 155, bottom: 215}} source={require('./components/images/titleScott.png')} />
         <Button
           title="Start"
