@@ -3,9 +3,10 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Alert
+  Alert,
+  Platform
 } from 'react-native';
-import MapView, { MAP_TYPES, Marker } from 'react-native-maps';
+import MapView, { MAP_TYPES, Marker} from 'react-native-maps';
 import React, { useState } from 'react';
 
 function userMap(props) {
@@ -101,9 +102,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   text: {
+    ...Platform.select({
+      android: {
+        fontFamily: 'normal'},
+      ios: {
+        fontFamily: 'Futura'}
+      }),
     color: 'white',
     fontWeight: 'bold',
-    fontFamily: 'Futura',
     alignSelf: 'center',
     alignItems: 'center',
 

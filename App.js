@@ -1,6 +1,6 @@
 //import * as React from 'react';
 import React, { useState, useEffect} from 'react';
-import {Alert, Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter, ScrollView } from 'react-native';
+import {Alert, Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, DeviceEventEmitter, ScrollView, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as geolib from 'geolib';
@@ -331,7 +331,12 @@ const styles = StyleSheet.create({
   },
 
   baseText: {
-    fontFamily: "Futura",
+    ...Platform.select({
+      ios: {
+        fontFamily: 'Futura'},
+      android: {
+        fontFamily: 'normal'}
+      }),
     fontSize: 20,
     fontWeight: "bold",
     textAlign: 'center',
@@ -339,7 +344,12 @@ const styles = StyleSheet.create({
 
   },
   topText: {
-    fontFamily: "Futura",
+    ...Platform.select({
+      ios: {
+        fontFamily: 'Futura'},
+      android: {
+        fontFamily: 'normal'}
+      }),
     fontSize: 15,
     fontWeight: "bold",
     textAlign: 'center',
