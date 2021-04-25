@@ -6,7 +6,7 @@
 
 
 import * as React from 'react';
-import { Alert, Image, View, Text, StyleSheet, Dimensions} from 'react-native';
+import { Alert, Image, View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer } from 'expo-sensors';
 import { useEffect, useState } from 'react';
@@ -194,10 +194,16 @@ const Compass = () => {
 }
 const styles = StyleSheet.create({
   text: {
+    ...Platform.select({
+      android: {
+        fontFamily: 'normal'},
+      ios: {
+        fontFamily: 'Futura'}
+      }),
     alignItems: 'center',
     color: 'white',
     fontWeight: 'bold',
-    fontFamily: 'Futura',
+    
 
   },
   compass: {
