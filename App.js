@@ -87,8 +87,8 @@ const MapScreen = ({ navigation }) => {
 
   return (
     <View style={styles.mapContainer} backgroundColor = {'orange'}>
-      <View style = {styles.buttonContainer}>
-      <TouchableOpacity onPress={Alert.alert(
+    <View style = {styles.buttonContainer}>
+      <TouchableOpacity onPress={()=>{Alert.alert(
   "Want To Return To Home Page?",
   "If you return home you will have to restart your journey.",
   [
@@ -99,7 +99,7 @@ const MapScreen = ({ navigation }) => {
     },
     { text: "Ok", onPress: () => navigation.navigate('home') }
   ]
-)}>
+)}}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
@@ -194,12 +194,12 @@ const GoalsScreen = ({ navigation }) => {
   return (
     <View style={styles.container} backgroundColor = {'orange'}>
       <TouchableOpacity onPress={()=>navigation.navigate('home')}>
-      <Image
-        style={styles.homelogo}
-        source={require('./components/images/home.png')}
-      />
+        <Image
+          style={styles.homelogo}
+          source={require('./components/images/home.png')}
+        />
       </TouchableOpacity>
-         <Text style={styles.baseText} color= {"white"}>
+      <Text style={styles.baseText} color= {"white"}>
         {"CLICK ON THE GOAL YOU WANT TO FIND!"}
       </Text>
       <View style={styles.map}>
