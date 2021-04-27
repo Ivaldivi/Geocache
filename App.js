@@ -76,7 +76,7 @@ const MapScreen = ({ navigation }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        if (geolib.getDistance(position.coords, global.goalCache) <= 0) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
           navigation.navigate('victory');
         }
       }
@@ -131,7 +131,7 @@ const CompassScreen = ({ navigation }) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         //must take into account if global.goalcache is not coordinates.... 
-        if (geolib.getDistance(position.coords, global.goalCache) <= 0) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
           navigation.navigate('victory');
         }
       }
