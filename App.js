@@ -76,7 +76,7 @@ const MapScreen = ({ navigation }) => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        if (geolib.getDistance(position.coords, global.goalCache) <= 0) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
           navigation.navigate('victory');
         }
       }
@@ -131,7 +131,7 @@ const CompassScreen = ({ navigation }) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         //must take into account if global.goalcache is not coordinates.... 
-        if (geolib.getDistance(position.coords, global.goalCache) <= 0) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
           navigation.navigate('victory');
         }
       }
@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
 
   },
   welcomeB: {
-    backgroundColor: 'rgba(223, 108, 22, .9)',
+    backgroundColor: "rgba(223, 108, 22, 1)",
     paddingHorizontal: 18,
     paddingVertical: 10,
     borderRadius: 20,
@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
     left: Dimensions.get('window').width-100,
   },
   aboutContainer: {
-    backgroundColor: 'rgba(223, 108, 22, 1)'
+    backgroundColor: 'rgba(223, 108, 22, 1)', 
   },
   buttonContainer: {
     flexDirection: 'row',
