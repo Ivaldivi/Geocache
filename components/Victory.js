@@ -78,7 +78,6 @@ const Victory = (props) => {
     const handlingSetName = (currentName) => {
         if (currentName === null || currentName.trim() === ''){
             setName('Anonymous');
-            console.log('plz')
         }
         else{
             setName(currentName);
