@@ -97,17 +97,17 @@ const Compass = () => {
       Magnetometer.addListener((data) => {
         setMagnetometer(_angle(data));
         changeBearing();
-        changeDistance();
-      })
+      },
+      changeDistance())
     );
   };
 
   //removes subscription and should stop the whole screen
   const _unsubscribe = () => {
-   // subscription && subscription.remove();
-    setSubscription(null);
-    setMagnetometer(0); 
+    subscription && subscription.remove();
     Magnetometer.removeAllListeners(); 
+    setSubscription(null);
+    navigator.doNotTrack;
   };
 
 
