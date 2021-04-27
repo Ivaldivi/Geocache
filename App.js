@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     alignContent: 'center',
-    color: 'white',
+    color: 'rgba(223, 108, 22, 1)',
     marginBottom: 45,
     display: 'flex'
   },
