@@ -131,7 +131,7 @@ const CompassScreen = ({ navigation }) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         //must take into account if global.goalcache is not coordinates.... 
-        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
+        if (geolib.getDistance(position.coords, global.goalCache) > 7) {
           navigation.navigate('victory');
         }
       }
@@ -280,7 +280,8 @@ const WelcomeScreen = ({ navigation }) => {
 const VictoryScreen = ({ navigation }) => {
   return (
     <View  backgroundColor="lightblue">
-      <TouchableOpacity onPress={Alert.alert(
+     <View style = {styles.buttonContainer}>
+      <TouchableOpacity onPress={()=>{Alert.alert(
   "Want To Return To Home Page?",
   "If you return home you will have to restart your journey.",
   [
@@ -291,12 +292,13 @@ const VictoryScreen = ({ navigation }) => {
     },
     { text: "Ok", onPress: () => navigation.navigate('home') }
   ]
-      )}>
+)}}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
       />
       </TouchableOpacity>
+      </View> 
       <Victory location={global.goalCache}/>
     </View>
   )
