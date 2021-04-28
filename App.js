@@ -186,7 +186,6 @@ const GoalsScreen = ({ navigation }) => {
         coordinate={props.coordinates}
         title={props.title}
         key={Marker.snellAndGrand}
-       // image={require("./components/images/scot.png")}
      
         onPress={() => { global.goalCache = props.coordinates; navigation.navigate('map'); }}
         image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
@@ -223,10 +222,10 @@ const GoalsScreen = ({ navigation }) => {
           }}
           showsUserLocation={true}
           style={styles.map}>
-          <ScottMarker coordinates={{ latitude: 44.9379, longitude: -93.168869019 }} title="Snelling and Grand Cache" />
-          <ScottMarker coordinates={{ latitude: 44.9416, longitude: -93.1974 }} title="River Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258}} title="Macalester Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude:-93.19863080978394}} title="River Cache" />
           <ScottMarker coordinates={{ latitude: 44.934412433560745, longitude: -93.1777188451171 }} title="The Tap Cache" />
-          <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
           <ScottMarker coordinates={{ latitude: 44.2212723, longitude: -92.0000204 }} title="Camping Cache" />
           <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
           {/* Takes the user to a bench on summit : ) */}
@@ -280,7 +279,8 @@ const WelcomeScreen = ({ navigation }) => {
 const VictoryScreen = ({ navigation }) => {
   return (
     <View  backgroundColor="lightblue">
-      <TouchableOpacity onPress={Alert.alert(
+     <View style = {styles.buttonContainer}>
+      <TouchableOpacity onPress={()=>{Alert.alert(
   "Want To Return To Home Page?",
   "If you return home you will have to restart your journey.",
   [
@@ -291,12 +291,13 @@ const VictoryScreen = ({ navigation }) => {
     },
     { text: "Ok", onPress: () => navigation.navigate('home') }
   ]
-      )}>
+)}}>
       <Image
         style={styles.homelogo}
         source={require('./components/images/home.png')}
       />
       </TouchableOpacity>
+      </View> 
       <Victory location={global.goalCache}/>
     </View>
   )
