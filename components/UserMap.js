@@ -1,5 +1,5 @@
 //import React from 'react';
-import {
+import { Image, 
   StyleSheet,
   View,
   Dimensions,
@@ -52,8 +52,17 @@ function userMap(props) {
         coordinate={props.coordinates}
         title={props.title}
         key={Marker.goal}
-        image={require("./images/scot.png")}
-      />
+        image={Platform.OS === 'android' ? require("./images/scot.png") : undefined}>
+        {Platform.OS === 'ios'
+        ? <Image
+            source={require("./images/scot.png")}
+            style={{
+              width: 60,
+              height: 100,
+            }}
+          />
+        : null}
+        </MapView.Marker>
     );
   }
 

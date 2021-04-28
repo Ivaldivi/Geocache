@@ -97,8 +97,9 @@ const Compass = () => {
       Magnetometer.addListener((data) => {
         setMagnetometer(_angle(data));
         changeBearing();
-      },
-      changeDistance())
+        changeDistance();
+      })
+
     );
   };
 

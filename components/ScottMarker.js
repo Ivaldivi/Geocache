@@ -8,20 +8,19 @@ const ScottMarker = props =>{
             coordinate={props.coordinates}
             title={props.title}
             key={Marker.snellAndGrand}
-            //image={require("./images/scot.png")}
-           // image = {require('scot.png')}
-           image={Platform.OS === 'android' ? require('scot.png')} : undefined}>
-            {Platform.OS === 'ios'
-  ? <Image
-      source={require('scot.png'}
-      style={{
-        width: 15,
-        height: 15,
-      }}
-    />
-  : null}
-            onPress={()=> console.log(props.coordinates)}
+           image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
+           {Platform.OS === 'ios'
+           ? <Image
+               source={require("./images/scot.png")}
+               style={{
+                 width: 60,
+                 height: 100,
+               }}
+              
+             />
+           : null}
           />
+          </MapView.Marker>
     )
 }
 
