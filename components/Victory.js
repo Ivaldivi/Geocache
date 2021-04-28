@@ -9,6 +9,7 @@ import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, Image, Button,
 import * as firebase from 'firebase';
 import "firebase/firestore";
 import { useCardAnimation } from '@react-navigation/stack';
+import { Audio } from 'expo-av';
 
 // Initialize Firebase -- taken and adjusted from 
 //https://docs.expo.io/guides/using-firebase/
@@ -25,6 +26,31 @@ firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 
 const Victory = (props) => {
+
+    // /Play the victory music! By James. Taken and adjusted from https://docs.expo.io/versions/latest/sdk/audio/
+    useEffect(() => {
+      let victorySound = null;
+      let componentActive = true; //fixes a potential race condition if user exits before sound finishes loading
+
+      async function playSound() {
+        const { sound } = await Audio.Sound.createAsync(
+          require('./assets/bagpipes.m4a') //Sound courtesy of https://freesound.org/people/zagi2/sounds/205106/
+        );
+        victorySound = sound;
+        if (componentActive) {
+          await victorySound.playAsync(); 
+        }
+      }
+      playSound();
+
+      return function cleanup() {
+        componentActive = false;
+        if (victorySound) {
+          victorySound.stopAsync();
+        }
+      };
+    }, []); //an empty array as a second argument in useEffect() makes it only run once
+ 
 
     //Various states to handle comment loading and data
     const [data, setData] = useState([]);
