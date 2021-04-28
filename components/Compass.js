@@ -192,6 +192,7 @@ const Compass = () => {
       />
       <Text style={styles.text}> Distance to Goal:  </Text>
       <Text style={styles.text}> {distance} m </Text>
+      <Text style={styles.text}> (Hold Phone Parallel To Ground) </Text>
     </View>
   );
 
