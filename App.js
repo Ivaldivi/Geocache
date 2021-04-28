@@ -131,7 +131,7 @@ const CompassScreen = ({ navigation }) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         //must take into account if global.goalcache is not coordinates.... 
-        if (geolib.getDistance(position.coords, global.goalCache) > 7) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
           navigation.navigate('victory');
         }
       }
@@ -186,7 +186,6 @@ const GoalsScreen = ({ navigation }) => {
         coordinate={props.coordinates}
         title={props.title}
         key={Marker.snellAndGrand}
-       // image={require("./components/images/scot.png")}
      
         onPress={() => { global.goalCache = props.coordinates; navigation.navigate('map'); }}
         image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
