@@ -69,6 +69,36 @@ const Compass = () => {
     }
   }
 
+  //Finds distance between user and goal coordinates and updates distance text component appropriately.
+  const changeDistance = () => {
+    //must write check here as well for if goal cache is null 
+    if (GOAL_LATITUDE != 0) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setDistance(geolib.getDistance(
+            { latitude: position.coords.latitude, longitude: position.coords.longitude },
+            { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }
+          )
+          );
+        });
+    } else {
+      Alert.alert(
+        "Error",
+        "Return to Map of All Mac Caches To Pick Your Goal",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      );
+
+    }
+
+  }
+
   //magnetometer returns the cardinal angle in degrees east of north the user is facing
   //Aka Heading
   const [subscription, setSubscription] = useState(null);
@@ -93,6 +123,7 @@ const Compass = () => {
 
   //Turns Magnetometer on and sends angle of phone
   const _subscribe = () => {
+    
     setSubscription(
       Magnetometer.addListener((data) => {
         setMagnetometer(_angle(data));
@@ -107,6 +138,7 @@ const Compass = () => {
   const _unsubscribe = () => {
     subscription && subscription.remove();
     Magnetometer.removeAllListeners(); 
+    setMagnetometer(null);
     setSubscription(null);
     navigator.doNotTrack;
   };
@@ -145,35 +177,6 @@ const Compass = () => {
     }
   }
 
-  //Finds distance between user and goal coordinates and updates distance text component appropriately.
-  const changeDistance = () => {
-    //must write check here as well for if goal cache is null 
-    if (GOAL_LATITUDE != 0) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          let dis = geolib.getDistance(
-            { latitude: position.coords.latitude, longitude: position.coords.longitude },
-            { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }
-          );
-          setDistance(dis);
-        });
-    } else {
-      Alert.alert(
-        "Error",
-        "Return to Map of All Mac Caches To Pick Your Goal",
-        [
-          {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-      );
-
-    }
-
-  }
   // style done by Julia to make it look better for testing.
   return (
     <View style={[styles.compass]}>
