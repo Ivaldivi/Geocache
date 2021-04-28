@@ -186,9 +186,20 @@ const GoalsScreen = ({ navigation }) => {
         coordinate={props.coordinates}
         title={props.title}
         key={Marker.snellAndGrand}
-        image={require("./components/images/scot.png")}
+       // image={require("./components/images/scot.png")}
+     
         onPress={() => { global.goalCache = props.coordinates; navigation.navigate('map'); }}
-      />
+        image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
+        {Platform.OS === 'ios'
+        ? <Image
+            source={require("./components/images/scot.png")}
+            style={{
+              width: 60,
+              height: 100,
+            }}
+          />
+        : null}
+        </MapView.Marker>
     )
   }
   return (
@@ -224,6 +235,7 @@ const GoalsScreen = ({ navigation }) => {
     </View>
   )
 }
+
 
 //Simple home screen to switch to About Screen or Goal Map.
 const WelcomeScreen = ({ navigation }) => {
@@ -321,8 +333,6 @@ const styles = StyleSheet.create({
   compassContainer: {
     flex: 1,
     backgroundColor: 'orange',
-  // alignItems: 'center'
-
   },
   mapContainer: {
     flex: 1,
@@ -395,7 +405,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     alignContent: 'center',
-    color: 'rgba(223, 108, 22, 1)',
+    color: 'white',
     marginBottom: 45,
     display: 'flex'
   },
