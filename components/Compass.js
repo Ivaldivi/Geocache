@@ -10,6 +10,7 @@ import { Alert, Image, View, Text, StyleSheet, Dimensions, Platform} from 'react
 import * as geolib from 'geolib';
 import { Magnetometer } from 'expo-sensors';
 import { useEffect, useState } from 'react';
+import { atan } from 'react-native-reanimated';
 
 
 
@@ -149,31 +150,44 @@ const Compass = () => {
   //Based off of this stack overflow: https://stackoverflow.com/questions/57308560/smooth-orientation-compass-using-react-native-sensorss-magnetometer
   const _angle = (magnetometer) => {
     if (magnetometer) {
-      let { x, y, z } = magnetometer;
-      if (Math.atan2(y, x) >= 0) {
-        angle = Math.atan2(y, x) * (180 / Math.PI);
-      }
-      else {
-        angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
-      }
+      let { x, y} = magnetometer;
+      angle = Math.round(atan2Normalized(x, y));
     }
     return angle;
   };
 
-  //Adjusts magnetometer to be in correct degrees for rotation
-  const _normalizeCompassDirection = (magnetometer) => {
-    return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
-  };
+  //normalizes atan2 so that it covers 0 to 360 degrees
+function atan2Normalized(x,y) {
+  let result = Math.degrees(Math.atan2(y,x));
+  if (result < 0){
+      result = (360+result)%360;
+  }
+  return result;
+}
+
+//turns degrees to radians
+Math.radians = function(degrees) {
+return degrees * (Math.PI / 180);
+}
+
+//turns radians to degrees
+Math.degrees = function(radians) {
+return radians * (180 / Math.PI);
+}
 
   //Mathematical Reasoning (A'di's): If the bearing is less than the heading then we need to 
   //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
   //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
   const _finalAngle = () => {
-    if (bearing >= _normalizeCompassDirection(magnetometer)) {
-      return 360 - bearing - _normalizeCompassDirection(magnetometer);
+    if (bearing === magnetometer){
+        return 0;
     }
-    else {
-      return 360 - bearing + (_normalizeCompassDirection(magnetometer - bearing));
+    else if (bearing < _angle){
+        return Math.abs((magnetometer - bearing)%360);
+    }
+    else{
+        return ((bearing + magnetometer))%360;
+        
     }
   }
 
