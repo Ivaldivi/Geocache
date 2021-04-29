@@ -4,34 +4,35 @@ import {describe, expect, test} from '@jest/globals'
 //gets angle based on compass math logic, uses set x and y for magnetometer
 //does not normalize angle because not using magnetometer
 function getAngle (bearing , x, y) {
+    //get angle and make whole number
     let _angle = atan2Normalized(x, y);
     _angle = Math.floor(_angle);
     console.log(_angle)
     if (bearing === _angle){
-        
         return 0;
     }
     else if (bearing < _angle){
         return (_angle - bearing)%360
-        
     }
     else{
-        // console.log('yes')
         return ((bearing + _angle))%360
         
     }
 }
 
+//normalizes atan2 so that it covers 0 to 360 degrees
 function atan2Normalized(x,y) {
     x = (Math.atan2(y,x));
     (x > 0 ? x : (2*Math.PI + x)) * 360 / (2*Math.PI);
     return(x);
 }
 
+//turns degrees to radians
 Math.radians = function(degrees) {
 	return degrees * (Math.PI / 180);
 }
 
+//turns radians to degrees
 Math.degrees = function(radians) {
 	return radians * (180 / Math.PI);
 }
@@ -46,6 +47,7 @@ Math.degrees = function(radians) {
 
 it('if bearing = magnetometer, returns number equal to 360', () => {
     for (i = 0; i <= 360; i++){
+        //convert degree to x y coordinates that would match the degree in getAngle
         expect(getAngle(i, Math.cos(Math.radians(i)), Math.sin(Math.radians(i)))).toBe(0);
     }
 })
