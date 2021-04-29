@@ -6,8 +6,8 @@ import {describe, expect, test} from '@jest/globals'
 function getAngle (bearing , x, y) {
     //get angle and make whole number
     let _angle = atan2Normalized(x, y);
-    _angle = Math.floor(_angle);
-    console.log(_angle)
+    _angle = Math.round(_angle);
+    // console.log(_angle, bearing)
     if (bearing === _angle){
         return 0;
     }
@@ -22,9 +22,11 @@ function getAngle (bearing , x, y) {
 
 //normalizes atan2 so that it covers 0 to 360 degrees
 function atan2Normalized(x,y) {
-    x = (Math.atan2(y,x));
-    (x > 0 ? x : (2*Math.PI + x)) * 360 / (2*Math.PI);
-    return(x);
+    let result = Math.degrees(Math.atan2(y,x));
+    if (result < 0){
+        result = (360+result)%360;
+    }
+    return result;
 }
 
 //turns degrees to radians
@@ -37,13 +39,13 @@ Math.degrees = function(radians) {
 	return radians * (180 / Math.PI);
 }
 
-// it('if bearing = magnetometer, returns 0', () => {
-//     expect(getAngle(0, 0, 0)).toBe(0);
-// })
+it('if bearing = magnetometer, returns 0', () => {
+    expect(getAngle(0, 0, 0)).toBe(0);
+})
 
-// it('if bearing > magnetometer, returns number less than 360', () => {
-//     expect(getAngle(150, 2, 3)).toBeLessThan(360);
-// })
+it('if bearing > magnetometer, returns number less than 360', () => {
+    expect(getAngle(150, 2, 3)).toBeLessThan(360);
+})
 
 it('if bearing = magnetometer, returns number equal to 360', () => {
     for (i = 0; i <= 360; i++){
