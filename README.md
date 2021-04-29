@@ -23,6 +23,9 @@ ____________________
 ### Goal Screen
 A google-maps styled screen displaying goal markers as Mac the Scot. Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. Selecting a goal marker sets a global variable with goal coordinates. Selecting a marker also brings the user directly to the map screen (and sets the goal of the map screen to the goal coordinates).
 
+##### ScottMarker
+A component that allows for easy additions of more goal locations. The component keeps track of a title, location coordinates, image, and handles operating system differences between android and iOS. 
+
 ____________________
 
 ### Map Screen
