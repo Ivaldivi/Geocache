@@ -26,7 +26,7 @@ This screen creates a google map that shows the user location and the goal locat
 Finds user coordinates using geolocation navigator. 
 
 ##### const GoalMarker
-Sets the goal marker coordinates according to user goal selection (snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates. 
+Sets the goal marker's coordinates according to user marker selection (snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates. 
 
 
 #### References and Inspiration for Map Screen: 
@@ -96,5 +96,8 @@ ____________________
 
 ### Images within assets 
 All pngs with no copy right information or labeled clip art, found on the internet. 
+#### Scot.png: https://scorestream.com/team/macalester-college-scots-274538
+#### Macalester Campus picture on loading screen: Photo credit -> McGhiever, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons, illustration: Izzy V. 
+
 
 
