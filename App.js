@@ -160,7 +160,7 @@ const CompassScreen = ({ navigation }) => {
       />
       </TouchableOpacity>
       <Text style={styles.topText} color= {"white"}>
-        {"FOLLOW THE ARROW TO SCOTT"}
+        {"FOLLOW THE ARROW TO FIND THE SCOT"}
       </Text>
       </View>
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
@@ -368,7 +368,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignContent: 'center',
     marginTop: 30, 
-    marginLeft: 20
+    marginLeft: 20, 
+    marginRight: 35
   },
 
   map: {
