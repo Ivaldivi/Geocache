@@ -160,7 +160,7 @@ const CompassScreen = ({ navigation }) => {
       />
       </TouchableOpacity>
       <Text style={styles.topText} color= {"white"}>
-        {"FOLLOW THE ARROW TO SCOTT"}
+        {"FOLLOW THE ARROW TO FIND THE SCOT"}
       </Text>
       </View>
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
@@ -222,10 +222,10 @@ const GoalsScreen = ({ navigation }) => {
           }}
           showsUserLocation={true}
           style={styles.map}>
-          <ScottMarker coordinates={{ latitude: 44.9379, longitude: -93.168869019 }} title="Snelling and Grand Cache" />
-          <ScottMarker coordinates={{ latitude: 44.9416, longitude: -93.1974 }} title="River Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258}} title="Macalester Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude:-93.19863080978394}} title="River Cache" />
           <ScottMarker coordinates={{ latitude: 44.934412433560745, longitude: -93.1777188451171 }} title="The Tap Cache" />
-          <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
           <ScottMarker coordinates={{ latitude: 44.2212723, longitude: -92.0000204 }} title="Camping Cache" />
           <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
           {/* Takes the user to a bench on summit : ) */}
@@ -368,7 +368,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignContent: 'center',
     marginTop: 30, 
-    marginLeft: 20
+    marginLeft: 20, 
+    marginRight: 35
   },
 
   map: {
