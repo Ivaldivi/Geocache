@@ -5,13 +5,19 @@ ____________________
 
 
 ### Home Screen
-Simple stylized screen with buttons to go to the about screen or the goal selection screen. 
+Fun, styled screen with buttons a start button that will take the user to the goal screen, and an about button that navigates to the About screen. The scott png is the same one used for the markers and loading screen. The citation can be found at the bottom of the README. 
+
+#### References for Home Screen: 
+##### How to rotate an image in React Native: https://reactnativeforyou.com/how-to-rotate-an-image-in-react-native/
+##### React Native documetation on Images: https://reactnative.dev/docs/image
 
 ____________________
 
 ### About Screen
 This screen is a simple scroll view that gives users an idea of how to use the app, rules for use, and credits. 
 
+#### References for the About Screen: 
+##### How to use a scroll view-- React Native Documentation: https://reactnative.dev/docs/using-a-scrollview
 ____________________
 
 ### Goal Screen
@@ -36,6 +42,8 @@ Sets the goal marker's coordinates according to user marker selection (snelling 
 ##### Aman Mittal's "Using Geolocation in React Native", published September 30, 2018 to Digital Ocean: https://www.digitalocean.com/community/tutorials/react-geolocation-react-native
 
 ##### Example React Native Project where stylistic ideas were referenced: https://github.com/react-native-maps/react-native-maps
+
+##### How to Integrate Google Maps into React Native tutorial: https://dzone.com/articles/how-to-integrate-google-maps-in-react-native
 ____________________
 
 ### Compass Screen 
@@ -90,14 +98,18 @@ This function reacts to a button press in order to save the user's message (ente
 ###### Guide to using Firebase's Firestore with react native expo app: /https://rnfirebase.io/firestore/usage
 ###### Used to format text box and save input to a const: https://reactnative.dev/docs/textinput
 ###### Guide for how to use flatlists with firestore database: https://rnfirebase.io/firestore/usage-with-flatlists
+##### React Native documetation on Images: https://reactnative.dev/docs/image
 
 ____________________
 
 
 ### Images within assets 
 All pngs with no copy right information or labeled clip art, found on the internet. 
-#### Scot.png: https://scorestream.com/team/macalester-college-scots-274538
-#### Macalester Campus picture on loading screen: Photo credit -> McGhiever, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons, illustration: Izzy V. 
+###### Scot.png: https://scorestream.com/team/macalester-college-scots-274538
+###### Macalester Campus picture on loading screen: Photo credit -> McGhiever, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons 
+###### 'MAC CACHE' image on home screen: Izzy 
+###### 'Congrats, you found the scot' Image on victory screen: Izzy
+
 
 
 
