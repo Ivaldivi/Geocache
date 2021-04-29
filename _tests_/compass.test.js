@@ -12,10 +12,10 @@ function getAngle (bearing , x, y) {
         return 0;
     }
     else if (bearing < _angle){
-        return (_angle - bearing)%360
+        return Math.abs((_angle - bearing)%360);
     }
     else{
-        return ((bearing + _angle))%360
+        return ((bearing + _angle))%360;
         
     }
 }
@@ -47,9 +47,23 @@ it('if bearing > magnetometer, returns number less than 360', () => {
     expect(getAngle(150, 2, 3)).toBeLessThan(360);
 })
 
-it('if bearing = magnetometer, returns number equal to 360', () => {
+it('if bearing = magnetometer, returns number equal to 0', () => {
     for (i = 0; i <= 360; i++){
         //convert degree to x y coordinates that would match the degree in getAngle
         expect(getAngle(i, Math.cos(Math.radians(i)), Math.sin(Math.radians(i)))).toBe(0);
+    }
+})
+
+it('if bearing < magnetometer, returns correct angle greater than angle', () => {
+    for (i = 0; i <= 180; i++){
+        //convert degree to x y coordinates that would match the degree in getAngle
+        expect(getAngle(360-i, Math.cos(Math.radians(i)), Math.sin(Math.radians(i)))).toBe(((360-i + i))%360);
+    }
+})
+
+it('if bearing > magnetometer, returns correct angle greater than bearing', () => {
+    for (i = 0; i <= 180; i++){
+        //convert degree to x y coordinates that would match the degree in getAngle
+        expect(getAngle(i, Math.cos(Math.radians(360-i)), Math.sin(Math.radians(360-i)))).toBe(Math.abs(((360-i-i))%360));
     }
 })
