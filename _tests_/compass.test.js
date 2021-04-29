@@ -4,36 +4,48 @@ import {describe, expect, test} from '@jest/globals'
 //gets angle based on compass math logic, uses set x and y for magnetometer
 //does not normalize angle because not using magnetometer
 function getAngle (bearing , x, y) {
-    let _angle = 0;
-    if (Math.atan2(y, x) >= 0) {
-        _angle = Math.atan2(y, x) * (180 / Math.PI);
+    let _angle = atan2Normalized(x, y);
+    _angle = Math.floor(_angle);
+    console.log(_angle)
+    if (bearing === _angle){
+        
+        return 0;
     }
-    if (bearing >= _angle) {
-        return 360 - bearing - _angle;
+    else if (bearing < _angle){
+        return (_angle - bearing)%360
+        
     }
-    else {
-        return 360 - bearing + _angle;
+    else{
+        // console.log('yes')
+        return ((bearing + _angle))%360
+        
     }
 }
 
-function normalizeCompassDirection() {
-
+function atan2Normalized(x,y) {
+    x = (Math.atan2(y,x));
+    (x > 0 ? x : (2*Math.PI + x)) * 360 / (2*Math.PI);
+    return(x);
 }
 
 Math.radians = function(degrees) {
-	return degrees * Math.PI / 180;
+	return degrees * (Math.PI / 180);
 }
 
-it('if bearing = magnetometer, returns 0', () => {
-    expect(getAngle(0, 0, 0)).toBe(360);
-})
+Math.degrees = function(radians) {
+	return radians * (180 / Math.PI);
+}
 
-it('if bearing > magnetometer, returns number less than 360', () => {
-    expect(getAngle(150, 2, 3)).toBeLessThan(360);
-})
-
-// it('if bearing = magnetometer, returns number equal to 360', () => {
-//     for(i = 0; i <= 360; i++){
-//         expect(getAngle(i, Math.cos(Math.radians(i)), Math.sin(Math.radians(i)))).toBe(360);
-//     }
+// it('if bearing = magnetometer, returns 0', () => {
+//     expect(getAngle(0, 0, 0)).toBe(0);
 // })
+
+// it('if bearing > magnetometer, returns number less than 360', () => {
+//     expect(getAngle(150, 2, 3)).toBeLessThan(360);
+// })
+
+it('if bearing = magnetometer, returns number equal to 360', () => {
+    for (i = 0; i <= 360; i++){
+        expect(getAngle(i, Math.cos(Math.radians(i)), Math.sin(Math.radians(i)))).toBe(0);
+    }
+})
