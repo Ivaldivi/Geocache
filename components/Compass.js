@@ -9,7 +9,7 @@ import * as React from 'react';
 import { Alert, Image, View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer } from 'expo-sensors';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import { atan } from 'react-native-reanimated';
 
 
@@ -29,17 +29,24 @@ const Compass = () => {
 
   //finds user coordinates and updates user latitude and longitude states
   //Code by Julia and modified for compass by A'di
+
   const findCoordinates = () => {
-    if(subscription){
+    console.log("findCoordinates!", "existing subscription:", subscriptionRef.current);
+
+    if (!subscriptionRef.current) {
+      return;
+    }
     navigator.geolocation.getCurrentPosition(
       position => {
+        console.log("findCoordinates callback!", "existing subscription:", subscriptionRef.current);
+        if(subscriptionRef.current){
         const lat = position.coords.latitude;
         setUserLatitude(lat);
         const long = position.coords.longitude;
         setUserLongitude(long);
+        }
       },
     );
-    }
 
   };
 
@@ -50,6 +57,9 @@ const Compass = () => {
     //Gets bearing as angle (bearing is the cardinal angle between one coordinate
     //point and another. In this case from user to goal)
     if (GOAL_LATITUDE != 0) {
+      if(!subscriptionRef.current){
+        return; 
+      }
       const userBear = geolib.getGreatCircleBearing(
         { latitude: userLatitude, longitude: userLongitude }, //user location
         { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }); //goal
@@ -70,12 +80,15 @@ const Compass = () => {
     }
   }
 
-  //Finds distance between user and goal coordinates and updates distance text component appropriately.
-  const changeDistance = () => {
+   //Finds distance between user and goal coordinates and updates distance text component appropriately.
+   const changeDistance = () => {
     //must write check here as well for if goal cache is null 
     if (GOAL_LATITUDE != 0) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
+          if(!subscriptionRef.current){
+            return; 
+          }
           setDistance(geolib.getDistance(
             { latitude: position.coords.latitude, longitude: position.coords.longitude },
             { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }
@@ -105,43 +118,35 @@ const Compass = () => {
   const [subscription, setSubscription] = useState(null);
   const [magnetometer, setMagnetometer] = useState(0);
 
+  const subscriptionRef = useRef(false); 
   //Turns compass and runs toggle methods
   useEffect(() => {
-    _toggle();
+   _subscribe(); 
     return () => {
       _unsubscribe();
     };
   }, []);
 
-  //Shows if the app(specifically the compass screen) is subscribed (it is on and running).
-  const _toggle = () => {
-    if (subscription) {
-      _unsubscribe();
-    } else {
-      _subscribe();
-    }
-  };
-
   //Turns Magnetometer on and sends angle of phone
   const _subscribe = () => {
+    subscriptionRef.current = true; 
+    Magnetometer.addListener((data) => {
+      setMagnetometer(_angle(data));
+      changeBearing();
+      changeDistance();
+    });
     
-    setSubscription(
-      Magnetometer.addListener((data) => {
-        setMagnetometer(_angle(data));
-        changeBearing();
-        changeDistance();
-      })
-
-    );
+    console.log("subscribing", subscriptionRef); 
   };
 
   //removes subscription and should stop the whole screen
   const _unsubscribe = () => {
-    subscription && subscription.remove();
+    // subscription && subscription.remove();
+    subscriptionRef.current = false; 
     Magnetometer.removeAllListeners(); 
     setMagnetometer(null);
-    setSubscription(null);
-    navigator.doNotTrack;
+    
+    console.log("unsubscribing", subscriptionRef); 
   };
 
 
