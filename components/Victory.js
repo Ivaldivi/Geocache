@@ -9,7 +9,7 @@ import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, Image, Button,
 import * as firebase from 'firebase';
 import "firebase/firestore";
 import { useCardAnimation } from '@react-navigation/stack';
-import { Audio } from 'expo-av';
+//import { Audio } from 'expo-av';
 
 // Initialize Firebase -- taken and adjusted from 
 //https://docs.expo.io/guides/using-firebase/

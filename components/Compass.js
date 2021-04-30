@@ -1,4 +1,4 @@
-//Created by A'di with help from other group members (Subscription and angle from Julia)
+//Created by A'di with help from other group members (Subscription and angle from Julia as well as alerts, and all style)
 //
 //This component creates an arrow that uses the bearing between location and goal
 //and compass heading in order to rotate a picture of an arrow that directs user to 
@@ -27,28 +27,7 @@ const Compass = () => {
 
 
 
-  //finds user coordinates and updates user latitude and longitude states
-  //Code by Julia and modified for compass by A'di
-
-  const findCoordinates = () => {
-    console.log("findCoordinates!", "existing subscription:", subscriptionRef.current);
-
-    if (!subscriptionRef.current) {
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        console.log("findCoordinates callback!", "existing subscription:", subscriptionRef.current);
-        if(subscriptionRef.current){
-        const lat = position.coords.latitude;
-        setUserLatitude(lat);
-        const long = position.coords.longitude;
-        setUserLongitude(long);
-        }
-      },
-    );
-
-  };
+ const bearRef = useRef(0); 
 
   //Updates bearing based on current user coordinates
   const changeBearing = () => {
@@ -58,12 +37,14 @@ const Compass = () => {
     //point and another. In this case from user to goal)
     if (GOAL_LATITUDE != 0) {
       if(!subscriptionRef.current){
+        console.log("bearing not changed", "existing subscription:", subscriptionRef.current);
         return; 
       }
-      const userBear = geolib.getGreatCircleBearing(
-        { latitude: userLatitude, longitude: userLongitude }, //user location
-        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }); //goal
-      setBearing(userBear);
+      setBearing( geolib.getGreatCircleBearing(
+        { latitude: userLatRef.current, longitude: userLongRef.current }, 
+        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })-180);
+      // bearRef.current = userBear; 
+     //`` console.log("bearing changed", "userlat:", userLatRef.current, "userlong:", userLongRef.current);
     } else {
       Alert.alert(
         "Error",
@@ -80,7 +61,7 @@ const Compass = () => {
     }
   }
 
-   //Finds distance between user and goal coordinates and updates distance text component appropriately.
+   //Created by Julia. This finds distance between user and goal coordinates and updates distance text component appropriately.
    const changeDistance = () => {
     //must write check here as well for if goal cache is null 
     if (GOAL_LATITUDE != 0) {
@@ -94,6 +75,7 @@ const Compass = () => {
             { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }
           )
           );
+          //console.log("distance changed", "distance:", distance);
         });
     } else {
       Alert.alert(
@@ -115,9 +97,11 @@ const Compass = () => {
 
   //magnetometer returns the cardinal angle in degrees east of north the user is facing
   //Aka Heading
-  const [subscription, setSubscription] = useState(null);
+  //const [subscription, setSubscription] = useState(null);
   const [magnetometer, setMagnetometer] = useState(0);
 
+  const userLatRef = useRef(0); 
+  const userLongRef = useRef(0); 
   const subscriptionRef = useRef(false); 
   //Turns compass and runs toggle methods
   useEffect(() => {
@@ -126,6 +110,33 @@ const Compass = () => {
       _unsubscribe();
     };
   }, []);
+
+  //finds user coordinates and updates user latitude and longitude states
+  //Code by Julia and modified for compass by A'di
+
+  const findCoordinates = () => {
+    //console.log("findCoordinates!", "existing subscription:", subscriptionRef.current);
+
+    if (!subscriptionRef.current) {
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        
+        if(subscriptionRef.current){
+        const lat = position.coords.latitude;
+        userLatRef.current = lat; 
+        //console.log("findCoordinates callback!", "existing subscription:", userLatRef);
+        setUserLatitude(lat);
+        const long = position.coords.longitude;
+        userLongRef.current = long; 
+        setUserLongitude(long);
+        }
+      },
+    );
+
+  };
+
 
   //Turns Magnetometer on and sends angle of phone
   const _subscribe = () => {
@@ -136,7 +147,7 @@ const Compass = () => {
       changeDistance();
     });
     
-    console.log("subscribing", subscriptionRef); 
+    //console.log("subscribing", subscriptionRef); 
   };
 
   //removes subscription and should stop the whole screen
@@ -146,7 +157,7 @@ const Compass = () => {
     Magnetometer.removeAllListeners(); 
     setMagnetometer(null);
     
-    console.log("unsubscribing", subscriptionRef); 
+    //console.log("unsubscribing", subscriptionRef); 
   };
 
 
@@ -184,6 +195,8 @@ return radians * (180 / Math.PI);
   //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
   //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
   const _finalAngle = () => {
+    console.log("bearing changed", "bearing:", bearing);
+    console.log("magnetomete changed", "magnetometer:", magnetometer);
     if (bearing === magnetometer){
         return 0;
     }
