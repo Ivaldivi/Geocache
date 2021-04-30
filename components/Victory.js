@@ -121,13 +121,15 @@ const Victory = (props) => {
                 placeholder={'Leave comment here'}
                 style={styles.input}
                 onChangeText={(currentComment) => setComment(currentComment)} 
-                value={comment}/>
+                value={comment}
+                returnKeyType='done'/>
             <TextInput 
                // style={styles.submitButton} 
                 clearButtonMode= {'always'}
                 placeholder={'Add your name here'}
                 style={styles.input}
-                onChangeText={(userName) => handlingSetName(currentName = userName)}/>
+                onChangeText={(userName) => handlingSetName(currentName = userName)}
+                returnKeyType='done'/>
             <View style={styles.submitButton}>
                 <Button
                     style={styles.submitButton}
