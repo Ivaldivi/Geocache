@@ -286,7 +286,7 @@ const WelcomeScreen = ({ navigation }) => {
         <Image style = {{transform: [{ rotate: '360deg' }], width:100, height: 100,position: 'absolute', right: 155, bottom: 215}} source={require('./components/images/titleScott.png')} />
           <Button
             title="Start"
-            color='#fff'
+            color='rgba(223, 108, 22, 1)'
             onPress={() =>
               navigation.navigate('goals')} />
       </View>
@@ -295,7 +295,7 @@ const WelcomeScreen = ({ navigation }) => {
         <Button
           style={styles.welcomeB}
           title="About"
-          color='#fff'
+          color='rgba(223, 108, 22, 1)'
           onPress={() =>
             navigation.navigate('about')} />
       </View>
