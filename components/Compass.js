@@ -10,7 +10,6 @@ import { Alert, Image, View, Text, StyleSheet, Dimensions, Platform} from 'react
 import * as geolib from 'geolib';
 import { Magnetometer } from 'expo-sensors';
 import { useEffect, useState, useRef} from 'react';
-import { atan } from 'react-native-reanimated';
 
 
 
@@ -20,36 +19,36 @@ const Compass = () => {
   const GOAL_LATITUDE = global.goalCache.latitude;
   const GOAL_LONGITUDE = global.goalCache.longitude;
 
-  const [userLatitude, setUserLatitude] = useState(0);
-  const [userLongitude, setUserLongitude] = useState(0);
   const [bearing, setBearing] = useState(0);
   const [distance, setDistance] = useState(-1);
 
 
-
- const bearRef = useRef(0); 
-
   //Updates bearing based on current user coordinates
   const changeBearing = () => {
     findCoordinates();
-    //Explanation/docs here: https://www.npmjs.com/package/geolib
-    //Gets bearing as angle (bearing is the cardinal angle between one coordinate
-    //point and another. In this case from user to goal)
-    if (GOAL_LATITUDE != 0) {
+    
+    if (GOAL_LATITUDE != 0){
       if(!subscriptionRef.current){
         console.log("bearing not changed", "existing subscription:", subscriptionRef.current);
         return; 
       }
-      setBearing( Math.abs(Math.round(geolib.getGreatCircleBearing(
+
+      //Explanation/docs here: https://www.npmjs.com/package/geolib
+      //Gets bearing as angle (bearing is the cardinal angle between one coordinate
+      //point and another. In this case from user to goal)
+      setBearing(Math.abs(Math.round(geolib.getGreatCircleBearing(
         { latitude: userLatRef.current, longitude: userLongRef.current }, 
         { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })-180)));
+
+        //normalize bearing
         if (bearing < 0){
         setBearing(Math.round(Math.abs(360-(bearing%360))))
         } 
+        else {
         setBearing(Math.round(Math.abs(bearing))) 
-      // bearRef.current = userBear; 
-     //`` console.log("bearing changed", "userlat:", userLatRef.current, "userlong:", userLongRef.current);
-    } else {
+        }
+    } 
+    else {
       Alert.alert(
         "Error",
         "Return to Map of All Mac Caches To Pick Your Goal",
@@ -65,10 +64,12 @@ const Compass = () => {
     }
   }
 
-   //Created by Julia. This finds distance between user and goal coordinates and updates distance text component appropriately.
+   //Created by Julia. This finds distance between user and goal coordinates
+   //and updates distance text component appropriately.
    const changeDistance = () => {
-    //must write check here as well for if goal cache is null 
-    if (GOAL_LATITUDE != 0) {
+
+    //TODO: must write check here as well for if goal cache is null 
+    if (GOAL_LATITUDE != 0){
       navigator.geolocation.getCurrentPosition(
         (position) => {
           if(!subscriptionRef.current){
@@ -79,9 +80,9 @@ const Compass = () => {
             { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }
           )
           );
-          //console.log("distance changed", "distance:", distance);
         });
-    } else {
+    }
+    else {
       Alert.alert(
         "Error",
         "Return to Map of All Mac Caches To Pick Your Goal",
@@ -94,19 +95,17 @@ const Compass = () => {
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
       );
-
     }
-
   }
 
   //magnetometer returns the cardinal angle in degrees east of north the user is facing
   //Aka Heading
-  //const [subscription, setSubscription] = useState(null);
   const [magnetometer, setMagnetometer] = useState(0);
 
   const userLatRef = useRef(0); 
   const userLongRef = useRef(0); 
   const subscriptionRef = useRef(false); 
+
   //Turns compass and runs toggle methods
   useEffect(() => {
    _subscribe(); 
@@ -115,22 +114,20 @@ const Compass = () => {
     };
   }, []);
 
+
   //finds user coordinates and updates user latitude and longitude states
   //Code by Julia and modified for compass by A'di
-
   const findCoordinates = () => {
-    //console.log("findCoordinates!", "existing subscription:", subscriptionRef.current);
 
-    if (!subscriptionRef.current) {
+    if (!subscriptionRef.current){
       return;
     }
+    
     navigator.geolocation.getCurrentPosition(
       position => {
-        
         if(subscriptionRef.current){
         const lat = position.coords.latitude;
         userLatRef.current = lat; 
-        //console.log("findCoordinates callback!", "existing subscription:", userLatRef);
         setUserLatitude(lat);
         const long = position.coords.longitude;
         userLongRef.current = long; 
@@ -138,7 +135,6 @@ const Compass = () => {
         }
       },
     );
-
   };
 
 
@@ -150,18 +146,14 @@ const Compass = () => {
       changeBearing();
       changeDistance();
     });
-    
-    //console.log("subscribing", subscriptionRef); 
   };
 
   //removes subscription and should stop the whole screen
   const _unsubscribe = () => {
-    // subscription && subscription.remove();
     subscriptionRef.current = false; 
     Magnetometer.removeAllListeners(); 
     setMagnetometer(null);
     
-    //console.log("unsubscribing", subscriptionRef); 
   };
 
 
@@ -169,26 +161,21 @@ const Compass = () => {
   //Uses magnetometer to find the angle of which the phone is at.
   //Based off of this stack overflow: https://stackoverflow.com/questions/57308560/smooth-orientation-compass-using-react-native-sensorss-magnetometer
   const _angle = (magnetometer) => {
-    if (magnetometer) {
+    if (magnetometer){
       let {x, y} = magnetometer;
       angle = Math.round(atan2Normalized(x, y));
     }
     return angle;
   };
 
-  //normalizes atan2 so that it covers 0 to 360 degrees
+//normalizes atan2 so that it covers 0 to 360 degrees
 function atan2Normalized(x,y) {
   let result = Math.degrees(Math.atan2(y,x));
   if (result < 0){
       result = (360+result)%360;
   }
-  console.log(x, y)
   return result;
 }
-
-// const _normalizeBearing = (bearing) => {
-  
-// }
 
 const _normalizeDegree = (magnetometer) => {
   return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
@@ -208,12 +195,7 @@ return radians * (180 / Math.PI);
   //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
   //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
   const _finalAngle = () => {
-    // _normalizeBearing(bearing)
-    console.log(bearing, magnetometer)
-    // console.log("bearing changed", "bearing:", bearing);
-    // console.log("magnetomete changed", "magnetometer:", magnetometer);
     if (bearing === magnetometer){
-      // console.log('equal')
         return 0;
     }
     else if (bearing < _angle){
@@ -221,11 +203,10 @@ return radians * (180 / Math.PI);
     }
     else{
         return ((bearing + magnetometer))%360;
-        
     }
   }
 
-  // style done by Julia to make it look better for testing.
+  //style done by Julia to make it look better for testing.
   return (
     <View style={[styles.compass]}>
       <Image
@@ -233,17 +214,15 @@ return radians * (180 / Math.PI);
           height: height / 2,
           width: width / 2,
           resizeMode: 'contain',
-          transform: [{ rotate: _normalizeDegree(_finalAngle()) + 'deg' }]
+          transform: [{ rotate: _normalizeDegree(_finalAngle()) + 180 + 'deg' }]
         }}
         source={require('./images/arrow.png')}
-
       />
       <Text style={styles.text}> Distance to Goal:  </Text>
       <Text style={styles.text}> {distance} m </Text>
       <Text style={styles.text}> (Hold Phone Parallel To Ground) </Text>
     </View>
   );
-
 }
 const styles = StyleSheet.create({
   text: {
@@ -256,8 +235,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: 'white',
     fontWeight: 'bold',
-    
-
   },
   compass: {
     width: Dimensions.get('window').width,
