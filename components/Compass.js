@@ -166,7 +166,7 @@ const Compass = () => {
   //Based off of this stack overflow: https://stackoverflow.com/questions/57308560/smooth-orientation-compass-using-react-native-sensorss-magnetometer
   const _angle = (magnetometer) => {
     if (magnetometer) {
-      let { x, y} = magnetometer;
+      let {x, y} = magnetometer;
       angle = Math.round(atan2Normalized(x, y));
     }
     return angle;
@@ -178,8 +178,13 @@ function atan2Normalized(x,y) {
   if (result < 0){
       result = (360+result)%360;
   }
+  console.log(x, y)
   return result;
 }
+
+const _normalizeDegree = (magnetometer) => {
+  return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
+};
 
 //turns degrees to radians
 Math.radians = function(degrees) {
@@ -195,9 +200,10 @@ return radians * (180 / Math.PI);
   //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
   //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
   const _finalAngle = () => {
-    console.log("bearing changed", "bearing:", bearing);
-    console.log("magnetomete changed", "magnetometer:", magnetometer);
+    // console.log("bearing changed", "bearing:", bearing);
+    // console.log("magnetomete changed", "magnetometer:", magnetometer);
     if (bearing === magnetometer){
+      // console.log('equal')
         return 0;
     }
     else if (bearing < _angle){
@@ -217,7 +223,7 @@ return radians * (180 / Math.PI);
           height: height / 2,
           width: width / 2,
           resizeMode: 'contain',
-          transform: [{ rotate: _finalAngle() + 'deg' }]
+          transform: [{ rotate: _normalizeDegree(_finalAngle()) + 100 + 'deg' }]
         }}
         source={require('./images/arrow.png')}
 
