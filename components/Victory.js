@@ -8,8 +8,6 @@ import React, { useState, useEffect } from 'react';
 import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, Image, Button, ActivityIndicator, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
-import { useCardAnimation } from '@react-navigation/stack';
-//import { Audio } from 'expo-av';
 
 // Initialize Firebase -- taken and adjusted from 
 //https://docs.expo.io/guides/using-firebase/
@@ -37,15 +35,16 @@ const Victory = (props) => {
           require('./assets/bagpipes.m4a') //Sound courtesy of https://freesound.org/people/zagi2/sounds/205106/
         );
         victorySound = sound;
-        if (componentActive) {
+        if (componentActive){
           await victorySound.playAsync(); 
         }
       }
+
       playSound();
 
       return function cleanup() {
         componentActive = false;
-        if (victorySound) {
+        if (victorySound){
           victorySound.stopAsync();
         }
       };
@@ -75,13 +74,16 @@ const Victory = (props) => {
                     });
                 }
             });
+
             setData(comments);
             setLoading(false);
         });
+
         return () => subscriber();
     }, []);
+
     if (loading) {
-        return <ActivityIndicator />;
+        return <ActivityIndicator/>;
     }
 
 
@@ -90,7 +92,6 @@ const Victory = (props) => {
     const saveMessage = () => {
         if (name === null || name.trim() === ''){
             setName('Anonymous');
-            console.log('plz')
         }
         firestore.collection('Messages').add({
             message: comment,
@@ -110,12 +111,13 @@ const Victory = (props) => {
         }
     }
 
-    
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment and user name, and flat list of comments and names given by others
     return (
         <SafeAreaView style={styles.victoryScreenContainer}>
-            <Image style = {{width: Dimensions.get('window').width , height: Dimensions.get('window').height/3}} source={require('./images/contratsScreen.png')} />
+
+            <Image style = {{width: Dimensions.get('window').width , height: Dimensions.get('window').height/3}} source={require('./images/contratsScreen.png')}/>
+
             <TextInput
                 clearButtonMode= {'always'}
                 placeholder={'Leave comment here'}
@@ -123,32 +125,36 @@ const Victory = (props) => {
                 onChangeText={(currentComment) => setComment(currentComment)} 
                 value={comment}
                 returnKeyType='done'/>
+
             <TextInput 
-               // style={styles.submitButton} 
                 clearButtonMode= {'always'}
                 placeholder={'Add your name here'}
                 style={styles.input}
                 onChangeText={(userName) => handlingSetName(currentName = userName)}
                 returnKeyType='done'/>
+
             <View style={styles.submitButton}>
+
                 <Button
                     style={styles.submitButton}
                     color={'white'}
                     title={'Submit your comment!'}
                     onPress={saveMessage}
                 />
+
             </View>
-            <Text style={styles.text}>
-                Scroll To See All Comments  </Text>
+
+            <Text style={styles.text}> Scroll To See All Comments </Text>
+
             <FlatList
                 data={data}
                 renderItem={({ item }) => (
                     <View style={{ height: 20, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                  
                         <Text style={styles.comments}>{item.name}: {item.title}</Text>
                     </View>
                 )}
             />
+
         </SafeAreaView>
     );
 }
@@ -157,7 +163,6 @@ const Victory = (props) => {
 
 const styles = StyleSheet.create({
     victoryScreenContainer: {
-        
         backgroundColor: 'lightblue',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
@@ -167,7 +172,6 @@ const styles = StyleSheet.create({
         margin: 12,
         borderWidth: 1,
         fontWeight: 'bold',
-
     },
     text: {
         fontSize: 15,
@@ -194,7 +198,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
 
     }
-
 });
+
+
 
 export default Victory
