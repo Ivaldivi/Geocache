@@ -9,8 +9,11 @@ ____________________
 ### Mac-Cache & User Instructions:
 Our Macalester-themed geocaching app is aimed at all Macalester students, and Mac-Groveland residents. Our game features fun locations in and around Macalester's campus to engage students and push them to find new places. 
 
-In order to use the app, they should first download the expo go app which can be found here: (Apple) https://apps.apple.com/us/app/expo-go/id982107779 
+In order to use the app, they should first download the expo go app which can be found here: 
+(Apple) https://apps.apple.com/us/app/expo-go/id982107779 
+
 (Android) https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US&gl=US
+
 The user can then visit this link which will take them to the most recent published version of the app: FILL THIS IN LATER!!!!!!!!!!!!!!!!!!!!
 
 
