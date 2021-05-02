@@ -1,12 +1,8 @@
-//import React from 'react';
-import { Image, 
-  StyleSheet,
-  View,
-  Dimensions,
-  Alert,
-  Platform
-} from 'react-native';
-import MapView, { MAP_TYPES, Marker} from 'react-native-maps';
+//A component with a Google Maps style map that shows the user location and the location
+//of the selected goal marker. 
+
+import { Image, StyleSheet, View, Dimensions, Alert, Platform} from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import React, { useState } from 'react';
 
 function userMap(props) {
@@ -31,7 +27,7 @@ function userMap(props) {
   //Sets the goal marker coordinates according to user goal selection
   //(snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates.
   const GoalMarker = props => {
-    if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0) {
+    if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0){
       Alert.alert(
         "Error",
         "Return to Map of All Mac Caches To Pick Your Goal",
@@ -41,12 +37,18 @@ function userMap(props) {
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },
-          { text: "OK", onPress: () => console.log("OK Pressed") }
+          { 
+            text: "OK",
+            onPress: () => console.log("OK Pressed") 
+          }
         ]
       );
+
       GOAL_LATITUDE = 44.9379;
       GOAL_LONGITUDE = -93.68869019; //snelling and grand cache if no marker
     }
+
+
     return (
       <MapView.Marker
         coordinate={props.coordinates}
@@ -62,13 +64,14 @@ function userMap(props) {
             }}
           />
         : null}
-        </MapView.Marker>
+      </MapView.Marker>
     );
   }
 
 
   return (
     <View style={[styles.map]}>
+
       <MapView
         initialRegion={{
           latitude: GOAL_LATITUDE,
@@ -79,12 +82,14 @@ function userMap(props) {
         region={props.userLocation}
         showsUserLocation={true}
         style={styles.map}>
-        <GoalMarker coordinates={{ latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }} title="Goal Cache" />
+
+        <GoalMarker 
+        coordinates={{ latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }}
+        title="Goal Cache" />
+
       </MapView>
 
     </View>
-
-
   );
 };
 const styles = StyleSheet.create({
@@ -98,9 +103,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height * 0.7,
     marginBottom: 35,
     marginTop: 10,
-  
   },
-
   bubble: {
     backgroundColor: 'orange',
     paddingHorizontal: 18,
@@ -124,4 +127,7 @@ const styles = StyleSheet.create({
 
   },
 });
+
+
+
 export default userMap;
