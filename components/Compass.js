@@ -186,6 +186,7 @@ const _normalizeBearing = (bearing) => {
   if (bearing < 0){
     setBearing(Math.round(Math.abs(360-(bearing%360))))
   }
+  setBearing(Math.round(Math.abs(bearing)))
 }
 
 const _normalizeDegree = (magnetometer) => {
