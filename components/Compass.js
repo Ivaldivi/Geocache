@@ -43,6 +43,10 @@ const Compass = () => {
       setBearing( Math.abs(Math.round(geolib.getGreatCircleBearing(
         { latitude: userLatRef.current, longitude: userLongRef.current }, 
         { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })-180)));
+        if (bearing < 0){
+        setBearing(Math.round(Math.abs(360-(bearing%360))))
+        } 
+        setBearing(Math.round(Math.abs(bearing))) 
       // bearRef.current = userBear; 
      //`` console.log("bearing changed", "userlat:", userLatRef.current, "userlong:", userLongRef.current);
     } else {
@@ -182,12 +186,9 @@ function atan2Normalized(x,y) {
   return result;
 }
 
-const _normalizeBearing = (bearing) => {
-  if (bearing < 0){
-    setBearing(Math.round(Math.abs(360-(bearing%360))))
-  }
-  setBearing(Math.round(Math.abs(bearing)))
-}
+// const _normalizeBearing = (bearing) => {
+  
+// }
 
 const _normalizeDegree = (magnetometer) => {
   return magnetometer - 90 >= 0 ? magnetometer - 90 : magnetometer + 271;
@@ -207,7 +208,7 @@ return radians * (180 / Math.PI);
   //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
   //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
   const _finalAngle = () => {
-    _normalizeBearing(bearing)
+    // _normalizeBearing(bearing)
     console.log(bearing, magnetometer)
     // console.log("bearing changed", "bearing:", bearing);
     // console.log("magnetomete changed", "magnetometer:", magnetometer);
