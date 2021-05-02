@@ -1,5 +1,4 @@
 # Geocache
-### Intro: 
 
 Authors: Julia Kispert, James Bellitto, A'di Dust, and Izzy Valdivia 
 This app was created for the Module 4 version of Macalester's COMP225 class taught by Paul Cantrell
