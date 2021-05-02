@@ -1,6 +1,7 @@
+//A component that styles the Mac Goal Markers for maps 
+
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
-//import createNewMap from './CreateNewMap';
 
 const ScottMarker = props =>{
     return(
@@ -8,19 +9,17 @@ const ScottMarker = props =>{
             coordinate={props.coordinates}
             title={props.title}
             key={Marker.snellAndGrand}
-           image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
-           {Platform.OS === 'ios'
-           ? <Image
+            image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
+            {Platform.OS === 'ios'
+              ? <Image
                source={require("./images/scot.png")}
                style={{
                  width: 60,
                  height: 100,
                }}
-              
              />
            : null}
-          />
-          </MapView.Marker>
+           </MapView.Marker>
     )
 }
 
