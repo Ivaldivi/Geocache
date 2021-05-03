@@ -22,7 +22,7 @@ const Compass = () => {
   const [bearing, setBearing] = useState(0);
   const [distance, setDistance] = useState(-1);
 
-
+  const bearingRef = useRef(null); 
   //Updates bearing based on current user coordinates
   const changeBearing = () => {
     findCoordinates();
@@ -36,17 +36,36 @@ const Compass = () => {
       //Explanation/docs here: https://www.npmjs.com/package/geolib
       //Gets bearing as angle (bearing is the cardinal angle between one coordinate
       //point and another. In this case from user to goal)
-      setBearing(Math.abs(Math.round(geolib.getGreatCircleBearing(
-        { latitude: userLatRef.current, longitude: userLongRef.current }, 
-        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }))));
-
+      // setBearing(Math.abs(Math.round(geolib.getGreatCircleBearing(
+      //   { latitude: userLatRef.current, longitude: userLongRef.current }, 
+      //   { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }))));
+      //   console.log("userLongRef before normalization:", userLongRef.current);
         //normalize bearing
-        if (bearing < 0){
-        setBearing(Math.round(Math.abs(360-(bearing%360))))
-        } 
-        else {
-        setBearing(Math.round(Math.abs(bearing))) 
+        // bearingRef.current=Math.abs(Math.round(geolib.getGreatCircleBearing(
+        //   { latitude: userLatRef.current, longitude: userLongRef.current }, 
+        //   { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })));
+        
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          bearingRef.current = Math.abs(Math.round(geolib.getGreatCircleBearing(
+        { latitude: position.coords.latitude, longitude: position.coords.longitude }, 
+        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })));
         }
+
+      );
+    
+      
+      // console.log();
+        // if (bearing < 0){
+        // setBearing(Math.round(Math.abs(360-(bearing%360))))
+        // } 
+        // else {
+        // setBearing(Math.round(Math.abs(bearing))) 
+        // }
+        //console.log("bearing after normalization:", bearing);
+        // bearingRef.current = (Math.abs(Math.round(geolib.getGreatCircleBearing(
+        //   { latitude: userLatRef.current, longitude: userLongRef.current }, 
+        //   { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }))));
     } 
     else {
       Alert.alert(
@@ -145,7 +164,8 @@ const Compass = () => {
       setMagnetometer(_angle(data));
       changeBearing();
       changeDistance();
-    });
+    }
+    );
   };
 
   //removes subscription and should stop the whole screen
@@ -195,14 +215,17 @@ return radians * (180 / Math.PI);
   //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
   //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
   const _finalAngle = () => {
-    if (bearing === magnetometer){
-        return 0;
-    }
-    else if (bearing < _angle){
-        return Math.abs((magnetometer - bearing)%360);
+    // if (bearing === magnetometer){
+    //   console.log(0); 
+    //     return 0;
+    // }
+    if (bearing <= magnetometer){
+      console.log("bearing < angle", Math.abs((magnetometer - bearing-90)%360)); 
+        return Math.abs((magnetometer - bearing-90)%360);
     }
     else{
-        return ((bearing + magnetometer))%360;
+      console.log("bearing > angle", Math.abs((bearing + magnetometer-90))%360);
+        return Math.abs((bearing + magnetometer-90)%360);
     }
   }
 
