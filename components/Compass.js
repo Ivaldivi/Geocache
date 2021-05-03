@@ -38,7 +38,7 @@ const Compass = () => {
       //point and another. In this case from user to goal)
       setBearing(Math.abs(Math.round(geolib.getGreatCircleBearing(
         { latitude: userLatRef.current, longitude: userLongRef.current }, 
-        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })-)));
+        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }))));
 
         //normalize bearing
         if (bearing < 0){
