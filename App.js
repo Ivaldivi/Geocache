@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Alert, Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, Platform } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as geolib from 'geolib';
 import UserMap from './components/UserMap';
@@ -81,16 +81,18 @@ const MapScreen = ({ navigation }) => {
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
 
   //Constantly checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        if (geolib.getDistance(position.coords, global.goalCache) <= 7){
-          navigation.navigate('victory');
+  //If close enough, changes to victory screen. Used: https://reactnavigation.org/docs/use-focus-effect/
+  useFocusEffect(
+    React.useCallback(() => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
+            navigation.navigate('victory');
+          }
         }
-      }
-    )}
-  );
+      )
+    },[])
+  )
 
   return (
     <View style={styles.mapContainer} backgroundColor = {'orange'}>
@@ -141,17 +143,17 @@ const CompassScreen = ({ navigation }) => {
 
   //Constantly checks user position and sees if within distance of goal coordinates. 
   //If close enough, changes to victory screen. 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        //must take into account if global.goalcache is not coordinates.... 
-        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
-          navigation.navigate('victory');
+  useFocusEffect(
+    React.useCallback(() => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
+            navigation.navigate('victory');
+          }
         }
-      }
-    )
-  }
-  );
+      )
+    },[])
+  )
 
   return (
     <View style={styles.compassContainer}>
