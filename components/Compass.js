@@ -215,17 +215,19 @@ return radians * (180 / Math.PI);
   //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
   //we need to rotate clockwise (positive angle). This function finds the angle of arrow rotation. 
   const _finalAngle = () => {
-    // if (bearing === magnetometer){
-    //   console.log(0); 
-    //     return 0;
-    // }
-    if (bearing <= magnetometer){
+   // console.log("bearing", bearingRef.current, "angle", magnetometer); 
+   // console.log("bearing", bearingRef.current); 
+    if (bearing === magnetometer){
+      console.log(0); 
+        return 0;
+    }
+    if (bearingRef.current <= magnetometer){
       console.log("bearing < angle", Math.abs((magnetometer - bearing-90)%360)); 
-        return Math.abs((magnetometer - bearing-90)%360);
+        return Math.abs((magnetometer - bearingRef.current-90)%360);
     }
     else{
       console.log("bearing > angle", Math.abs((bearing + magnetometer-90))%360);
-        return Math.abs((bearing + magnetometer-90)%360);
+        return Math.abs((bearingRef.current + magnetometer-90)%360);
     }
   }
 
@@ -237,7 +239,7 @@ return radians * (180 / Math.PI);
           height: height / 2,
           width: width / 2,
           resizeMode: 'contain',
-          transform: [{ rotate: _normalizeDegree(_finalAngle()) + 180 + 'deg' }]
+          transform: [{ rotate: _normalizeDegree(_finalAngle()) + 'deg' }]
         }}
         source={require('./images/arrow.png')}
       />

@@ -1,4 +1,4 @@
-//Screen with primarily text that lays out rules, about the app, and acknowledgements. 
+//Created by Izzy: Screen with primarily text that lays out rules, about the app, and acknowledgements. 
 
 import React from 'react'
 import { Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
