@@ -1,4 +1,4 @@
-//A component with a Google Maps style map that shows the user location and the location
+//Created by Julia (with help of Izzy for style) A component with a Google Maps style map that shows the user location and the location
 //of the selected goal marker. 
 
 import { Image, StyleSheet, View, Dimensions, Alert, Platform} from 'react-native';

@@ -17,7 +17,7 @@ const ASPECT_RATIO = width / height;
 const Stack = createStackNavigator();
 
 function App() {
-  global.goalCache = 0; //Global variable containing goal coordinates
+  global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can acess the goal)
   return (
     <NavigateStack/>
   )
@@ -76,7 +76,7 @@ const NavigateStack = () => {
 }
 
 
-//Uses Map component visual and allows to switch to compass screen
+//Created by Julia, uses Map component visual and allows to switch to compass screen
 const MapScreen = ({ navigation }) => {
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
 
@@ -199,7 +199,7 @@ const CompassScreen = ({ navigation }) => {
 }
 
 //A google-maps styled screen displaying goal markers as Mac the Scot. 
-//Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers.
+//Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. (created by Julia and Izzy)
 const GoalsScreen = ({ navigation }) => {
 
   const ScottMarker = props => {

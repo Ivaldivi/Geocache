@@ -1,4 +1,4 @@
-//Created by A'di and James (graphics by Julia)
+//Created by A'di and James, graphics by Julia, Image by Izzy
 //
 //This component appears when user reaches goal (logic for that is in App.js).
 //Allows users to make comments on location using firebase firestore database. 
