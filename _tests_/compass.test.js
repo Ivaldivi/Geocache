@@ -1,9 +1,29 @@
 import React from 'react';
 import {describe, expect, test} from '@jest/globals'
 
+// This function returns the angle of arrow rotation on the screen, given the bearing to the
+// destination and the heading (compass reading). 
+const _finalAngle = (bearingRef, magnetometer) => {
+  //Mathematical Reasoning (A'di's): If the bearing is less than the heading then we need to 
+  //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
+  //we need to rotate clockwise (positive angle).
+  // if (bearingRef.current <= magnetometer) {
+  //     return Math.abs((-bearingRef.current + magnetometer - 90)%360);
+  // } else {
+  //     return Math.abs((bearingRef.current + magnetometer-90)%360);
+  // }
+  return ±bearingRef.current ± magnetometer ± 90 maybe?;
+}
+
+it('computes angles correctly') {
+  expect(_finalAngle({ current: 0}, 0)).toBe(0);
+}
+
+// -------------------------------------------------------
+
 //gets angle based on compass math logic, uses set x and y for magnetometer
 //does not normalize angle because not using magnetometer
-function getAngle (bearing , x, y) {
+function getAngle (bearing, x, y) {
     //get angle and make whole number
     let _angle = atan2Normalized(x, y);
     _angle = Math.round(_angle);
