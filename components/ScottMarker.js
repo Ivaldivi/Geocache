@@ -1,5 +1,5 @@
 //A component that styles the Mac Goal Markers for maps 
-
+// Made by Izzy
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 

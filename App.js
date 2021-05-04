@@ -267,6 +267,7 @@ const GoalsScreen = ({ navigation }) => {
 
 
 //Simple home screen to switch to About Screen or Goal Map.
+//Created by Izzy, scot Image edited by Izzy
 const WelcomeScreen = ({ navigation }) => {
 
   return (
@@ -341,6 +342,7 @@ const VictoryScreen = ({ navigation }) => {
 }
 
 //Simple page that shows instructions, rules, and credits for the app. 
+//Content by Izzy and Julia, style by Izzy
 const AboutPage = ({ navigation }) => {
   return (
     //View style={styles.container}>
@@ -363,7 +365,7 @@ const AboutPage = ({ navigation }) => {
   )
 }
 
-
+//Style by Julia and Izzy
 const styles = StyleSheet.create({
   container: {
     flex: 3,
