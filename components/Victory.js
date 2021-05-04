@@ -24,7 +24,6 @@ firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 
-
 const Victory = (props) => {
 
     // /Play the victory music! By James. Taken and adjusted from https://docs.expo.io/versions/latest/sdk/audio/
@@ -56,22 +55,21 @@ const Victory = (props) => {
     //Various states to handle comment loading and data
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [comment, setComment] = useState('');
+    const [comment, setComment] = useState('No Comment');
     const [name, setName] = useState('Anonymous');
 
 
     //Adding comments to flatlist was inspired by https://rnfirebase.io/firestore/usage-with-flatlists
 
     //Constantly looks for and updates 'data' with new comments and usernames
-    //(if user doesn't enter name simply saves as "anonymous") left by users using firestore. 
     useEffect(() => {
-        const subscriber = firestore.collection('Messages').orderBy('timestamp', 'desc').onSnapshot(querySnapshot => {
+        const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
             const comments = [];
             querySnapshot.forEach(documentSnapshot => {
                 if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))){
                     comments.push({
                         title: documentSnapshot.get('message'),
-                        name: documentSnapshot.get('userName'),
+                        name: documentSnapshot.get('userName'),    //(if user doesn't enter name simply saves as "anonymous") left by users using firestore. 
                         key: documentSnapshot.id,
                     });
                 }
@@ -87,11 +85,10 @@ const Victory = (props) => {
     }
 
 
-    //Saves given message and name (set to "anonymous if there isn't a name given) 
-    //to firestore when user clicks 'leave comments here' button. 
+    // sameMessage saves the name and comment to later be added to the comment scrollView
     const saveMessage = () => {
         if (name === null || name.trim() === ''){
-            setName('Anonymous');
+            setName('Anonymous'); //(set to "anonymous if there isn't a name given)
         }
         firestore.collection('Messages').add({
             message: comment,
@@ -100,16 +97,16 @@ const Victory = (props) => {
         })
         setComment(''); //Sets input text back to empty string
     }
-
-    //Sets name to anonymous if text input is empty, 
-    //otherwise sets name state appropriately with given name. 
+   
     const handlingSetName = (currentName) => {
-        if (currentName === null || currentName.trim() === ''){
-            setName('Anonymous');
+        if (currentName === null || currentName.trim() === ''){  
+            setName('Anonymous');    //Sets name to anonymous if text input is empty,
         } else{
-            setName(currentName);
+            setName(currentName);    //otherwise sets name state appropriately with given name. 
+
         }
     }
+
 
     //I used https://reactnative.dev/docs/textinput to format and save text input. 
     //View contains place to write comment and user name, and flat list of comments and names given by others
@@ -151,7 +148,6 @@ const Victory = (props) => {
 }
 
 
-
 const styles = StyleSheet.create({
     victoryScreenContainer: {
         backgroundColor: 'lightblue',
@@ -190,7 +186,5 @@ const styles = StyleSheet.create({
 
     }
 });
-
-
 
 export default Victory
