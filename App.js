@@ -183,15 +183,26 @@ const GoalsScreen = ({ navigation }) => {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0922 * ASPECT_RATIO,
           }}
-          showsUserLocation={true}
-          style={styles.map}>
+          showsUserLocation={true}  
+          style={styles.map}> 
           <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258 }} title="Macalester Cache" />
+          <ScottMarker coordinates={{ latitude: 44.95639299656109, longitude: -93.16680466351086 }} title="Delicious Food Cache" />
+          <ScottMarker coordinates={{ latitude: 44.98285915765575, longitude: -93.1540443668212 }} title="Como Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94134442410231, longitude: -93.14290723211685 }} title="Governor's Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93988856080435, longitude: -93.13788269499263 }} title="Shopping Cache" />
+          <ScottMarker coordinates={{ latitude: 44.92660058013187, longitude: -93.15679485958243 }} title="Bowling Cache" />
+          <ScottMarker coordinates={{ latitude: 44.91188129719778, longitude: -93.24247817220277 }} title="Nokomis Cache" />
+          <ScottMarker coordinates={{ latitude: 44.90490950335187, longitude: -93.19192998071587 }} title="Scenic Route Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93625192995378, longitude:  -93.16806031032465 }} title="Turbine Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93943898067451, longitude: -93.16792952281267 }} title="Campus Center Cache" />          
+          <ScottMarker coordinates={{ latitude: 44.93558615867223, longitude: -93.17030280866367 }} title="Language Cache" />          
+          <ScottMarker coordinates={{ latitude: 44.92780772281948, longitude: -93.16681856438859 }} title="Nelson's Cache" />          
+          <ScottMarker coordinates={{ latitude: 44.93743843844827, longitude: -93.16811487885501 }} title="Swings Cache" />          
           <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude: -93.19863080978394 }} title="River Cache" />
           <ScottMarker coordinates={{ latitude: 44.934412433560745, longitude: -93.1777188451171 }} title="The Tap Cache" />
           <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
           <ScottMarker coordinates={{ latitude: 44.2212723, longitude: -92.0000204 }} title="Camping Cache" />
           <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
-          <ScottMarker coordinates={{ latitude: 44.939774, longitude: -93.166090 }} title="The Rest Cache" />
           {/* Takes the user to a bench on summit : ) */}
         </MapView>
       </View>
