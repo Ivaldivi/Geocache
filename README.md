@@ -72,14 +72,13 @@ This screen creates a simple arrow that points to the direction of the goal coor
 Finds user coordinates using geolocation navigator. 
 
 ##### const changeBearing
-Adjusts the bearing state (cardinal angle between user and goal coordinates) as coordinate information changes. Uses 'getGreatCircleBearing' function from Geolib package.
+Adjusts the bearingReference state (cardinal angle between user and goal coordinates) as coordinate information changes. Uses 'getGreatCircleBearing' function from Geolib package.
 
 ##### useEffect()
 Purpose is to turn compass and to run methods. It calles to unsubscribe and subscriped based on if the compass is running to subscribe its functions. 
 
 #### const subscriptionReference
 Turns Magnetometer on and sends angle of phone if true. Ends subscription and should stop the whole screen if false. 
-
 
 #### const _angle 
 Uses magnetometer to find the angle the phone is pointing in degrees east of North. At the bottom of method descriptions will be references to where Math was refrenced from.
@@ -129,11 +128,12 @@ All pngs with no copy right information or labeled clip art, found on the intern
 ##### Give hints for location 
 ##### Artificial Reality when arriving to Maccache location 
 ##### Allow users to leave pictures and drawings on victory screen 
+##### Allow users to save favorite locations and past locations they have been to
 
 ### Bugs: 
 ##### Victory screen does not show up unless switch screens when at location 
-##### Compass error 
 ##### Victory screen submit button for a message does not show up on smaller phone screens
+##### Compass Arrow does not like when very close to cache location 
 
 
 

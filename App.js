@@ -191,7 +191,7 @@ const GoalsScreen = ({ navigation }) => {
           <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
           <ScottMarker coordinates={{ latitude: 44.2212723, longitude: -92.0000204 }} title="Camping Cache" />
           <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
-          <ScottMarker coordinates={{ latitude: 44.939774, longitude: -93.166090 }} title="The Rest Cache" />
+          <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
           {/* Takes the user to a bench on summit : ) */}
         </MapView>
       </View>
