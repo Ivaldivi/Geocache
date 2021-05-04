@@ -304,8 +304,8 @@ const CompassScreen = ({ navigation }) => {
       <View style={styles.otherB}>
         <TouchableOpacity onPress={() => navigation.navigate('map')}>
           <Text style={styles.otherText}>Map</Text>
-        </TouchableOpacity>
-      </View>
+        </TouchableOpacity> 
+    </View>
     </View>
   )
 }
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center'
   },
-  
+
   compassContainer: {
     flex: 1,
     backgroundColor: 'orange',

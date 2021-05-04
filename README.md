@@ -75,19 +75,14 @@ Finds user coordinates using geolocation navigator.
 Adjusts the bearing state (cardinal angle between user and goal coordinates) as coordinate information changes. Uses 'getGreatCircleBearing' function from Geolib package.
 
 ##### useEffect()
-Purpose is to turn compass and to run methods. Currently, may need to insert a possible error when it is called but toggle is unsubscribed (meaning it should be turned off), another possible source of the warning. 
- 
-##### const _toggle
-Repersents if the app(specifically the compass screen) is subscribed (it is on and running). 
+Purpose is to turn compass and to run methods. It calles to unsubscribe and subscriped based on if the compass is running to subscribe its functions. 
 
-#### const subscribe, const unscribed 
-Turns Magnetometer on and sends angle of phone, removes subscription and should stop the whole screen. 
+#### const subscriptionReference
+Turns Magnetometer on and sends angle of phone if true. Ends subscription and should stop the whole screen if false. 
+
 
 #### const _angle 
 Uses magnetometer to find the angle the phone is pointing in degrees east of North. At the bottom of method descriptions will be references to where Math was refrenced from.
-
-#### const _normalizeCompassDirection
-Adjusts magnetometer to be in correct degrees for rotation.
 
 #### const _finalAngle
 This function finds the angle of arrow image rotation by doing simple math with bearing and heading (magnetometer) states. 
@@ -128,6 +123,17 @@ All pngs with no copy right information or labeled clip art, found on the intern
 ###### Macalester Campus picture on loading screen: Photo credit -> McGhiever, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons 
 ###### 'MAC CACHE' image on home screen: Izzy 
 ###### 'Congrats, you found the scot' Image on victory screen: Izzy
+
+### Future Ideas: 
+##### Allow users to add locations
+##### Give hints for location 
+##### Artificial Reality when arriving to Maccache location 
+##### Allow users to leave pictures and drawings on victory screen 
+
+### Bugs: 
+##### Victory screen does not show up unless switch screens when at location 
+##### Compass error 
+##### Victory screen submit button for a message does not show up on smaller phone screens
 
 
 

@@ -20,11 +20,20 @@ const Compass = () => {
   const GOAL_LONGITUDE = global.goalCache.longitude;
 
   const [distance, setDistance] = useState(-1);
+
+  //Created by Julia holds the bearing of the compass
   const bearingRef = useRef(null); 
+
+
+  //magnetometer returns the cardinal angle in degrees east of north the user is facing
+  //Aka Heading
+  const [magnetometer, setMagnetometer] = useState(0);
+
+  //Created by Julia reference to control when the compass should be running or not
+  const subscriptionRef = useRef(false); 
 
   //Updates bearing based on current user coordinates
   const changeBearing = () => {
-    findCoordinates();
     
     if (GOAL_LATITUDE != 0){
       if(!subscriptionRef.current){
@@ -88,13 +97,6 @@ const Compass = () => {
       }
   }
 
-  //magnetometer returns the cardinal angle in degrees east of north the user is facing
-  //Aka Heading
-  const [magnetometer, setMagnetometer] = useState(0);
-
-  const userLatRef = useRef(0); 
-  const userLongRef = useRef(0); 
-  const subscriptionRef = useRef(false); 
 
   //Turns compass and runs toggle methods
   useEffect(() => {
@@ -105,27 +107,6 @@ const Compass = () => {
   }, []);
 
 
-  //finds user coordinates and updates user latitude and longitude states
-  //Code by Julia and modified for compass by A'di
-  const findCoordinates = () => {
-
-    if (!subscriptionRef.current){
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        if(subscriptionRef.current){
-          const lat = position.coords.latitude;
-          userLatRef.current = lat; 
-          setUserLatitude(lat);
-          const long = position.coords.longitude;
-          userLongRef.current = long; 
-          setUserLongitude(long);
-        }
-      },
-    );
-  };
 
 
   //Turns Magnetometer on and sends angle of phone
@@ -179,7 +160,7 @@ const Compass = () => {
   // This function returns the angle of arrow rotation on the screen, given the bearing to the
   // destination and the heading (compass reading). 
   const _finalAngle = () => {
-    //console.log(bearingRef.current - magnetometer - 90);
+    console.log(bearingRef.current - magnetometer - 90);
     return bearingRef.current - magnetometer - 90;
   }
 
