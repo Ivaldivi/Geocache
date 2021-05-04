@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { TextInput, Dimensions, View, FlatList, StyleSheet, Text, Image, Button, ActivityIndicator, SafeAreaView } from 'react-native';
 import * as firebase from 'firebase';
 import "firebase/firestore";
+import { Audio } from 'expo-av';
 
 // Initialize Firebase -- taken and adjusted from 
 //https://docs.expo.io/guides/using-firebase/
