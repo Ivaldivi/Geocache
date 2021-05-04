@@ -23,6 +23,7 @@ firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 
+
 const Victory = (props) => {
 
     // /Play the victory music! By James. Taken and adjusted from https://docs.expo.io/versions/latest/sdk/audio/
@@ -74,11 +75,9 @@ const Victory = (props) => {
                     });
                 }
             });
-
             setData(comments);
             setLoading(false);
         });
-
         return () => subscriber();
     }, []);
 
@@ -98,15 +97,15 @@ const Victory = (props) => {
             location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
             userName: name
         })
-        setComment('');
+        setComment(''); //Sets input text back to empty string
     }
 
-    //Sets name to anonymous if text input is empty, otherwise sets name state appropriately with given name. 
+    //Sets name to anonymous if text input is empty, 
+    //otherwise sets name state appropriately with given name. 
     const handlingSetName = (currentName) => {
         if (currentName === null || currentName.trim() === ''){
             setName('Anonymous');
-        }
-        else{
+        } else{
             setName(currentName);
         }
     }
@@ -115,9 +114,7 @@ const Victory = (props) => {
     //View contains place to write comment and user name, and flat list of comments and names given by others
     return (
         <SafeAreaView style={styles.victoryScreenContainer}>
-
             <Image style = {{width: Dimensions.get('window').width , height: Dimensions.get('window').height/3}} source={require('./images/contratsScreen.png')}/>
-
             <TextInput
                 clearButtonMode= {'always'}
                 placeholder={'Leave comment here'}
@@ -125,27 +122,21 @@ const Victory = (props) => {
                 onChangeText={(currentComment) => setComment(currentComment)} 
                 value={comment}
                 returnKeyType='done'/>
-
             <TextInput 
                 clearButtonMode= {'always'}
                 placeholder={'Add your name here'}
                 style={styles.input}
                 onChangeText={(userName) => handlingSetName(currentName = userName)}
                 returnKeyType='done'/>
-
             <View style={styles.submitButton}>
-
                 <Button
                     style={styles.submitButton}
                     color={'white'}
                     title={'Submit your comment!'}
                     onPress={saveMessage}
                 />
-
             </View>
-
             <Text style={styles.text}> Scroll To See All Comments </Text>
-
             <FlatList
                 data={data}
                 renderItem={({ item }) => (
@@ -154,7 +145,6 @@ const Victory = (props) => {
                     </View>
                 )}
             />
-
         </SafeAreaView>
     );
 }
