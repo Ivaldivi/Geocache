@@ -125,11 +125,10 @@ const MapScreen = ({ navigation }) => {
       <View style={{ position: 'absolute', top: 100, left: 50 }}/>
 
       <View style={styles.otherB}> 
-
         <Button
           style={styles.otherB}
           title="Compass"
-          color='#fff'
+          // color='#fff'
           onPress={() =>
             navigation.navigate('compass')} />
 
@@ -189,7 +188,7 @@ const CompassScreen = ({ navigation }) => {
         <Button
           style={styles.otherB}
           title="Map"
-          color='#fff'
+          // color='#fff'
           onPress={() =>
             navigation.navigate('map')} />
       </View>
@@ -290,7 +289,7 @@ const WelcomeScreen = ({ navigation }) => {
         <Image style = {{transform: [{ rotate: '360deg' }], width:100, height: 100,position: 'absolute', right: 155, bottom: 215}} source={require('./components/images/titleScott.png')} />
           <Button
             title="Start"
-            color='rgba(223, 108, 22, 1)'
+            // color='#fff'
             onPress={() =>
               navigation.navigate('goals')} />
       </View>
@@ -299,7 +298,7 @@ const WelcomeScreen = ({ navigation }) => {
         <Button
           style={styles.welcomeB}
           title="About"
-          color='rgba(223, 108, 22, 1)'
+          // color='#fff'
           onPress={() =>
             navigation.navigate('about')} />
       </View>
@@ -446,7 +445,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     alignContent: 'center',
-    color: 'white',
+    ...Platform.select({
+      ios: {
+        color: '#fff'},
+      android: {
+        color: 'rgba(223, 108, 22, 1)'}
+      }),
     marginBottom: 45,
     display: 'flex'
   },
@@ -455,7 +459,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 5,
     borderRadius: 20,
-    color: 'white',
+    ...Platform.select({
+      ios: {
+        color: '#fff'},
+      android: {
+        color: 'rgba(223, 108, 22, 1)'}
+      }),
     width: '50%',
     alignItems: 'center',
     alignSelf: 'center',
