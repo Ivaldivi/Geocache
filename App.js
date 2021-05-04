@@ -31,7 +31,6 @@ const NavigateStack = () => {
     <NavigationContainer>
 
       <Stack.Navigator screenOptions={{headerShown: false}}>
-
         <Stack.Screen
           name='home'
           component={WelcomeScreen}
@@ -68,199 +67,8 @@ const NavigateStack = () => {
           component={AboutPage}
           options={{ title: 'About',
           gestureEnabled: false} }/>
-
       </Stack.Navigator>
-
     </NavigationContainer>
-  )
-}
-
-
-//Created by Julia, uses Map component visual and allows to switch to compass screen
-const MapScreen = ({ navigation }) => {
-  //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
-
-  //Constantly checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. Used: https://reactnavigation.org/docs/use-focus-effect/
-  useFocusEffect(
-    React.useCallback(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
-            navigation.navigate('victory');
-          }
-        }
-      )
-    },[])
-  )
-
-  return (
-    <View style={styles.mapContainer} backgroundColor = {'orange'}>
-
-      <View style = {styles.buttonContainer}>
-        <TouchableOpacity 
-        onPress={()=>{Alert.alert(
-          "Want To Return To Home Page?",
-          "If you return home you will have to restart your journey.",
-          [{
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "Ok", onPress: () => navigation.navigate('home') }]
-        )}}>
-
-        <Image
-          style={styles.homelogo}
-          source={require('./components/images/home.png')}
-        />
-
-        </TouchableOpacity>
-
-        <Text style={styles.topText} color= {"white"}> {"MAKE THE JOURNEY TO THE SCOTT"} </Text>
-      </View>
-
-      <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
-
-      <View style={{ position: 'absolute', top: 100, left: 50 }}/>
-
-      <View style={styles.otherB}> 
-        <Button
-          style={styles.otherB}
-          title="Compass"
-          // color='#fff'
-          onPress={() =>
-            navigation.navigate('compass')} />
-
-      </View>
-    </View>
-  )
-}
-
-//Uses Compass component and allows to switch to Map Screen. 
-const CompassScreen = ({ navigation }) => {
-
-  //Constantly checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. 
-  useFocusEffect(
-    React.useCallback(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
-            navigation.navigate('victory');
-          }
-        }
-      )
-    },[])
-  )
-
-  return (
-    <View style={styles.compassContainer}>
-       <View style = {styles.buttonContainer}>
-
-      <TouchableOpacity onPress={()=>{Alert.alert(
-        "Want To Return To Home Page?",
-        "If you return home you will have to restart your journey.",
-        [{
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "Ok", onPress: () => navigation.navigate('home') }]
-      )}}>
-      <Image
-        style={styles.homelogo}
-        source={require('./components/images/home.png')}
-      />
-      </TouchableOpacity>
-
-      <Text style={styles.topText} color= {"white"}>
-        {"FOLLOW THE ARROW TO FIND THE SCOT"}
-      </Text>
-
-      </View>
-
-      <Compass style={styles.compass, StyleSheet.absoluteFillObject}/>
-
-      <View style={{ position: 'absolute', top: 0, left: 50 }}/>
-
-      <View style={styles.otherB}>
-        <Button
-          style={styles.otherB}
-          title="Map"
-          // color='#fff'
-          onPress={() =>
-            navigation.navigate('map')} />
-      </View>
-
-    </View>
-  )
-}
-
-//A google-maps styled screen displaying goal markers as Mac the Scot. 
-//Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. (created by Julia and Izzy)
-const GoalsScreen = ({ navigation }) => {
-
-  const ScottMarker = props => {
-
-    return (
-      <MapView.Marker
-        coordinate={props.coordinates}
-        title={props.title}
-        key={Marker.snellAndGrand}
-        onPress={() => { global.goalCache = props.coordinates; navigation.navigate('map'); }}
-        image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
-
-          {Platform.OS === 'ios'
-          ? <Image
-              source={require("./components/images/scot.png")}
-              style={{
-                width: 60,
-                height: 100,
-              }}
-            />
-          : null}
-
-      </MapView.Marker>
-    )
-  }
-
-  return (
-    <View style={styles.container} backgroundColor = {'orange'}>
-
-      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
-        <Image
-          style={styles.homelogo}
-          source={require('./components/images/home.png')}
-        />
-      </TouchableOpacity>
-
-      <Text style={styles.baseText} color= {"white"}> {"CLICK ON THE GOAL YOU WANT TO FIND!"} </Text>
-      
-      <View style={styles.map}>
-        
-        <MapView
-          initialRegion={{
-            latitude: (44.94000),
-            longitude: (-93.1746),
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0922 * ASPECT_RATIO,
-          }}
-          showsUserLocation={true}
-          style={styles.map}>
-          <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258}} title="Macalester Cache" />
-          <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude:-93.19863080978394}} title="River Cache" />
-          <ScottMarker coordinates={{ latitude: 44.934412433560745, longitude: -93.1777188451171 }} title="The Tap Cache" />
-          <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
-          <ScottMarker coordinates={{ latitude: 44.2212723, longitude: -92.0000204 }} title="Camping Cache" />
-          <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
-          <ScottMarker coordinates={{ latitude: 44.939774, longitude: -93.166090 }} title="The Rest Cache" />
-          {/* Takes the user to a bench on summit : ) */}
-        </MapView>
-
-      </View>
-
-    </View>
   )
 }
 
@@ -287,11 +95,12 @@ const WelcomeScreen = ({ navigation }) => {
         <Image style = {{transform: [{ rotate: '350deg' }], width:100, height: 100,position: 'absolute', left: 140, bottom: 330}} source={require('./components/images/titleScott.png')} />
         <Image style = {{transform: [{ rotate: '50deg' }], width:100, height: 100,position: 'absolute', left: 135, bottom: 230}} source={require('./components/images/titleScott.png')} />
         <Image style = {{transform: [{ rotate: '360deg' }], width:100, height: 100,position: 'absolute', right: 155, bottom: 215}} source={require('./components/images/titleScott.png')} />
-          <Button
-            title="Start"
-            // color='#fff'
-            onPress={() =>
-              navigation.navigate('goals')} />
+        <Button
+          style={styles.welcomeB}
+          title="Start"
+          // color='#fff'
+          onPress={() =>
+            navigation.navigate('goals')} />
       </View>
 
       <View style={styles.welcomeB}>
@@ -302,43 +111,10 @@ const WelcomeScreen = ({ navigation }) => {
           onPress={() =>
             navigation.navigate('about')} />
       </View>
-
     </View>
   )
 }
 
-//Uses Victory component to show comments and congrats!
-const VictoryScreen = ({ navigation }) => {
-
-  return (
-    <View  backgroundColor="lightblue">
-
-     <View style = {styles.buttonContainer}>
-      <TouchableOpacity onPress={()=>{Alert.alert(
-        "Want To Return To Home Page?",
-        "If you return home you will have to restart your journey.",
-        [{
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "Ok", onPress: () => navigation.navigate('home') }]
-      )}}>
-
-      <Image
-        style={styles.homelogo}
-        source={require('./components/images/home.png')}
-      />
-
-      </TouchableOpacity>
-
-      </View> 
-
-      <Victory location={global.goalCache}/>
-
-    </View>
-  )
-}
 
 //Simple page that shows instructions, rules, and credits for the app. 
 //Content by Izzy and Julia, style by Izzy
@@ -347,22 +123,226 @@ const AboutPage = ({ navigation }) => {
     //View style={styles.container}>
     <View style = {styles.container}>
       <View style = {styles.aboutContainer}>
-
-      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
-      <Image
-        style={styles.homelogo}
-        source={require('./components/images/home.png')}
-      />
-      </TouchableOpacity>
-
-      <About/>
-
+        <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+          <Image
+            style={styles.homelogo}
+            source={require('./components/images/home.png')}
+          />
+        </TouchableOpacity>
+        <About/>
       </View>
-
     </View>
-   
   )
 }
+
+
+
+//A google-maps styled screen displaying goal markers as Mac the Scot. 
+//Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. (created by Julia and Izzy)
+const GoalsScreen = ({ navigation }) => {
+
+  const ScottMarker = props => {
+
+    return (
+      <MapView.Marker
+        coordinate={props.coordinates}
+        title={props.title}
+        key={Marker.snellAndGrand}
+        onPress={() => { global.goalCache = props.coordinates; navigation.navigate('map'); }}
+        image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
+
+        {Platform.OS === 'ios'
+        ? <Image
+            source={require("./components/images/scot.png")}
+            style={{
+              width: 60,
+              height: 100,
+            }}
+          />
+        : null}
+      </MapView.Marker>
+    )
+  }
+
+  return (
+    <View style={styles.container} backgroundColor = {'orange'}>
+      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+        <Image
+          style={styles.homelogo}
+          source={require('./components/images/home.png')}
+        />
+      </TouchableOpacity>
+      <Text style={styles.baseText} color= {"white"}> {"CLICK ON THE GOAL YOU WANT TO FIND!"} </Text>
+      <View style={styles.map}>
+        <MapView
+          initialRegion={{
+            latitude: (44.94000),
+            longitude: (-93.1746),
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0922 * ASPECT_RATIO,
+          }}
+          showsUserLocation={true}
+          style={styles.map}>
+          <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258}} title="Macalester Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude:-93.19863080978394}} title="River Cache" />
+          <ScottMarker coordinates={{ latitude: 44.934412433560745, longitude: -93.1777188451171 }} title="The Tap Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
+          <ScottMarker coordinates={{ latitude: 44.2212723, longitude: -92.0000204 }} title="Camping Cache" />
+          <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
+          <ScottMarker coordinates={{ latitude: 44.939774, longitude: -93.166090 }} title="The Rest Cache" />
+          {/* Takes the user to a bench on summit : ) */}
+        </MapView>
+      </View>
+    </View>
+  )
+}
+
+
+
+//Created by Julia, uses Map component visual and allows to switch to compass screen
+const MapScreen = ({ navigation }) => {
+  //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
+
+  //Constantly checks user position and sees if within distance of goal coordinates. 
+  //If close enough, changes to victory screen. 
+  //Used: https://reactnavigation.org/docs/use-focus-effect/
+  useFocusEffect(
+    React.useCallback(() => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
+            navigation.navigate('victory');
+          }
+        }
+      )
+    },[])
+  )
+
+  return (
+    <View style={styles.mapContainer} backgroundColor = {'orange'}>
+      <View style = {styles.buttonContainer}>
+        <TouchableOpacity 
+          onPress={()=>{Alert.alert(
+            "Want To Return To Home Page?",
+            "If you return home you will have to restart your journey.",
+          [{
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "Ok", onPress: () => navigation.navigate('home') }]
+          )}}>
+          <Image
+            style={styles.homelogo}
+            source={require('./components/images/home.png')}
+          />
+        </TouchableOpacity>
+        <Text style={styles.topText} color= {"white"}> {"MAKE THE JOURNEY TO THE SCOTT"} </Text>
+      </View>
+
+      <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
+      <View style={{ position: 'absolute', top: 100, left: 50 }}/>
+        <View style={styles.otherB}> 
+          <Button
+            style={styles.otherB}
+            title="Compass"
+            // color='#fff'
+            onPress={() =>
+              navigation.navigate('compass')} />
+      </View>
+    </View>
+  )
+}
+
+
+
+//Uses Compass component and allows to switch to Map Screen. 
+const CompassScreen = ({ navigation }) => {
+
+  //Constantly checks user position and sees if within distance of goal coordinates. 
+  //If close enough, changes to victory screen. 
+  useFocusEffect(
+    React.useCallback(() => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
+            navigation.navigate('victory');
+          }
+        }
+      )
+    },[])
+  )
+
+  return (
+    <View style={styles.compassContainer}>
+      <View style = {styles.buttonContainer}>
+        <TouchableOpacity onPress={()=>{Alert.alert(
+          "Want To Return To Home Page?",
+          "If you return home you will have to restart your journey.",
+          [{
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "Ok", onPress: () => navigation.navigate('home') }]
+        )}}>
+        <Image
+          style={styles.homelogo}
+          source={require('./components/images/home.png')}
+        />
+      </TouchableOpacity>
+      <Text style={styles.topText} color= {"white"}>
+        {"FOLLOW THE ARROW TO FIND THE SCOT"}
+      </Text>
+    </View>
+
+      <Compass style={styles.compass, StyleSheet.absoluteFillObject}/>
+      <View style={{ position: 'absolute', top: 0, left: 50 }}/>
+        <View style={styles.otherB}>
+          <Button
+            style={styles.otherB}
+            title="Map"
+            // color='#fff'
+            onPress={() =>
+              navigation.navigate('map')} />
+        </View>
+      </View>
+  )
+}
+
+
+
+//Uses Victory component to show comments and congrats!
+//Created by A'di
+const VictoryScreen = ({ navigation }) => {
+
+  return (
+    <View  backgroundColor="lightblue">
+      <View style = {styles.buttonContainer}>
+        <TouchableOpacity onPress={()=>{Alert.alert(
+          "Want To Return To Home Page?",
+          "If you return home you will have to restart your journey.",
+          [{
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "Ok", onPress: () => navigation.navigate('home') }]
+        )}}>
+          <Image
+            style={styles.homelogo}
+            source={require('./components/images/home.png')}
+          />
+        </TouchableOpacity>
+      </View> 
+        <Victory location={global.goalCache}/>
+    </View>
+  )
+}
+
+
+
+
 
 //Style by Julia and Izzy
 const styles = StyleSheet.create({
