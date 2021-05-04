@@ -1,4 +1,4 @@
-//Created by A'di with help from other group members (Subscription and angle from Julia as well as alerts, and all style)
+//Created by all group members
 //
 //This component creates an arrow that uses the bearing between location and goal
 //and compass heading in order to rotate a picture of an arrow that directs user to 
@@ -19,10 +19,9 @@ const Compass = () => {
   const GOAL_LATITUDE = global.goalCache.latitude;
   const GOAL_LONGITUDE = global.goalCache.longitude;
 
-  const [bearing, setBearing] = useState(0);
   const [distance, setDistance] = useState(-1);
-
   const bearingRef = useRef(null); 
+
   //Updates bearing based on current user coordinates
   const changeBearing = () => {
     findCoordinates();
@@ -36,38 +35,14 @@ const Compass = () => {
       //Explanation/docs here: https://www.npmjs.com/package/geolib
       //Gets bearing as angle (bearing is the cardinal angle between one coordinate
       //point and another. In this case from user to goal)
-      // setBearing(Math.abs(Math.round(geolib.getGreatCircleBearing(
-      //   { latitude: userLatRef.current, longitude: userLongRef.current }, 
-      //   { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }))));
-      //   console.log("userLongRef before normalization:", userLongRef.current);
-        //normalize bearing
-        // bearingRef.current=Math.abs(Math.round(geolib.getGreatCircleBearing(
-        //   { latitude: userLatRef.current, longitude: userLongRef.current }, 
-        //   { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })));
-        
       navigator.geolocation.getCurrentPosition(
         (position) => {
           bearingRef.current = Math.abs(Math.round(geolib.getGreatCircleBearing(
-        { latitude: position.coords.latitude, longitude: position.coords.longitude }, 
-        { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })));
+            { latitude: position.coords.latitude, longitude: position.coords.longitude }, 
+            { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })));
         }
-
       );
-    
-      
-      // console.log();
-        // if (bearing < 0){
-        // setBearing(Math.round(Math.abs(360-(bearing%360))))
-        // } 
-        // else {
-        // setBearing(Math.round(Math.abs(bearing))) 
-        // }
-        //console.log("bearing after normalization:", bearing);
-        // bearingRef.current = (Math.abs(Math.round(geolib.getGreatCircleBearing(
-        //   { latitude: userLatRef.current, longitude: userLongRef.current }, 
-        //   { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }))));
-    } 
-    else {
+    } else {
       Alert.alert(
         "Error",
         "Return to Map of All Mac Caches To Pick Your Goal",
@@ -78,8 +53,7 @@ const Compass = () => {
             style: "cancel"
           },
           { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-      );
+        ]);
     }
   }
 
@@ -97,24 +71,21 @@ const Compass = () => {
           setDistance(geolib.getDistance(
             { latitude: position.coords.latitude, longitude: position.coords.longitude },
             { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }
-          )
-          );
+          ));
         });
-    }
-    else {
-      Alert.alert(
-        "Error",
-        "Return to Map of All Mac Caches To Pick Your Goal",
-        [
-          {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]
-      );
-    }
+    } else {
+        Alert.alert(
+          "Error",
+          "Return to Map of All Mac Caches To Pick Your Goal",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]);
+      }
   }
 
   //magnetometer returns the cardinal angle in degrees east of north the user is facing
@@ -141,16 +112,16 @@ const Compass = () => {
     if (!subscriptionRef.current){
       return;
     }
-    
+
     navigator.geolocation.getCurrentPosition(
       position => {
         if(subscriptionRef.current){
-        const lat = position.coords.latitude;
-        userLatRef.current = lat; 
-        setUserLatitude(lat);
-        const long = position.coords.longitude;
-        userLongRef.current = long; 
-        setUserLongitude(long);
+          const lat = position.coords.latitude;
+          userLatRef.current = lat; 
+          setUserLatitude(lat);
+          const long = position.coords.longitude;
+          userLongRef.current = long; 
+          setUserLongitude(long);
         }
       },
     );
@@ -164,8 +135,7 @@ const Compass = () => {
       setMagnetometer(_angle(data));
       changeBearing();
       changeDistance();
-    }
-    );
+    });
   };
 
   //removes subscription and should stop the whole screen
@@ -173,7 +143,6 @@ const Compass = () => {
     subscriptionRef.current = false; 
     Magnetometer.removeAllListeners(); 
     setMagnetometer(null);
-    
   };
 
 
@@ -188,41 +157,30 @@ const Compass = () => {
     return angle;
   };
 
-//normalizes atan2 so that it covers 0 to 360 degrees
-function atan2Normalized(x,y) {
-  let result = Math.degrees(Math.atan2(y,x));
-  if (result < 0){
+  //normalizes atan2 so that it covers 0 to 360 degrees
+  function atan2Normalized(x,y) {
+    let result = Math.degrees(Math.atan2(y,x));
+    if (result < 0){
       result = (360+result)%360;
+    }
+    return result;
   }
-  return result;
-}
 
-//turns degrees to radians
-Math.radians = function(degrees) {
-return degrees * (Math.PI / 180);
-}
+  //turns degrees to radians
+  Math.radians = function(degrees) {
+    return degrees * (Math.PI / 180);
+  }
 
-//turns radians to degrees
-Math.degrees = function(radians) {
-return radians * (180 / Math.PI);
-}
+  //turns radians to degrees
+  Math.degrees = function(radians) {
+    return radians * (180 / Math.PI);
+  }
 
   // This function returns the angle of arrow rotation on the screen, given the bearing to the
   // destination and the heading (compass reading). 
   const _finalAngle = () => {
-    //Mathematical Reasoning (A'di's): If the bearing is less than the heading then we need to 
-    //rotate counter clockwise (negative angle), and if the bearing is greater than the heading
-    //we need to rotate clockwise (positive angle).
-    // if (bearingRef.current <= magnetometer) {
-    //   console.log("bearing < angle", Math.abs((magnetometer - bearing-90)%360)); 
-    //     return Math.abs((magnetometer - bearingRef.current-90)%360);
-    // } else {
-    //   console.log("bearing > angle", Math.abs((bearing + magnetometer-90))%360);
-    //     return Math.abs((bearingRef.current + magnetometer-90)%360);
-    // }
-    console.log(bearingRef.current - magnetometer - 90);
+    //console.log(bearingRef.current - magnetometer - 90);
     return bearingRef.current - magnetometer - 90;
-    //return -bearingRef.current +magnetometer +90; this will follow where user pointing
   }
 
   //style done by Julia to make it look better for testing.
@@ -243,6 +201,8 @@ return radians * (180 / Math.PI);
     </View>
   );
 }
+
+
 const styles = StyleSheet.create({
   text: {
     ...Platform.select({
