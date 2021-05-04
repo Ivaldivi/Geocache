@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 function App() {
   global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can acess the goal)
   return (
-    <NavigateStack/>
+    <NavigateStack />
   )
 }
 
@@ -30,43 +30,51 @@ const NavigateStack = () => {
   return (
     <NavigationContainer>
 
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name='home'
           component={WelcomeScreen}
-          options={{ title: 'Mac Cache',
-          gestureEnabled: false}} />
-
-        <Stack.Screen
-          name='map'
-          component={MapScreen}
-          options={{ title: 'Map',
-          gestureEnabled: false }} />
-
-        <Stack.Screen
-          name='compass'
-          component={CompassScreen}
-          options={{ 
-            title: 'Compass',
-          gestureEnabled: false }} />
-
-        <Stack.Screen
-          name='victory'
-          component={VictoryScreen}
-          options={{ 
-            title: 'Victory',
-            gestureEnabled: false}} />
-
-        <Stack.Screen
-          name='goals'
-          component={GoalsScreen}
-          options={{ title: 'Goals'}} />
+          options={{
+            title: 'Mac Cache',
+            gestureEnabled: false
+          }} />
 
         <Stack.Screen
           name='about'
           component={AboutPage}
-          options={{ title: 'About',
-          gestureEnabled: false} }/>
+          options={{ title: 'About' }} />
+
+        <Stack.Screen
+          name='goals'
+          component={GoalsScreen}
+          options={{ title: 'Goals' }} />
+
+        <Stack.Screen
+          name='map'
+          component={MapScreen}
+          options={{
+            title: 'Map',
+            gestureEnabled: false
+          }} />
+
+        <Stack.Screen
+          name='compass'
+          component={CompassScreen}
+          options={{
+            title: 'Compass',
+            gestureEnabled: false
+          }} />
+
+        <Stack.Screen
+          name='victory'
+          component={VictoryScreen}
+          options={{
+            title: 'Victory',
+            gestureEnabled: false
+          }} />
+
+
+
       </Stack.Navigator>
     </NavigationContainer>
   )
@@ -74,7 +82,7 @@ const NavigateStack = () => {
 
 
 //Simple home screen to switch to About Screen or Goal Map.
-//Created by Izzy, scot Image edited by Izzy
+//Created by Izzy, scot Image edited by Izzy (Julia assisted James with adjusting buttons to properly appear on andriods and IOS )
 const WelcomeScreen = ({ navigation }) => {
 
   return (
@@ -82,34 +90,31 @@ const WelcomeScreen = ({ navigation }) => {
       <View style={styles.imgz}>
         <Image source={require('./components/images/macCache.png')} />
       </View>
-      <View style={styles.welcomeB}>
-        <Image style = {{transform: [{ rotate: '15deg' }], width:100, height: 100,position: 'absolute', right: 130, bottom: 30}} source={require('./components/images/rotated.png')} />
-        <Image style = {{transform: [{ rotate: '295deg' }], width:100, height: 100,position: 'absolute', right: 90, top: 60}} source={require('./components/images/rotated.png')} />
-        <Image style = {{transform: [{ rotate: '350deg' }], width:100, height: 100,position: 'absolute', left: 140, bottom: 10}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '220deg' }], width:100, height: 100,position: 'absolute', top: 100, left: 110}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '60deg' }], width:100, height: 100, position: 'absolute', top: 165, right: 135}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '30deg' }], width:100, height: 100, position: 'absolute', top: 245, left: 120}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '160deg' }], width:100, height: 100, position: 'absolute', top: 186}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '270deg' }], width:100, height: 100, position: 'absolute', top: 265, right: 75}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '200deg' }], width:100, height: 100,position: 'absolute', right: 140, bottom: 360}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '350deg' }], width:100, height: 100,position: 'absolute', left: 140, bottom: 330}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '50deg' }], width:100, height: 100,position: 'absolute', left: 135, bottom: 230}} source={require('./components/images/titleScott.png')} />
-        <Image style = {{transform: [{ rotate: '360deg' }], width:100, height: 100,position: 'absolute', right: 155, bottom: 215}} source={require('./components/images/titleScott.png')} />
-        <Button
-          style={styles.welcomeB}
-          title="Start"
-          // color='#fff'
-          onPress={() =>
-            navigation.navigate('goals')} />
+      <View style={styles.welcomeScotts}>
+        <Image style={{ transform: [{ rotate: '15deg' }], width: 100, height: 100, position: 'absolute', right: 110, bottom: 30 }} source={require('./components/images/rotated.png')} />
+        <Image style={{ transform: [{ rotate: '295deg' }], width: 100, height: 100, position: 'absolute', right: 90, top: 25 }} source={require('./components/images/rotated.png')} />
+        <Image style={{ transform: [{ rotate: '350deg' }], width: 100, height: 100, position: 'absolute', left: 110, bottom: 10 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '220deg' }], width: 100, height: 100, position: 'absolute', top: 100, left: 110 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '60deg' }], width: 100, height: 100, position: 'absolute', top: 165, right: 135 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '30deg' }], width: 100, height: 100, position: 'absolute', top: 245, left: 120 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '160deg' }], width: 100, height: 100, position: 'absolute', top: 186 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '270deg' }], width: 100, height: 100, position: 'absolute', top: 265, right: 75 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '200deg' }], width: 100, height: 100, position: 'absolute', right: 140, bottom: 360 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '350deg' }], width: 100, height: 100, position: 'absolute', left: 140, bottom: 330 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '50deg' }], width: 100, height: 100, position: 'absolute', left: 135, bottom: 230 }} source={require('./components/images/titleScott.png')} />
+        <Image style={{ transform: [{ rotate: '360deg' }], width: 100, height: 100, position: 'absolute', right: 155, bottom: 215 }} source={require('./components/images/titleScott.png')} />
       </View>
-
       <View style={styles.welcomeB}>
-        <Button
-          style={styles.welcomeB}
-          title="About"
-          // color='#fff'
-          onPress={() =>
-            navigation.navigate('about')} />
+        <TouchableOpacity onPress={() =>
+          navigation.navigate('goals')}>
+          <Text style={styles.welcomeText}>Start</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.welcomeB}>
+        <TouchableOpacity onPress={() =>
+          navigation.navigate('about')}>
+          <Text style={styles.welcomeText}>About</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -121,15 +126,15 @@ const WelcomeScreen = ({ navigation }) => {
 const AboutPage = ({ navigation }) => {
   return (
     //View style={styles.container}>
-    <View style = {styles.container}>
-      <View style = {styles.aboutContainer}>
-        <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+    <View style={styles.container}>
+      <View style={styles.aboutContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('home')}>
           <Image
             style={styles.homelogo}
             source={require('./components/images/home.png')}
           />
         </TouchableOpacity>
-        <About/>
+        <About />
       </View>
     </View>
   )
@@ -150,29 +155,26 @@ const GoalsScreen = ({ navigation }) => {
         key={Marker.snellAndGrand}
         onPress={() => { global.goalCache = props.coordinates; navigation.navigate('map'); }}
         image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
-
-        {Platform.OS === 'ios'
-        ? <Image
-            source={require("./components/images/scot.png")}
+        {Platform.OS === 'ios' ? <Image source={require("./components/images/scot.png")}
             style={{
               width: 60,
               height: 100,
             }}
           />
-        : null}
+          : null}
       </MapView.Marker>
     )
   }
 
   return (
-    <View style={styles.container} backgroundColor = {'orange'}>
-      <TouchableOpacity onPress={()=>navigation.navigate('home')}>
+    <View style={styles.container} backgroundColor={'orange'}>
+      <TouchableOpacity onPress={() => navigation.navigate('home')}>
         <Image
           style={styles.homelogo}
           source={require('./components/images/home.png')}
         />
       </TouchableOpacity>
-      <Text style={styles.baseText} color= {"white"}> {"CLICK ON THE GOAL YOU WANT TO FIND!"} </Text>
+      <Text style={styles.baseText} color={"white"}> {"CLICK ON THE GOAL YOU WANT TO FIND!"} </Text>
       <View style={styles.map}>
         <MapView
           initialRegion={{
@@ -183,8 +185,8 @@ const GoalsScreen = ({ navigation }) => {
           }}
           showsUserLocation={true}
           style={styles.map}>
-          <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258}} title="Macalester Cache" />
-          <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude:-93.19863080978394}} title="River Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258 }} title="Macalester Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude: -93.19863080978394 }} title="River Cache" />
           <ScottMarker coordinates={{ latitude: 44.934412433560745, longitude: -93.1777188451171 }} title="The Tap Cache" />
           <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
           <ScottMarker coordinates={{ latitude: 44.2212723, longitude: -92.0000204 }} title="Camping Cache" />
@@ -210,45 +212,44 @@ const MapScreen = ({ navigation }) => {
     React.useCallback(() => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
+          if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
             navigation.navigate('victory');
           }
         }
       )
-    },[])
+    }, [])
   )
 
   return (
-    <View style={styles.mapContainer} backgroundColor = {'orange'}>
-      <View style = {styles.buttonContainer}>
-        <TouchableOpacity 
-          onPress={()=>{Alert.alert(
-            "Want To Return To Home Page?",
-            "If you return home you will have to restart your journey.",
-          [{
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "Ok", onPress: () => navigation.navigate('home') }]
-          )}}>
+    <View style={styles.mapContainer} backgroundColor={'orange'}>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            Alert.alert(
+              "Want To Return To Home Page?",
+              "If you return home you will have to restart your journey.",
+              [{
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+              },
+              { text: "Ok", onPress: () => navigation.navigate('home') }]
+            )
+          }}>
           <Image
             style={styles.homelogo}
             source={require('./components/images/home.png')}
           />
         </TouchableOpacity>
-        <Text style={styles.topText} color= {"white"}> {"MAKE THE JOURNEY TO THE SCOTT"} </Text>
+        <Text style={styles.topText} color={"white"}> {"MAKE THE JOURNEY TO THE SCOTT"} </Text>
       </View>
 
       <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
-      <View style={{ position: 'absolute', top: 100, left: 50 }}/>
-        <View style={styles.otherB}> 
-          <Button
-            style={styles.otherB}
-            title="Compass"
-            // color='#fff'
-            onPress={() =>
-              navigation.navigate('compass')} />
+      <View style={{ position: 'absolute', top: 100, left: 50 }} />
+      <View style={styles.otherB}>
+        <TouchableOpacity onPress={() => navigation.navigate('compass')}>
+          <Text style={styles.otherText}>Compass</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -265,48 +266,47 @@ const CompassScreen = ({ navigation }) => {
     React.useCallback(() => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          if (geolib.getDistance(position.coords, global.goalCache) <= 7){
+          if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
             navigation.navigate('victory');
           }
         }
       )
-    },[])
+    }, [])
   )
 
   return (
     <View style={styles.compassContainer}>
-      <View style = {styles.buttonContainer}>
-        <TouchableOpacity onPress={()=>{Alert.alert(
-          "Want To Return To Home Page?",
-          "If you return home you will have to restart your journey.",
-          [{
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "Ok", onPress: () => navigation.navigate('home') }]
-        )}}>
-        <Image
-          style={styles.homelogo}
-          source={require('./components/images/home.png')}
-        />
-      </TouchableOpacity>
-      <Text style={styles.topText} color= {"white"}>
-        {"FOLLOW THE ARROW TO FIND THE SCOT"}
-      </Text>
-    </View>
-
-      <Compass style={styles.compass, StyleSheet.absoluteFillObject}/>
-      <View style={{ position: 'absolute', top: 0, left: 50 }}/>
-        <View style={styles.otherB}>
-          <Button
-            style={styles.otherB}
-            title="Map"
-            // color='#fff'
-            onPress={() =>
-              navigation.navigate('map')} />
-        </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => {
+          Alert.alert(
+            "Want To Return To Home Page?",
+            "If you return home you will have to restart your journey.",
+            [{
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "Ok", onPress: () => navigation.navigate('home') }]
+          )
+        }}>
+          <Image
+            style={styles.homelogo}
+            source={require('./components/images/home.png')}
+          />
+        </TouchableOpacity>
+        <Text style={styles.topText} color={"white"}>
+          {"FOLLOW THE ARROW TO FIND THE SCOT"}
+        </Text>
       </View>
+
+      <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
+      <View style={{ position: 'absolute', top: 0, left: 50 }} />
+      <View style={styles.otherB}>
+        <TouchableOpacity onPress={() => navigation.navigate('map')}>
+          <Text style={styles.otherText}>Map</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   )
 }
 
@@ -317,25 +317,27 @@ const CompassScreen = ({ navigation }) => {
 const VictoryScreen = ({ navigation }) => {
 
   return (
-    <View  backgroundColor="lightblue">
-      <View style = {styles.buttonContainer}>
-        <TouchableOpacity onPress={()=>{Alert.alert(
-          "Want To Return To Home Page?",
-          "If you return home you will have to restart your journey.",
-          [{
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          { text: "Ok", onPress: () => navigation.navigate('home') }]
-        )}}>
+    <View backgroundColor="lightblue">
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => {
+          Alert.alert(
+            "Want To Return To Home Page?",
+            "If you return home you will have to restart your journey.",
+            [{
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "Ok", onPress: () => navigation.navigate('home') }]
+          )
+        }}>
           <Image
             style={styles.homelogo}
             source={require('./components/images/home.png')}
           />
         </TouchableOpacity>
-      </View> 
-        <Victory location={global.goalCache}/>
+      </View>
+      <Victory location={global.goalCache} />
     </View>
   )
 }
@@ -349,69 +351,82 @@ const styles = StyleSheet.create({
   container: {
     flex: 3,
     backgroundColor: '#fff',
-    alignItems: 'center', 
-    alignContent: 'center', 
+    alignItems: 'center',
+    alignContent: 'center',
     justifyContent: 'center'
   },
+  
   compassContainer: {
     flex: 1,
     backgroundColor: 'orange',
   },
+
   mapContainer: {
     flex: 1,
     backgroundColor: 'whitesmoke',
     justifyContent: 'center',
   },
+
   baseText: {
     ...Platform.select({
       ios: {
-        fontFamily: 'Futura'},
+        fontFamily: 'Futura'
+      },
       android: {
-        fontFamily: 'normal'}
-      }),
+        fontFamily: 'normal'
+      }
+    }),
     fontSize: 20,
     fontWeight: "bold",
     textAlign: 'center',
     color: 'white',
   },
+  
   topText: {
     ...Platform.select({
       ios: {
-        fontFamily: 'Futura'},
+        fontFamily: 'Futura'
+      },
       android: {
-        fontFamily: 'normal'}
-      }),
+        fontFamily: 'normal'
+      }
+    }),
     fontSize: 15,
     fontWeight: "bold",
     textAlign: 'center',
     color: 'white',
     alignSelf: 'center',
     alignContent: 'center',
-    marginTop: 30, 
-    marginLeft: 20, 
+    marginTop: 30,
+    marginLeft: 20,
     marginRight: 35
   },
+
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.80,
   },
-  centeredText: { 
-    textAlign: 'center' 
+
+  centeredText: {
+    textAlign: 'center'
   },
+
   compass: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.75,
     backgroundColor: 'rgba(223, 108, 22, 1)',
   },
+
   imgz: {
     width: 370,
     height: 370,
     alignContent: 'center',
     alignItems: 'center',
     backgroundColor: '#214683',
-    marginBottom: -15, 
-    marginTop: Dimensions.get('window').height*0.1
+    marginBottom: -15,
+    marginTop: Dimensions.get('window').height * 0.1
   },
+
   welcomePg: {
     alignItems: 'center',
     backgroundColor: `#214683`,
@@ -419,52 +434,109 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
   },
-  welcomeB: {
-    backgroundColor: "rgba(223, 108, 22, 1)",
-    paddingHorizontal: 18,
+
+  welcomeScotts: {
+    paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 20,
     alignContent: 'center',
     ...Platform.select({
       ios: {
-        color: '#fff'},
+        color: 'white'
+      },
       android: {
-        color: 'rgba(223, 108, 22, 1)'}
-      }),
+        color: 'rgba(223, 108, 22, 1)'
+      }
+    }),
+    display: 'flex',
     marginBottom: 45,
+  },
+
+  welcomeB: {
+    backgroundColor: "rgba(223, 108, 22, 1)",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 20,
+    alignContent: 'center',
+    display: 'flex',
+    marginBottom: 45,
+    width: 90, 
+    alignItems: 'center',
+
+  },
+
+  welcomeText: {
+    borderRadius: 20,
+    alignContent: 'center',
+    fontWeight: "bold",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    ...Platform.select({
+      ios: {
+        color: 'white'
+      },
+      android: {
+        color: 'rgba(223, 108, 22, 1)'
+      }
+    }),
     display: 'flex'
   },
+
   otherB: {
     backgroundColor: 'skyblue',
     paddingHorizontal: 18,
-    paddingVertical: 5,
+    paddingVertical: 10,
     borderRadius: 20,
     ...Platform.select({
       ios: {
-        color: '#fff'},
+        color: '#fff'
+      },
       android: {
-        color: 'rgba(223, 108, 22, 1)'}
-      }),
-    width: '50%',
+        color: 'rgba(223, 108, 22, 1)'
+      }
+    }),
     alignItems: 'center',
     alignSelf: 'center',
     top: 0,
+    width: 200,
   },
+
+  otherText: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    alignContent: 'center',
+    alignSelf: 'center',
+    fontWeight: "bold",
+    ...Platform.select({
+      ios: {
+        color: 'white',
+        fontFamily: 'Futura'
+      },
+      android: {
+        color: 'rgba(223, 108, 22, 1)',
+        fontFamily: 'normal'
+      }
+    }),
+  },
+
   homelogo: {
     width: 45,
     height: 45,
-    marginTop: 25, 
-    right: 0, 
+    marginTop: 25,
+    right: 0,
   },
+
   aboutlogo: {
     width: 45,
     height: 45,
-    marginTop: -5,    
-    left: Dimensions.get('window').width-100,
+    marginTop: -5,
+    left: Dimensions.get('window').width - 100,
   },
+
   aboutContainer: {
-    backgroundColor: 'rgba(223, 108, 22, 1)', 
+    backgroundColor: 'rgba(223, 108, 22, 1)',
   },
+
   buttonContainer: {
     flexDirection: 'row',
     marginTop: 20,
