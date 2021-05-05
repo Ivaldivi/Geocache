@@ -90,10 +90,7 @@ const Victory = (props) => {
         if (name === null || name.trim() === ''){
             setName('Anonymous'); //(set to "anonymous if there isn't a name given)
         }
-        if (comment === null || comment.trim() === ''){
-            console.log('no message')
-        }
-        else{
+        if (comment !== null && comment.trim() !== ''){
             firestore.collection('Messages').add({
                 message: comment,
                 location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
