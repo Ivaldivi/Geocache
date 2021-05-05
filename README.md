@@ -131,9 +131,8 @@ All pngs with no copy right information or labeled clip art, found on the intern
 ##### Allow users to save favorite locations and past locations they have been to
 
 ### Bugs: 
-##### Victory screen does not show up unless switch screens when at location 
 ##### Victory screen submit button for a message does not show up on smaller phone screens
-##### Compass Arrow does not like when very close to cache location 
+##### Compass Arrow acts a little weird when very close to cache location 
 
 
 
