@@ -20,20 +20,7 @@ const Stack = createStackNavigator();
 function App() {
   global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can acess the goal)
 
-  //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. 
-  //Used: https://www.npmjs.com/package/react-useinterval
-  const changeScreenOnVictoryLocation = () => {
-    // console.log('yes');
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
-          navigation.navigate('victory');
-        }
-      }
-    )
-  }
-  useInterval(changeScreenOnVictoryLocation, 2000)
+  
   return (
     
     <NavigateStack />
@@ -238,6 +225,24 @@ const GoalsScreen = ({ navigation }) => {
 const MapScreen = ({ navigation }) => {
     //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
 
+
+  //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
+  //If close enough, changes to victory screen. 
+  //Used: https://www.npmjs.com/package/react-useinterval
+  const changeScreenOnVictoryLocation = () => {
+    // console.log('yes');
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
+          console.log('got there')
+          navigation.navigate('victory');
+        }
+      }
+    )
+  }
+  useInterval(changeScreenOnVictoryLocation, 2000)
+
+
   return (
     <View style={styles.mapContainer} backgroundColor={'orange'}>
       <View style={styles.buttonContainer}>
@@ -277,6 +282,23 @@ const MapScreen = ({ navigation }) => {
 
 //Uses Compass component and allows to switch to Map Screen. 
 const CompassScreen = ({ navigation }) => {
+
+  //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
+  //If close enough, changes to victory screen. 
+  //Used: https://www.npmjs.com/package/react-useinterval
+  const changeScreenOnVictoryLocation = () => {
+    // console.log('yes');
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if (geolib.getDistance(position.coords, global.goalCache) >= 7) {
+          console.log('got there')
+          navigation.navigate('victory');
+        }
+      }
+    )
+  }
+  useInterval(changeScreenOnVictoryLocation, 2000)
+
   return (
     <View style={styles.compassContainer}>
       <View style={styles.buttonContainer}>
