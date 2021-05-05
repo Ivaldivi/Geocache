@@ -10,6 +10,7 @@ import Compass from './components/Compass';
 import Victory from './components/Victory';
 import About from './components/About';
 import MapView, { Marker } from 'react-native-maps';
+import useInterval from 'react-useinterval';
 
 
 const { width, height } = Dimensions.get('window');
@@ -18,7 +19,19 @@ const Stack = createStackNavigator();
 
 function App() {
   global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can acess the goal)
+  const changeScreenOnVictoryLocation = () => {
+    // console.log('yes');
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
+          navigation.navigate('victory');
+        }
+      }
+    )
+  }
+  useInterval(changeScreenOnVictoryLocation, 2000)
   return (
+    
     <NavigateStack />
   )
 }
@@ -224,17 +237,22 @@ const MapScreen = ({ navigation }) => {
   //Constantly checks user position and sees if within distance of goal coordinates. 
   //If close enough, changes to victory screen. 
   //Used: https://reactnavigation.org/docs/use-focus-effect/
-  useFocusEffect(
-    React.useCallback(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
-            navigation.navigate('victory');
-          }
-        }
-      )
-    }, [])
-  )
+
+
+
+
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
+  //           navigation.navigate('victory');
+  //         }
+  //       }
+  //     )
+  //   }, [])
+  // )
 
   return (
     <View style={styles.mapContainer} backgroundColor={'orange'}>
