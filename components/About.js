@@ -53,7 +53,6 @@ const About = () => {
 
       <Text style={styles.AboutPageP}>
         - React Native documentation (woohoo, we love you, thank you) {'\n'}- Our instructor: Paul Cantrell
-        {'\n'}- Some of our other commonly used resources below : P
       </Text>
     </ScrollView>
   );
