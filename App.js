@@ -19,6 +19,10 @@ const Stack = createStackNavigator();
 
 function App() {
   global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can acess the goal)
+
+  //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
+  //If close enough, changes to victory screen. 
+  //Used: https://www.npmjs.com/package/react-useinterval
   const changeScreenOnVictoryLocation = () => {
     // console.log('yes');
     navigator.geolocation.getCurrentPosition(
@@ -232,27 +236,7 @@ const GoalsScreen = ({ navigation }) => {
 
 //Created by Julia, uses Map component visual and allows to switch to compass screen
 const MapScreen = ({ navigation }) => {
-  //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
-
-  //Constantly checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. 
-  //Used: https://reactnavigation.org/docs/use-focus-effect/
-
-
-
-
-
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
-  //           navigation.navigate('victory');
-  //         }
-  //       }
-  //     )
-  //   }, [])
-  // )
+    //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
 
   return (
     <View style={styles.mapContainer} backgroundColor={'orange'}>
@@ -293,21 +277,6 @@ const MapScreen = ({ navigation }) => {
 
 //Uses Compass component and allows to switch to Map Screen. 
 const CompassScreen = ({ navigation }) => {
-
-  //Constantly checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. 
-  useFocusEffect(
-    React.useCallback(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
-            navigation.navigate('victory');
-          }
-        }
-      )
-    }, [])
-  )
-
   return (
     <View style={styles.compassContainer}>
       <View style={styles.buttonContainer}>
