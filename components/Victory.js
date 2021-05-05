@@ -28,29 +28,29 @@ const Victory = (props) => {
 
     // /Play the victory music! By James. Taken and adjusted from https://docs.expo.io/versions/latest/sdk/audio/
     useEffect(() => {
-      let victorySound = null;
-      let componentActive = true; //fixes a potential race condition if user exits before sound finishes loading
+        let victorySound = null;
+        let componentActive = true; //fixes a potential race condition if user exits before sound finishes loading
 
-      async function playSound() {
-        const { sound } = await Audio.Sound.createAsync(
-          require('./assets/bagpipes.m4a') //Sound courtesy of https://freesound.org/people/zagi2/sounds/205106/
-        );
-        victorySound = sound;
-        if (componentActive){
-          await victorySound.playAsync(); 
+        async function playSound() {
+            const { sound } = await Audio.Sound.createAsync(
+                require('./assets/bagpipes.m4a') //Sound courtesy of https://freesound.org/people/zagi2/sounds/205106/
+            );
+            victorySound = sound;
+            if (componentActive) {
+                await victorySound.playAsync();
+            }
         }
-      }
 
-      playSound();
+        playSound();
 
-      return function cleanup() {
-        componentActive = false;
-        if (victorySound){
-          victorySound.stopAsync();
-        }
-      };
+        return function cleanup() {
+            componentActive = false;
+            if (victorySound) {
+                victorySound.stopAsync();
+            }
+        };
     }, []); //an empty array as a second argument in useEffect() makes it only run once
- 
+
 
     //Various states to handle comment loading and data
     const [data, setData] = useState([]);
@@ -66,7 +66,7 @@ const Victory = (props) => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
             const comments = [];
             querySnapshot.forEach(documentSnapshot => {
-                if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))){
+                if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))) {
                     comments.push({
                         title: documentSnapshot.get('message'),
                         name: documentSnapshot.get('userName'),    //(if user doesn't enter name simply saves as "anonymous") left by users using firestore. 
@@ -81,16 +81,16 @@ const Victory = (props) => {
     }, []);
 
     if (loading) {
-        return <ActivityIndicator/>;
+        return <ActivityIndicator />;
     }
 
 
     // sameMessage saves the name and comment to later be added to the comment scrollView
     const saveMessage = () => {
-        if (name === null || name.trim() === ''){
+        if (name === null || name.trim() === '') {
             setName('Anonymous'); //(set to "anonymous if there isn't a name given)
         }
-        if (comment !== null && comment.trim() !== ''){
+        if (comment !== null && comment.trim() !== '') {
             firestore.collection('Messages').add({
                 message: comment,
                 location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
@@ -99,11 +99,11 @@ const Victory = (props) => {
         }
         setComment(''); //Sets input text back to empty string
     }
-   
+
     const handlingSetName = (currentName) => {
-        if (currentName === null || currentName.trim() === ''){  
+        if (currentName === null || currentName.trim() === '') {
             setName('Anonymous');    //Sets name to anonymous if text input is empty,
-        } else{
+        } else {
             setName(currentName);    //otherwise sets name state appropriately with given name. 
 
         }
@@ -114,20 +114,20 @@ const Victory = (props) => {
     //View contains place to write comment and user name, and flat list of comments and names given by others
     return (
         <SafeAreaView style={styles.victoryScreenContainer}>
-            <Image style = {{width: Dimensions.get('window').width , height: Dimensions.get('window').height/3}} source={require('./images/contratsScreen.png')}/>
+            <Image style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height / 3 }} source={require('./images/contratsScreen.png')} />
             <TextInput
-                clearButtonMode= {'always'}
+                clearButtonMode={'always'}
                 placeholder={'Leave comment here'}
                 style={styles.input}
-                onChangeText={(currentComment) => setComment(currentComment)} 
+                onChangeText={(currentComment) => setComment(currentComment)}
                 value={comment}
-                returnKeyType='done'/>
-            <TextInput 
-                clearButtonMode= {'always'}
+                returnKeyType='done' />
+            <TextInput
+                clearButtonMode={'always'}
                 placeholder={'Add your name here'}
                 style={styles.input}
                 onChangeText={(userName) => handlingSetName(currentName = userName)}
-                returnKeyType='done'/>
+                returnKeyType='done' />
             <View style={styles.submitButton}>
                 <Button
                     style={styles.submitButton}

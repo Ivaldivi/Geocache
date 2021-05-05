@@ -6,10 +6,10 @@
 
 
 import * as React from 'react';
-import { Alert, Image, View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
+import { Alert, Image, View, Text, StyleSheet, Dimensions, Platform } from 'react-native';
 import * as geolib from 'geolib';
 import { Magnetometer } from 'expo-sensors';
-import { useEffect, useState, useRef} from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 
 
@@ -22,7 +22,7 @@ const Compass = () => {
   const [distance, setDistance] = useState(-1);
 
   //Created by Julia holds the bearing of the compass
-  const bearingRef = useRef(null); 
+  const bearingRef = useRef(null);
 
 
   //magnetometer returns the cardinal angle in degrees east of north the user is facing
@@ -30,15 +30,15 @@ const Compass = () => {
   const [magnetometer, setMagnetometer] = useState(0);
 
   //Created by Julia reference to control when the compass should be running or not
-  const subscriptionRef = useRef(false); 
+  const subscriptionRef = useRef(false);
 
   //Updates bearing based on current user coordinates
   const changeBearing = () => {
-    
-    if (GOAL_LATITUDE != 0){
-      if(!subscriptionRef.current){
+
+    if (GOAL_LATITUDE != 0) {
+      if (!subscriptionRef.current) {
         console.log("bearing not changed", "existing subscription:", subscriptionRef.current);
-        return; 
+        return;
       }
 
       //Explanation/docs here: https://www.npmjs.com/package/geolib
@@ -47,7 +47,7 @@ const Compass = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           bearingRef.current = Math.abs(Math.round(geolib.getGreatCircleBearing(
-            { latitude: position.coords.latitude, longitude: position.coords.longitude }, 
+            { latitude: position.coords.latitude, longitude: position.coords.longitude },
             { latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE })));
         }
       );
@@ -66,16 +66,16 @@ const Compass = () => {
     }
   }
 
-   //Created by Julia. This finds distance between user and goal coordinates
-   //and updates distance text component appropriately.
-   const changeDistance = () => {
+  //Created by Julia. This finds distance between user and goal coordinates
+  //and updates distance text component appropriately.
+  const changeDistance = () => {
 
     //TODO: must write check here as well for if goal cache is null 
-    if (GOAL_LATITUDE != 0){
+    if (GOAL_LATITUDE != 0) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          if(!subscriptionRef.current){
-            return; 
+          if (!subscriptionRef.current) {
+            return;
           }
           setDistance(geolib.getDistance(
             { latitude: position.coords.latitude, longitude: position.coords.longitude },
@@ -83,24 +83,24 @@ const Compass = () => {
           ));
         });
     } else {
-        Alert.alert(
-          "Error",
-          "Return to Map of All Mac Caches To Pick Your Goal",
-          [
-            {
-              text: "Cancel",
-              onPress: () => console.log("Cancel Pressed"),
-              style: "cancel"
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-          ]);
-      }
+      Alert.alert(
+        "Error",
+        "Return to Map of All Mac Caches To Pick Your Goal",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]);
+    }
   }
 
 
   //Turns compass and runs toggle methods
   useEffect(() => {
-   _subscribe(); 
+    _subscribe();
     return () => {
       _unsubscribe();
     };
@@ -111,7 +111,7 @@ const Compass = () => {
 
   //Turns Magnetometer on and sends angle of phone
   const _subscribe = () => {
-    subscriptionRef.current = true; 
+    subscriptionRef.current = true;
     Magnetometer.addListener((data) => {
       setMagnetometer(_angle(data));
       changeBearing();
@@ -121,8 +121,8 @@ const Compass = () => {
 
   //removes subscription and should stop the whole screen
   const _unsubscribe = () => {
-    subscriptionRef.current = false; 
-    Magnetometer.removeAllListeners(); 
+    subscriptionRef.current = false;
+    Magnetometer.removeAllListeners();
     setMagnetometer(null);
   };
 
@@ -131,36 +131,35 @@ const Compass = () => {
   //Uses magnetometer to find the angle of which the phone is at.
   //Based off of this stack overflow: https://stackoverflow.com/questions/57308560/smooth-orientation-compass-using-react-native-sensorss-magnetometer
   const _angle = (magnetometer) => {
-    if (magnetometer){
-      let {x, y} = magnetometer;
+    if (magnetometer) {
+      let { x, y } = magnetometer;
       angle = Math.round(atan2Normalized(x, y));
     }
     return angle;
   };
 
   //normalizes atan2 so that it covers 0 to 360 degrees
-  function atan2Normalized(x,y) {
-    let result = Math.degrees(Math.atan2(y,x));
-    if (result < 0){
-      result = (360+result)%360;
+  function atan2Normalized(x, y) {
+    let result = Math.degrees(Math.atan2(y, x));
+    if (result < 0) {
+      result = (360 + result) % 360;
     }
     return result;
   }
 
   //turns degrees to radians
-  Math.radians = function(degrees) {
+  Math.radians = function (degrees) {
     return degrees * (Math.PI / 180);
   }
 
   //turns radians to degrees
-  Math.degrees = function(radians) {
+  Math.degrees = function (radians) {
     return radians * (180 / Math.PI);
   }
 
   // This function returns the angle of arrow rotation on the screen, given the bearing to the
   // destination and the heading (compass reading). 
   const _finalAngle = () => {
-    console.log(bearingRef.current - magnetometer - 90);
     return bearingRef.current - magnetometer - 90;
   }
 
@@ -188,10 +187,12 @@ const styles = StyleSheet.create({
   text: {
     ...Platform.select({
       android: {
-        fontFamily: 'normal'},
+        fontFamily: 'normal'
+      },
       ios: {
-        fontFamily: 'Futura'}
-      }),
+        fontFamily: 'Futura'
+      }
+    }),
     alignItems: 'center',
     color: 'white',
     fontWeight: 'bold',

@@ -1,7 +1,7 @@
 //Created by Julia (with help of Izzy for style) A component with a Google Maps style map that shows the user location and the location
 //of the selected goal marker. 
 
-import { Image, StyleSheet, View, Dimensions, Alert, Platform} from 'react-native';
+import { Image, StyleSheet, View, Dimensions, Alert, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import React, { useState } from 'react';
 
@@ -27,7 +27,7 @@ function userMap(props) {
   //Sets the goal marker coordinates according to user goal selection
   //(snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates.
   const GoalMarker = props => {
-    if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0){
+    if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0) {
       Alert.alert(
         "Error",
         "Return to Map of All Mac Caches To Pick Your Goal",
@@ -37,9 +37,9 @@ function userMap(props) {
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },
-          { 
+          {
             text: "OK",
-            onPress: () => console.log("OK Pressed") 
+            onPress: () => console.log("OK Pressed")
           }
         ]
       );
@@ -56,14 +56,14 @@ function userMap(props) {
         key={Marker.goal}
         image={Platform.OS === 'android' ? require("./images/scot.png") : undefined}>
         {Platform.OS === 'ios'
-        ? <Image
+          ? <Image
             source={require("./images/scot.png")}
             style={{
               width: 60,
               height: 100,
             }}
           />
-        : null}
+          : null}
       </MapView.Marker>
     );
   }
@@ -83,9 +83,9 @@ function userMap(props) {
         showsUserLocation={true}
         style={styles.map}>
 
-        <GoalMarker 
-        coordinates={{ latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }}
-        title="Goal Cache" />
+        <GoalMarker
+          coordinates={{ latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }}
+          title="Goal Cache" />
 
       </MapView>
 
@@ -116,10 +116,12 @@ const styles = StyleSheet.create({
   text: {
     ...Platform.select({
       android: {
-        fontFamily: 'normal'},
+        fontFamily: 'normal'
+      },
       ios: {
-        fontFamily: 'Futura'}
-      }),
+        fontFamily: 'Futura'
+      }
+    }),
     color: 'white',
     fontWeight: 'bold',
     alignSelf: 'center',

@@ -20,9 +20,9 @@ const Stack = createStackNavigator();
 function App() {
   global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can acess the goal)
 
-  
+
   return (
-    
+
     <NavigateStack />
   )
 }
@@ -160,11 +160,11 @@ const GoalsScreen = ({ navigation }) => {
         onPress={() => { global.goalCache = props.coordinates; navigation.navigate('map'); }}
         image={Platform.OS === 'android' ? require("./components/images/scot.png") : undefined}>
         {Platform.OS === 'ios' ? <Image source={require("./components/images/scot.png")}
-            style={{
-              width: 60,
-              height: 100,
-            }}
-          />
+          style={{
+            width: 60,
+            height: 100,
+          }}
+        />
           : null}
       </MapView.Marker>
     )
@@ -187,8 +187,8 @@ const GoalsScreen = ({ navigation }) => {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0922 * ASPECT_RATIO,
           }}
-          showsUserLocation={true}  
-          style={styles.map}> 
+          showsUserLocation={true}
+          style={styles.map}>
           <ScottMarker coordinates={{ latitude: 44.93783562821608, longitude: -93.16884756088258 }} title="Macalester Cache" />
           <ScottMarker coordinates={{ latitude: 44.95639299656109, longitude: -93.16680466351086 }} title="Delicious Food Cache" />
           <ScottMarker coordinates={{ latitude: 44.98285915765575, longitude: -93.1540443668212 }} title="Como Cache" />
@@ -197,11 +197,11 @@ const GoalsScreen = ({ navigation }) => {
           <ScottMarker coordinates={{ latitude: 44.92660058013187, longitude: -93.15679485958243 }} title="Bowling Cache" />
           <ScottMarker coordinates={{ latitude: 44.91188129719778, longitude: -93.24247817220277 }} title="Nokomis Cache" />
           <ScottMarker coordinates={{ latitude: 44.90490950335187, longitude: -93.19192998071587 }} title="Scenic Route Cache" />
-          <ScottMarker coordinates={{ latitude: 44.93625192995378, longitude:  -93.16806031032465 }} title="Turbine Cache" />
-          <ScottMarker coordinates={{ latitude: 44.93943898067451, longitude: -93.16792952281267 }} title="Campus Center Cache" />          
-          <ScottMarker coordinates={{ latitude: 44.93558615867223, longitude: -93.17030280866367 }} title="Language Cache" />          
-          <ScottMarker coordinates={{ latitude: 44.92780772281948, longitude: -93.16681856438859 }} title="Nelson's Cache" />          
-          <ScottMarker coordinates={{ latitude: 44.93743843844827, longitude: -93.16811487885501 }} title="Swings Cache" />          
+          <ScottMarker coordinates={{ latitude: 44.93625192995378, longitude: -93.16806031032465 }} title="Turbine Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93943898067451, longitude: -93.16792952281267 }} title="Campus Center Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93558615867223, longitude: -93.17030280866367 }} title="Language Cache" />
+          <ScottMarker coordinates={{ latitude: 44.92780772281948, longitude: -93.16681856438859 }} title="Nelson's Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93743843844827, longitude: -93.16811487885501 }} title="Swings Cache" />
           <ScottMarker coordinates={{ latitude: 44.94178471526371, longitude: -93.19863080978394 }} title="River Cache" />
           <ScottMarker coordinates={{ latitude: 44.934412433560745, longitude: -93.1777188451171 }} title="The Tap Cache" />
           <ScottMarker coordinates={{ latitude: 44.94031596574141, longitude: -93.16657303880767 }} title="BreadSmith Dumpster Cache" />
@@ -209,9 +209,10 @@ const GoalsScreen = ({ navigation }) => {
           <ScottMarker coordinates={{ latitude: 44.941529947250395, longitude: -93.18443394690537 }} title="The Rest Cache" />
           <ScottMarker coordinates={{ latitude: 44.98075218728141, longitude: -93.14020156860353 }} title="Into A Lake Cache" />
           <ScottMarker coordinates={{ latitude: 44.915480195653956, longitude: -93.21021258831026 }} title="Minnehaha Cache" />
-          <ScottMarker coordinates={{ latitude: 44.97305644426214, longitude: -93.25954914093019}} title="Vikes Cache" />
-          <ScottMarker coordinates={{ latitude: 44.93594452690041, longitude: -93.31975936889648}} title="Bde Maka Ska Cache" />
-          <ScottMarker coordinates={{ latitude: 44.94238464895194, longitude: -93.10050487518312}} title= "Science Cache" />
+          <ScottMarker coordinates={{ latitude: 44.97305644426214, longitude: -93.25954914093019 }} title="Vikes Cache" />
+          <ScottMarker coordinates={{ latitude: 44.93594452690041, longitude: -93.31975936889648 }} title="Bde Maka Ska Cache" />
+          <ScottMarker coordinates={{ latitude: 44.94238464895194, longitude: -93.10050487518312 }} title="Science Cache" />
+          <ScottMarker coordinates={{ latitude: 44.939819, longitude: -93.165891 }} title="Julia Apt. Testing Cache" />
           {/* Takes the user to a bench on summit : ) */}
         </MapView>
       </View>
@@ -223,7 +224,7 @@ const GoalsScreen = ({ navigation }) => {
 
 //Created by Julia, uses Map component visual and allows to switch to compass screen
 const MapScreen = ({ navigation }) => {
-    //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
+  //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
 
 
   //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
@@ -290,7 +291,7 @@ const CompassScreen = ({ navigation }) => {
     // console.log('yes');
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        if (geolib.getDistance(position.coords, global.goalCache) >= 7) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
           console.log('got there')
           navigation.navigate('victory');
         }
@@ -329,8 +330,8 @@ const CompassScreen = ({ navigation }) => {
       <View style={styles.otherB}>
         <TouchableOpacity onPress={() => navigation.navigate('map')}>
           <Text style={styles.otherText}>Map</Text>
-        </TouchableOpacity> 
-    </View>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -406,7 +407,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
   },
-  
+
   topText: {
     ...Platform.select({
       ios: {
@@ -485,7 +486,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     display: 'flex',
     marginBottom: 45,
-    width: 90, 
+    width: 90,
     alignItems: 'center',
 
   },
