@@ -290,7 +290,7 @@ const CompassScreen = ({ navigation }) => {
     // console.log('yes');
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        if (geolib.getDistance(position.coords, global.goalCache) >= 7) {
+        if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
           console.log('got there')
           navigation.navigate('victory');
         }
