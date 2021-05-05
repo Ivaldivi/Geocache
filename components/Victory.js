@@ -55,7 +55,7 @@ const Victory = (props) => {
     //Various states to handle comment loading and data
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [comment, setComment] = useState('No Comment');
+    const [comment, setComment] = useState('');
     const [name, setName] = useState('Anonymous');
 
 
@@ -90,11 +90,16 @@ const Victory = (props) => {
         if (name === null || name.trim() === ''){
             setName('Anonymous'); //(set to "anonymous if there isn't a name given)
         }
-        firestore.collection('Messages').add({
-            message: comment,
-            location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
-            userName: name
-        })
+        if (comment === null || comment.trim() === ''){
+            console.log('no message')
+        }
+        else{
+            firestore.collection('Messages').add({
+                message: comment,
+                location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
+                userName: name
+            })
+        }
         setComment(''); //Sets input text back to empty string
     }
    
