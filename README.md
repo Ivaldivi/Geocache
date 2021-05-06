@@ -100,7 +100,16 @@ ____________________
 ### Victory Screen
 This screen appears when the user reaches goal. It allows users to make comments on location using Firebase Firestore database. It also allows users to view the comments made by others previously. 
 
-#### useEffect
+### useEffect (sound)
+The first instance of useEffect in the file works with playing the victory sound.  Unlike the useEffect below which constantly searches for changes in a database,this useEffect triggers immediately on navigating to the victory screen and runs only once.
+
+### async function playSound()
+This function makes sure that the user has the correct audio file and plays that file when called.
+
+### function cleanup()
+Resets the data necessary to make playSound work ana helps prevent race conditions using the boolean componentActive.  
+
+#### useEffect (firebase)
 This hook constantly searches for changes in the firestore database, and when a change is detected it adds the comment and username data to the data state. 
 
 #### const saveMessage
