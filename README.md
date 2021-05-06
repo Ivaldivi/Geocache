@@ -16,6 +16,8 @@ In order to use the app, they should first download the expo go app which can be
 
 The user can then visit this link which will take them to the most recent published version of the app: FILL THIS IN LATER!!!!!!!!!!!!!!!!!!!!
 
+If the user has an iOS device, they might have to clone the project and create their own published version. This can be accomplished by cloning the project, navigating to it in your terminal, and then running `expo publish`. The result will give you a link in which you can open the published version from. 
+
 
 ____________________
 
@@ -33,7 +35,7 @@ ____________________
 This screen is a simple scroll view that gives users an idea of how to use the app, rules for use, and credits. 
 
 #### References for the About Screen: 
-##### How to use a scroll view-- React Native Documentation: https://reactnative.dev/docs/using-a-scrollview
+###### How to use a scroll view-- React Native Documentation: https://reactnative.dev/docs/using-a-scrollview
 ____________________
 
 ### Goal Screen
@@ -56,13 +58,13 @@ Sets the goal marker's coordinates according to user marker selection (snelling 
 
 #### References and Inspiration for Map Screen: 
 
-##### Prashant Gond's "How to Use Geolocation and Geocding in React Native Apps", published December 18, 2019 to Web Dev Zone: https://dzone.com/articles/how-to-use-geo-location-geo-coding-in-react-native
+###### Prashant Gond's "How to Use Geolocation and Geocding in React Native Apps", published December 18, 2019 to Web Dev Zone: https://dzone.com/articles/how-to-use-geo-location-geo-coding-in-react-native
 
-##### Aman Mittal's "Using Geolocation in React Native", published September 30, 2018 to Digital Ocean: https://www.digitalocean.com/community/tutorials/react-geolocation-react-native
+###### Aman Mittal's "Using Geolocation in React Native", published September 30, 2018 to Digital Ocean: https://www.digitalocean.com/community/tutorials/react-geolocation-react-native
 
-##### Example React Native Project where stylistic ideas were referenced: https://github.com/react-native-maps/react-native-maps
+###### Example React Native Project where stylistic ideas were referenced: https://github.com/react-native-maps/react-native-maps
 
-##### How to Integrate Google Maps into React Native tutorial: https://dzone.com/articles/how-to-integrate-google-maps-in-react-native
+###### How to Integrate Google Maps into React Native tutorial: https://dzone.com/articles/how-to-integrate-google-maps-in-react-native
 ____________________
 
 ### Compass Screen 
@@ -83,6 +85,9 @@ Turns Magnetometer on and sends angle of phone if true. Ends subscription and sh
 #### const _angle 
 Uses magnetometer to find the angle the phone is pointing in degrees east of North. At the bottom of method descriptions will be references to where Math was refrenced from.
 
+#### atand2Normalized
+Normalizes atan funtion to work with compass angles. 
+
 #### const _finalAngle
 This function finds the angle of arrow image rotation by doing simple math with bearing and heading (magnetometer) states. 
 
@@ -100,13 +105,13 @@ ____________________
 ### Victory Screen
 This screen appears when the user reaches goal. It allows users to make comments on location using Firebase Firestore database. It also allows users to view the comments made by others previously. 
 
-### useEffect (sound)
+#### useEffect (sound)
 The first instance of useEffect in the file works with playing the victory sound.  Unlike the useEffect below which constantly searches for changes in a database,this useEffect triggers immediately on navigating to the victory screen and runs only once.
 
-### async function playSound()
+#### async function playSound()
 This function makes sure that the user has the correct audio file and plays that file when called.
 
-### function cleanup()
+#### function cleanup()
 Resets the data necessary to make playSound work ana helps prevent race conditions using the boolean componentActive.  
 
 #### useEffect (firebase)
@@ -120,7 +125,7 @@ This function reacts to a button press in order to save the user's message (ente
 ###### Guide to using Firebase's Firestore with react native expo app: /https://rnfirebase.io/firestore/usage
 ###### Used to format text box and save input to a const: https://reactnative.dev/docs/textinput
 ###### Guide for how to use flatlists with firestore database: https://rnfirebase.io/firestore/usage-with-flatlists
-##### React Native documetation on Images: https://reactnative.dev/docs/image
+###### React Native documetation on Images: https://reactnative.dev/docs/image
 
 ____________________
 
