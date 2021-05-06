@@ -18,7 +18,7 @@ const ASPECT_RATIO = width / height;
 const Stack = createStackNavigator();
 
 function App() {
-  global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can acess the goal)
+  global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can access goal coordinate)
 
 
   return (
@@ -28,7 +28,7 @@ function App() {
 }
 
 
-//Handles navigation between different screens
+//Handles navigation between different screens.
 const NavigateStack = () => {
 
   return (
@@ -212,7 +212,6 @@ const GoalsScreen = ({ navigation }) => {
           <ScottMarker coordinates={{ latitude: 44.97305644426214, longitude: -93.25954914093019 }} title="Vikes Cache" />
           <ScottMarker coordinates={{ latitude: 44.93594452690041, longitude: -93.31975936889648 }} title="Bde Maka Ska Cache" />
           <ScottMarker coordinates={{ latitude: 44.94238464895194, longitude: -93.10050487518312 }} title="Science Cache" />
-          {/* Takes the user to a bench on summit : ) */}
         </MapView>
       </View>
     </View>
@@ -266,7 +265,6 @@ const MapScreen = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.topText} color={"white"}> {"MAKE THE JOURNEY TO THE SCOTT"} </Text>
       </View>
-
       <UserMap style={styles.map, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 100, left: 50 }} />
       <View style={styles.otherB}>
@@ -284,7 +282,7 @@ const MapScreen = ({ navigation }) => {
 const CompassScreen = ({ navigation }) => {
 
   //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. 
+  //If close enough (within 7 meters), changes to victory screen. 
   //Used: https://www.npmjs.com/package/react-useinterval
   const changeScreenOnVictoryLocation = () => {
     // console.log('yes');
@@ -297,6 +295,7 @@ const CompassScreen = ({ navigation }) => {
       }
     )
   }
+
   useInterval(changeScreenOnVictoryLocation, 2000)
 
   return (
@@ -311,7 +310,9 @@ const CompassScreen = ({ navigation }) => {
               onPress: () => console.log("Cancel Pressed"),
               style: "cancel"
             },
-            { text: "Ok", onPress: () => navigation.navigate('home') }]
+            { text: "Ok",
+             onPress: () => navigation.navigate('home') 
+            }]
           )
         }}>
           <Image
@@ -320,17 +321,17 @@ const CompassScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
         <Text style={styles.topText} color={"white"}>
-          {"FOLLOW THE ARROW TO FIND THE SCOT"}
+        {"FOLLOW THE ARROW TO FIND THE SCOT"}
         </Text>
       </View>
 
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 0, left: 50 }} />
-      <View style={styles.otherB}>
-        <TouchableOpacity onPress={() => navigation.navigate('map')}>
-          <Text style={styles.otherText}>Map</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.otherB}>
+          <TouchableOpacity onPress={() => navigation.navigate('map')}>
+            <Text style={styles.otherText}>Map</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   )
 }
@@ -353,9 +354,11 @@ const VictoryScreen = ({ navigation }) => {
               onPress: () => console.log("Cancel Pressed"),
               style: "cancel"
             },
-            { text: "Ok", onPress: () => navigation.navigate('home') }]
+            { text: "Ok", 
+            onPress: () => navigation.navigate('home')
+            }]
           )
-        }}>
+          }}>
           <Image
             style={styles.homelogo}
             source={require('./components/images/home.png')}
