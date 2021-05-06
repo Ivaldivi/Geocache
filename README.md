@@ -6,7 +6,7 @@ This app was created for the Module 4 version of Macalester's COMP225 class taug
 ____________________
 
 ### Mac-Cache & User Instructions:
-Our Macalester-themed geocaching app is aimed at all Macalester students, and Mac-Groveland residents. Our game features fun locations in and around Macalester's campus to engage students and push them to find new places. 
+Our Macalester-themed geocaching app is aimed at all Macalester students and Mac-Groveland residents. The premise is users may choose a special goal location to travel to (by foot or other means of transportation), where their journey is enhanced by a given map and compass (an arrow that points in the direction of the goal) tools. When arriving at a location, users are rewarded with a victory screen accompanied by bagpipe music, where users can leave comments for others who travel to the exact location. Our game features fun locations around Macalester's campus to engage students and push them to find new places. This app encourages exploration and connecting with others as users find new locations and leave comments.  
 
 In order to use the app, they should first download the expo go app which can be found here: 
 
@@ -14,11 +14,16 @@ In order to use the app, they should first download the expo go app which can be
 
 (Android) https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US&gl=US
 
-The user can then visit this link which will take them to the most recent published version of the app: 
+The user can then visit this link which will take them to the most recent published version of the app: FILL THIS IN LATER!!!!!!!!!!!!!!!!!!!!
 
-If the user has an iOS device, they might have to clone the project and create their own published version. This can be accomplished by cloning the project, navigating to it in your terminal, and then running `expo publish`. The result will give you a link in which you can open the published version from. 
+If the user has an iOS device, they might have to clone the project and create their own published version. This can be accomplished by cloning the project from this github repository, navigating to it in your terminal, and then running `expo publish`. The result will give you a link in which you can open the published version from in the expo go mobile app. 
 
-
+#### Goals: 
+We created these goals at the start of our project and stuck to them until the end:
+1. allow the user to choose a location out of different options. This will encourage exploration of the MSP area and Macalester College and gives users an activity they can do with their friends or alone to familiarize themselves with the area. 
+2.  Create a home/introduction screen. 
+3. When users get within a certain distance of the goal, have a victory screen pop up that says they found the location. 
+4. There will be a message log where people can leave messages (possibly for others if they choose to) when they arrive at the location. This will allow for a sense of connection with others in current COVID-19 times when in-person interaction is not possible. 
 ____________________
 
 
@@ -148,6 +153,7 @@ All pngs with no copy right information or labeled clip art, found on the intern
 ### Bugs: 
 ##### Victory screen submit button for a message does not show up on smaller phone screens until keyboard exited
 ##### Compass Arrow acts a little weird when very close to cache location 
+##### When first clicking on map, if goal coordinates is far away from user location, map region does not zoom out to show both (user must zoom out to see their location)
 
 
 

@@ -98,7 +98,7 @@ const Compass = () => {
   }
 
 
-  //Turns compass and runs toggle methods
+  //Turns compass and controls subscription methods (turns compass on and off)
   useEffect(() => {
     _subscribe();
     return () => {
@@ -109,7 +109,7 @@ const Compass = () => {
 
 
 
-  //Turns Magnetometer on and sends angle of phone
+  //Turns Magnetometer on and sends angle of phone. 
   const _subscribe = () => {
     subscriptionRef.current = true;
     Magnetometer.addListener((data) => {
@@ -163,7 +163,7 @@ const Compass = () => {
     return bearingRef.current - magnetometer - 90;
   }
 
-  //style done by Julia to make it look better for testing.
+  //style done by Julia 
   return (
     <View style={[styles.compass]}>
       <Image

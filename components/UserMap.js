@@ -1,7 +1,7 @@
 //Created by Julia (with help of Izzy for style) A component with a Google Maps style map that shows the user location and the location
 //of the selected goal marker. 
 
-import { Image, StyleSheet, View, Dimensions, Alert, Platform } from 'react-native';
+import {Image, StyleSheet, View, Dimensions, Alert, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import React, { useState } from 'react';
 
@@ -9,6 +9,8 @@ function userMap(props) {
 
   const { width, height } = Dimensions.get('window');
 
+  //Instance variables to set region for Map screen to focus on when it initally opens. 
+  //Also Sets the goal coordinates to the global coordinates variable which is set in App.js in goalscreen.  
   const ASPECT_RATIO = width / height;
   const GOAL_LATITUDE = global.goalCache.latitude;
   const GOAL_LONGITUDE = global.goalCache.longitude;
@@ -24,8 +26,8 @@ function userMap(props) {
   });
 
 
-  //Sets the goal marker coordinates according to user goal selection
-  //(snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates.
+  //Sets and create goal marker based on goal coordinates selected by the user goal.
+  // Also Handles default condition if user does not select goal location. 
   const GoalMarker = props => {
     if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0) {
       Alert.alert(
@@ -45,7 +47,7 @@ function userMap(props) {
       );
 
       GOAL_LATITUDE = 44.9379;
-      GOAL_LONGITUDE = -93.68869019; //snelling and grand cache if no marker
+      GOAL_LONGITUDE = -93.68869019; //snelling and grand cache are default if no goal coordinates chosen 
     }
 
 
@@ -71,7 +73,7 @@ function userMap(props) {
 
   return (
     <View style={[styles.map]}>
-
+      {/*Sets intial region shows on screen to be centered on the goal location*/}
       <MapView
         initialRegion={{
           latitude: GOAL_LATITUDE,
@@ -79,10 +81,8 @@ function userMap(props) {
           latitudeDelta: 0.0725,
           longitudeDelta: 0.0420,
         }}
-        region={props.userLocation}
         showsUserLocation={true}
         style={styles.map}>
-
         <GoalMarker
           coordinates={{ latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }}
           title="Goal Cache" />

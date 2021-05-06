@@ -22,13 +22,12 @@ function App() {
 
 
   return (
-
     <NavigateStack />
   )
 }
 
 
-//Handles navigation between different screens.
+//Handles navigation between different screens (set up by Julia)
 const NavigateStack = () => {
 
   return (
@@ -129,7 +128,6 @@ const WelcomeScreen = ({ navigation }) => {
 //Content by Izzy and Julia, style by Izzy
 const AboutPage = ({ navigation }) => {
   return (
-    //View style={styles.container}>
     <View style={styles.container}>
       <View style={styles.aboutContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('home')}>
@@ -245,6 +243,7 @@ const MapScreen = ({ navigation }) => {
   return (
     <View style={styles.mapContainer} backgroundColor={'orange'}>
       <View style={styles.buttonContainer}>
+        {/* If home button is selected, warns user that if they return to home they will have to reselect their goal*/}
         <TouchableOpacity
           onPress={() => {
             Alert.alert(
@@ -301,6 +300,7 @@ const CompassScreen = ({ navigation }) => {
   return (
     <View style={styles.compassContainer}>
       <View style={styles.buttonContainer}>
+        {/* Alert created by Julia: If home button is selected, warns user that if they return to home they will have to reselect their goal*/}
         <TouchableOpacity onPress={() => {
           Alert.alert(
             "Want To Return To Home Page?",
@@ -310,8 +310,9 @@ const CompassScreen = ({ navigation }) => {
               onPress: () => console.log("Cancel Pressed"),
               style: "cancel"
             },
-            { text: "Ok",
-             onPress: () => navigation.navigate('home') 
+            {
+              text: "Ok",
+              onPress: () => navigation.navigate('home')
             }]
           )
         }}>
@@ -321,17 +322,17 @@ const CompassScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
         <Text style={styles.topText} color={"white"}>
-        {"FOLLOW THE ARROW TO FIND THE SCOT"}
+          {"FOLLOW THE ARROW TO FIND THE SCOT"}
         </Text>
       </View>
 
       <Compass style={styles.compass, StyleSheet.absoluteFillObject} />
       <View style={{ position: 'absolute', top: 0, left: 50 }} />
-        <View style={styles.otherB}>
-          <TouchableOpacity onPress={() => navigation.navigate('map')}>
-            <Text style={styles.otherText}>Map</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.otherB}>
+        <TouchableOpacity onPress={() => navigation.navigate('map')}>
+          <Text style={styles.otherText}>Map</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -345,6 +346,7 @@ const VictoryScreen = ({ navigation }) => {
   return (
     <View backgroundColor="lightblue">
       <View style={styles.buttonContainer}>
+        {/* Alert created by Julia: If home button is selected, warns user that if they return to home they will have to reselect their goal*/}
         <TouchableOpacity onPress={() => {
           Alert.alert(
             "Want To Return To Home Page?",
@@ -354,11 +356,12 @@ const VictoryScreen = ({ navigation }) => {
               onPress: () => console.log("Cancel Pressed"),
               style: "cancel"
             },
-            { text: "Ok", 
-            onPress: () => navigation.navigate('home')
+            {
+              text: "Ok",
+              onPress: () => navigation.navigate('home')
             }]
           )
-          }}>
+        }}>
           <Image
             style={styles.homelogo}
             source={require('./components/images/home.png')}
@@ -433,10 +436,6 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.80,
-  },
-
-  centeredText: {
-    textAlign: 'center'
   },
 
   compass: {
@@ -552,13 +551,6 @@ const styles = StyleSheet.create({
     height: 45,
     marginTop: 25,
     right: 0,
-  },
-
-  aboutlogo: {
-    width: 45,
-    height: 45,
-    marginTop: -5,
-    left: Dimensions.get('window').width - 100,
   },
 
   aboutContainer: {
