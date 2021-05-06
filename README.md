@@ -126,6 +126,7 @@ This function reacts to a button press in order to save the user's message (ente
 ###### Used to format text box and save input to a const: https://reactnative.dev/docs/textinput
 ###### Guide for how to use flatlists with firestore database: https://rnfirebase.io/firestore/usage-with-flatlists
 ###### React Native documetation on Images: https://reactnative.dev/docs/image
+###### Documentation on expo-av: https://docs.expo.io/versions/latest/sdk/audio/
 
 ____________________
 
