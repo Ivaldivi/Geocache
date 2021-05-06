@@ -33,7 +33,7 @@ const Victory = (props) => {
 
         async function playSound() {
             const { sound } = await Audio.Sound.createAsync(
-                require('./assets/bagpipes.m4a') //Sound courtesy of https://freesound.org/people/zagi2/sounds/205106/
+                require('./assets/nttserenade.m4a') //Sound courtesy of Paul!
             );
             victorySound = sound;
             if (componentActive) {
