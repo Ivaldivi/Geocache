@@ -44,7 +44,7 @@ This screen is a simple scroll view that gives users an idea of how to use the a
 ____________________
 
 ### Goal Screen
-A google-maps styled screen displaying goal markers as Mac the Scot. Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. Selecting a goal marker sets a global variable with goal coordinates. Selecting a marker also brings the user directly to the map screen (and sets the goal of the map screen to the goal coordinates).
+A google-maps styled screen displaying goal markers as Mac the Scott. Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. Selecting a goal marker sets a global variable with goal coordinates. Selecting a marker also brings the user directly to the map screen (and sets the goal of the map screen to the goal coordinates). If user presses on marker, marker will show a short one-two word description of what the location is.   
 
 ##### ScottMarker
 A component that allows for easy additions of more goal locations. The component keeps track of a title, location coordinates, image, and handles operating system differences between android and iOS. 
@@ -144,9 +144,9 @@ All pngs with no copy right information or labeled clip art, found on the intern
 ###### 'Congrats, you found the scot' Image on victory screen: Izzy
 
 ### Future Ideas: 
-##### Allow users to add locations
-##### Give hints for location 
 ##### Artificial Reality when arriving to Maccache location 
+##### Allow users to add locations
+##### Give hints for locations
 ##### Allow users to leave pictures and drawings on victory screen 
 ##### Allow users to save favorite locations and past locations they have been to
 
