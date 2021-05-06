@@ -14,9 +14,9 @@ In order to use the app, they should first download the expo go app which can be
 
 (Android) https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US&gl=US
 
-The user can then visit this link which will take them to the most recent published version of the app: FILL THIS IN LATER!!!!!!!!!!!!!!!!!!!!
+The user can then visit this link which will take them to the most recent published version of the app: 
 
-If the user has an iOS device, they might have to clone the project and create their own published version. This can be accomplished by cloning the project from this github repository, navigating to it in your terminal, and then running `expo publish`. The result will give you a link in which you can open the published version from in the expo go mobile app. 
+If the user has an iOS device, they might have to clone the project and create their own published version. This can be accomplished by cloning the project, navigating to it in your terminal, and then running `expo publish`. The result will give you a link in which you can open the published version from. 
 
 
 ____________________
