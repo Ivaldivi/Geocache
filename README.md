@@ -20,8 +20,8 @@ If the user has an iOS device, they might have to clone the project and create t
 
 #### Goals: 
 We created these goals at the start of our project and stuck to them until the end:
-1. allow the user to choose a location out of different options. This will encourage exploration of the MSP area and Macalester College and gives users an activity they can do with their friends or alone to familiarize themselves with the area. 
-2.  Create a home/introduction screen. 
+1. Allow the user to choose a location out of different options. This will encourage exploration of the Twin Cities and Mac-Groveland area and gives users an activity they can do with their friends or alone to familiarize themselves with the area. 
+2. Create a home/introduction screen. 
 3. When users get within a certain distance of the goal, have a victory screen pop up that says they found the location. 
 4. There will be a message log where people can leave messages (possibly for others if they choose to) when they arrive at the location. This will allow for a sense of connection with others in current COVID-19 times when in-person interaction is not possible. 
 ____________________
@@ -59,7 +59,6 @@ Finds user coordinates using geolocation navigator.
 
 ##### const GoalMarker
 Sets the goal marker's coordinates according to user marker selection (snelling and grand is the default coordinates). Creates a Mapview.Marker component with correct coordinates. 
-
 
 #### References and Inspiration for Map Screen: 
 
@@ -141,10 +140,11 @@ All pngs with no copy right information or labeled clip art, found on the intern
 ###### Scot.png: https://scorestream.com/team/macalester-college-scots-274538
 ###### Macalester Campus picture on loading screen: Photo credit -> McGhiever, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons 
 ###### 'MAC CACHE' image on home screen: Izzy 
-###### 'Congrats, you found the scot' Image on victory screen: Izzy
+###### 'Congrats, you found the scott' Image on victory screen: Izzy
 
 ### Future Ideas: 
-##### Artificial Reality when arriving to Maccache location 
+##### Augmented Reality when arriving to Maccache location or added to Geocache markers on the maps
+##### Add a login screen to the app
 ##### Allow users to add locations
 ##### Give hints for locations
 ##### Allow users to leave pictures and drawings on victory screen 
@@ -153,7 +153,7 @@ All pngs with no copy right information or labeled clip art, found on the intern
 ### Bugs: 
 ##### Victory screen submit button for a message does not show up on smaller phone screens until keyboard exited
 ##### Compass Arrow acts a little weird when very close to cache location 
-##### When first clicking on map, if goal coordinates is far away from user location, map region does not zoom out to show both (user must zoom out to see their location)
+##### When choosing your goal geocache, if the goal's coordinates are far away from user location, map region may not show the user AND the Geocache (user must zoom out to see their location)
 
 
 
