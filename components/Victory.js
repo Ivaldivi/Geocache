@@ -30,7 +30,6 @@ const Victory = (props) => {
     useEffect(() => {
         let victorySound = null;
         let componentActive = true; //fixes a potential race condition if user exits before sound finishes loading
-
         async function playSound() {
             const { sound } = await Audio.Sound.createAsync(
                 require('./assets/nttserenade.m4a') //Sound courtesy of Paul!
@@ -40,7 +39,6 @@ const Victory = (props) => {
                 await victorySound.playAsync();
             }
         }
-
         playSound();
 
         return function cleanup() {
@@ -60,7 +58,6 @@ const Victory = (props) => {
 
 
     //Adding comments to flatlist was inspired by https://rnfirebase.io/firestore/usage-with-flatlists
-
     //Constantly looks for and updates 'data' with new comments and usernames
     useEffect(() => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
@@ -185,8 +182,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         display: 'flex',
         alignSelf: 'center'
-
     }
 });
+
 
 export default Victory

@@ -1,5 +1,4 @@
 //App.js contains the navigation and logic required to go between screens.
-
 import React, { useEffect } from 'react';
 import { Alert, Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, Platform } from 'react-native';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
@@ -11,7 +10,6 @@ import Victory from './components/Victory';
 import About from './components/About';
 import MapView, { Marker } from 'react-native-maps';
 import useInterval from 'react-useinterval';
-
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -145,7 +143,7 @@ const AboutPage = ({ navigation }) => {
 
 
 //A google-maps styled screen displaying goal markers as Mac the Scot. 
-//Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. (created by Julia and Izzy)
+//Users can view their location and goals, and select a goal by pressing on one of the Mac the Scot goal markers. (created by Julia and Izzy, scottmarker created by Izzy)
 const GoalsScreen = ({ navigation }) => {
 
   const ScottMarker = props => {
@@ -217,11 +215,9 @@ const GoalsScreen = ({ navigation }) => {
 }
 
 
-
 //Created by Julia, uses Map component visual and allows to switch to compass screen
 const MapScreen = ({ navigation }) => {
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
-
 
   //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
   //If close enough, changes to victory screen. 
@@ -274,7 +270,6 @@ const MapScreen = ({ navigation }) => {
     </View>
   )
 }
-
 
 
 //Uses Compass component and allows to switch to Map Screen. 
@@ -338,7 +333,6 @@ const CompassScreen = ({ navigation }) => {
 }
 
 
-
 //Uses Victory component to show comments and congrats!
 //Created by A'di
 const VictoryScreen = ({ navigation }) => {
@@ -372,8 +366,6 @@ const VictoryScreen = ({ navigation }) => {
     </View>
   )
 }
-
-
 
 
 
@@ -562,7 +554,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   }
 });
-
 
 
 export default App;

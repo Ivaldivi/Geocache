@@ -17,14 +17,12 @@ function userMap(props) {
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-
   const region = useState({
     latitude: GOAL_LATITUDE,
     longitude: GOAL_LONGITUDE,
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
-
 
   //Sets and create goal marker based on goal coordinates selected by the user goal.
   // Also Handles default condition if user does not select goal location. 
@@ -129,7 +127,6 @@ const styles = StyleSheet.create({
 
   },
 });
-
 
 
 export default userMap;
