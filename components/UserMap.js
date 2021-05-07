@@ -5,7 +5,7 @@ import {Image, StyleSheet, View, Dimensions, Alert, Platform } from 'react-nativ
 import MapView, { Marker } from 'react-native-maps';
 import React, { useState } from 'react';
 
-function userMap(props) {
+function userMap () {
 
   const { width, height } = Dimensions.get('window');
 
@@ -24,8 +24,8 @@ function userMap(props) {
     longitudeDelta: LONGITUDE_DELTA,
   });
 
-  //Sets and create goal marker based on goal coordinates selected by the user goal.
-  // Also Handles default condition if user does not select goal location. 
+  //Sets and creates goal marker based on goal coordinates selected by the user goal.
+  // Also handles default condition if user does not select goal location. 
   const GoalMarker = props => {
     if (GOAL_LATITUDE == 0 && GOAL_LONGITUDE == 0) {
       Alert.alert(
@@ -47,7 +47,6 @@ function userMap(props) {
       GOAL_LATITUDE = 44.9379;
       GOAL_LONGITUDE = -93.68869019; //snelling and grand cache are default if no goal coordinates chosen 
     }
-
 
     return (
       <MapView.Marker
@@ -81,15 +80,15 @@ function userMap(props) {
         }}
         showsUserLocation={true}
         style={styles.map}>
-        <GoalMarker
-          coordinates={{ latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }}
-          title="Goal Cache" />
-
+      <GoalMarker
+        coordinates={{ latitude: GOAL_LATITUDE, longitude: GOAL_LONGITUDE }}
+        title="Goal Cache" />
       </MapView>
-
     </View>
   );
 };
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
