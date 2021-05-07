@@ -63,7 +63,7 @@ const Victory = (props) => {
         const subscriber = firestore.collection('Messages').onSnapshot(querySnapshot => {
             const comments = [];
             querySnapshot.forEach(documentSnapshot => {
-                if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))) {
+                if (documentSnapshot.get('location').isEqual(new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude))) { //filters so that the only messages returned correspond to the goal location
                     comments.push({
                         title: documentSnapshot.get('message'),
                         name: documentSnapshot.get('userName'),    //(if user doesn't enter name simply saves as "anonymous") left by users using firestore. 
@@ -85,24 +85,23 @@ const Victory = (props) => {
     // sameMessage saves the name and comment to later be added to the comment scrollView
     const saveMessage = () => {
         if (name === null || name.trim() === '') {
-            setName('Anonymous'); //(set to "anonymous if there isn't a name given)
+            setName('Anonymous'); //sets to "anonymous if there isn't a name given
         }
-        if (comment !== null && comment.trim() !== '') {
+        if (comment !== null && comment.trim() !== '') { //only saves message to firestore if there is a comment
             firestore.collection('Messages').add({
                 message: comment,
-                location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude),
+                location: new firebase.firestore.GeoPoint(props.location.latitude, props.location.longitude), //this is to check which comment corresponds to which cache
                 userName: name
             })
         }
         setComment(''); //Sets input text back to empty string
     }
 
-    const handlingSetName = (currentName) => {
+    const handleSetName = (currentName) => {
         if (currentName === null || currentName.trim() === '') {
             setName('Anonymous');    //Sets name to anonymous if text input is empty,
         } else {
             setName(currentName);    //otherwise sets name state appropriately with given name. 
-
         }
     }
 
@@ -123,7 +122,7 @@ const Victory = (props) => {
                 clearButtonMode={'always'}
                 placeholder={'Add your name here'}
                 style={styles.input}
-                onChangeText={(userName) => handlingSetName(currentName = userName)}
+                onChangeText={(userName) => handleSetName(currentName = userName)}
                 returnKeyType='done' />
             <View style={styles.submitButton}>
                 <Button
