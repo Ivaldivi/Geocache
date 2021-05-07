@@ -74,9 +74,6 @@ ____________________
 ### Compass Screen 
 This screen creates a simple arrow that points to the direction of the goal coordinates (AKA Scot). Utilizing the compass' magnetometer, the user coordinates, and the goal coordinates, this screen finds the bearing and heading in order to point in the correct direction. When user is within a certain distance of the goal, the screen switches to the Victory Screen. The user can switch betwen the Compass Screen and Map Screen at will by selecting a button. 
 
-##### Find Coordinates Method 
-Finds user coordinates using geolocation navigator. 
-
 ##### const changeBearing
 Adjusts the bearingReference state (cardinal angle between user and goal coordinates) as coordinate information changes. Uses 'getGreatCircleBearing' function from Geolib package.
 
@@ -86,13 +83,13 @@ Purpose is to turn compass and to run methods. It calles to unsubscribe and subs
 #### const subscriptionReference
 Turns Magnetometer on and sends angle of phone if true. Ends subscription and should stop the whole screen if false. 
 
-#### const _angle 
+#### const _getHeadingAngle 
 Uses magnetometer to find the angle the phone is pointing in degrees east of North. At the bottom of method descriptions will be references to where Math was refrenced from.
 
-#### atand2Normalized
+#### atan2Normalized
 Normalizes atan funtion to work with compass angles. 
 
-#### const _finalAngle
+#### const _getFinalHeadingAngle
 This function finds the angle of arrow image rotation by doing simple math with bearing and heading (magnetometer) states. 
 
 #### const changeDistance
@@ -123,6 +120,9 @@ This hook constantly searches for changes in the firestore database, and when a 
 
 #### const saveMessage
 This function reacts to a button press in order to save the user's message (entered through a text input) as a message in the firestore database. It also adds the user's name. If a user doesn't provide their name the default name is "anonymous". 
+
+#### const handleSetName
+This sets the user's name to anonymous if they do not enter a name. Otherwise the name is set to the name they entered.
 
 ### References and Inspiration for Victory Screen: 
 ###### General guide for using Firebase with a react native expo app: https://docs.expo.io/guides/using-firebase/
