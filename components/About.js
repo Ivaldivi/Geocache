@@ -25,8 +25,7 @@ const About = () => {
       <Text style={{
         fontSize: 25, fontWeight: 'bold', marginLeft: 4, borderColor: 'white', borderWidth: 2, borderRadius: 8,
         color: '#183592', marginRight: 285
-      }}>
-        Rules:  </Text>
+      }}> Rules:  </Text>
 
       <Text style={styles.AboutPageP}>
         <B>1.</B> Be nice in the message log! No mean-spirited, hateful, or discriminatory messages.
@@ -74,13 +73,13 @@ const styles = StyleSheet.create({
   AboutPageT: {
     fontSize: 25, 
     fontWeight: 'bold',
-     marginLeft: 4,  
-     borderColor: 'white',
-      borderWidth: 2, 
-      borderRadius: 8,
-       color: '#183592', 
-       marginRight: 105,
-      },
+    marginLeft: 4,  
+    borderColor: 'white',
+    borderWidth: 2, 
+    borderRadius: 8,
+    color: '#183592', 
+    marginRight: 105,
+  },
 });
 
 
