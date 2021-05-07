@@ -1,4 +1,4 @@
-//Created by all group members
+//Created by all group members with a lot of the math by A'di
 //
 //This component creates an arrow that uses the bearing between location and goal
 //and compass heading in order to rotate a picture of an arrow that directs user to 
@@ -70,7 +70,6 @@ const Compass = () => {
   //and updates distance text component appropriately.
   const changeDistance = () => {
 
-    //TODO: must write check here as well for if goal cache is null 
     if (GOAL_LATITUDE != 0) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -93,7 +92,8 @@ const Compass = () => {
             style: "cancel"
           },
           { text: "OK", onPress: () => console.log("OK Pressed") }
-        ]);
+        ]
+      );
     }
   }
 
@@ -113,7 +113,7 @@ const Compass = () => {
   const _subscribe = () => {
     subscriptionRef.current = true;
     Magnetometer.addListener((data) => {
-      setMagnetometer(_angle(data));
+      setMagnetometer(_getHeadingAngle(data));
       changeBearing();
       changeDistance();
     });
@@ -130,7 +130,7 @@ const Compass = () => {
 
   //Uses magnetometer to find the angle of which the phone is at.
   //Based off of this stack overflow: https://stackoverflow.com/questions/57308560/smooth-orientation-compass-using-react-native-sensorss-magnetometer
-  const _angle = (magnetometer) => {
+  const _getHeadingAngle = (magnetometer) => {
     if (magnetometer) {
       let { x, y } = magnetometer;
       angle = Math.round(atan2Normalized(x, y));
@@ -159,7 +159,7 @@ const Compass = () => {
 
   // This function returns the angle of arrow rotation on the screen, given the bearing to the
   // destination and the heading (compass reading). 
-  const _finalAngle = () => {
+  const _getFinalHeadingAngle = () => {
     return bearingRef.current - magnetometer - 90;
   }
 
@@ -171,7 +171,7 @@ const Compass = () => {
           height: height / 2,
           width: width / 2,
           resizeMode: 'contain',
-          transform: [{ rotate: _finalAngle() + 'deg' }]
+          transform: [{ rotate: _getFinalHeadingAngle() + 'deg' }]
         }}
         source={require('./images/arrow.png')}
       />
