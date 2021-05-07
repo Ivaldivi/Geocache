@@ -1,7 +1,8 @@
 //App.js contains the navigation and logic required to go between screens.
-import React, { useEffect } from 'react';
-import { Alert, Text, Button, View, StyleSheet, Dimensions, Image, TouchableOpacity, Platform } from 'react-native';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+
+import React from 'react';
+import { Alert, Text, View, StyleSheet, Dimensions, Image, TouchableOpacity, Platform } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as geolib from 'geolib';
 import UserMap from './components/UserMap';
@@ -17,7 +18,6 @@ const Stack = createStackNavigator();
 
 function App() {
   global.goalCache = 0; //Global variable containing goal coordinates (creatd by Julia, so all screens can access goal coordinate)
-
 
   return (
     <NavigateStack />
@@ -73,10 +73,8 @@ const NavigateStack = () => {
             title: 'Victory',
             gestureEnabled: false
           }} />
-
-
-
       </Stack.Navigator>
+
     </NavigationContainer>
   )
 }
@@ -219,9 +217,9 @@ const GoalsScreen = ({ navigation }) => {
 const MapScreen = ({ navigation }) => {
   //Code used for how to find coordinates: https://dev-yakuza.posstree.com/en/react-native/react-native-geolocation-service/#how-to-get-current-geolocation
 
-  //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
-  //If close enough, changes to victory screen. 
+  //Every 2 seconds checks user position and sees if 7m of goal coordinates and changes to victory screen. 
   //Used: https://www.npmjs.com/package/react-useinterval
+  //Created by A'di
   const changeScreenOnVictoryLocation = () => {
     // console.log('yes');
     navigator.geolocation.getCurrentPosition(
@@ -233,8 +231,7 @@ const MapScreen = ({ navigation }) => {
       }
     )
   }
-  useInterval(changeScreenOnVictoryLocation, 2000)
-
+  useInterval(changeScreenOnVictoryLocation, 2000) //checks every 2 seconds
 
   return (
     <View style={styles.mapContainer} backgroundColor={'orange'}>
@@ -272,14 +269,14 @@ const MapScreen = ({ navigation }) => {
 }
 
 
-//Uses Compass component and allows to switch to Map Screen. 
+//Uses Compass component and allows to switch to Map Screen. Functionality primarily by 
+//A'di with help from everyone else, style by Julia. 
 const CompassScreen = ({ navigation }) => {
 
-  //Every 2 seconds checks user position and sees if within distance of goal coordinates. 
-  //If close enough (within 7 meters), changes to victory screen. 
+  //Every 2 seconds checks user position and sees if 7m of goal coordinates and changes to victory screen. 
   //Used: https://www.npmjs.com/package/react-useinterval
+  //Created by A'di
   const changeScreenOnVictoryLocation = () => {
-    // console.log('yes');
     navigator.geolocation.getCurrentPosition(
       (position) => {
         if (geolib.getDistance(position.coords, global.goalCache) <= 7) {
@@ -289,8 +286,7 @@ const CompassScreen = ({ navigation }) => {
       }
     )
   }
-
-  useInterval(changeScreenOnVictoryLocation, 2000)
+  useInterval(changeScreenOnVictoryLocation, 2000) //checks every 2 seconds
 
   return (
     <View style={styles.compassContainer}>
@@ -334,7 +330,7 @@ const CompassScreen = ({ navigation }) => {
 
 
 //Uses Victory component to show comments and congrats!
-//Created by A'di
+//Created by A'di with sound by James
 const VictoryScreen = ({ navigation }) => {
 
   return (
@@ -378,18 +374,15 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center'
   },
-
   compassContainer: {
     flex: 1,
     backgroundColor: 'orange',
   },
-
   mapContainer: {
     flex: 1,
     backgroundColor: 'whitesmoke',
     justifyContent: 'center',
   },
-
   baseText: {
     ...Platform.select({
       ios: {
@@ -404,7 +397,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
   },
-
   topText: {
     ...Platform.select({
       ios: {
@@ -424,18 +416,15 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 35
   },
-
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.80,
   },
-
   compass: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.75,
     backgroundColor: 'rgba(223, 108, 22, 1)',
   },
-
   imgz: {
     width: 370,
     height: 370,
@@ -445,7 +434,6 @@ const styles = StyleSheet.create({
     marginBottom: -15,
     marginTop: Dimensions.get('window').height * 0.1
   },
-
   welcomePg: {
     alignItems: 'center',
     backgroundColor: `#214683`,
@@ -453,7 +441,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
   },
-
   welcomeScotts: {
     paddingHorizontal: 12,
     paddingVertical: 10,
@@ -470,7 +457,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     marginBottom: 45,
   },
-
   welcomeB: {
     backgroundColor: "rgba(223, 108, 22, 1)",
     paddingHorizontal: 12,
@@ -483,7 +469,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
-
   welcomeText: {
     borderRadius: 20,
     alignContent: 'center',
@@ -500,7 +485,6 @@ const styles = StyleSheet.create({
     }),
     display: 'flex'
   },
-
   otherB: {
     backgroundColor: 'skyblue',
     paddingHorizontal: 18,
@@ -519,7 +503,6 @@ const styles = StyleSheet.create({
     top: 0,
     width: 200,
   },
-
   otherText: {
     paddingHorizontal: 18,
     paddingVertical: 10,
@@ -537,18 +520,15 @@ const styles = StyleSheet.create({
       }
     }),
   },
-
   homelogo: {
     width: 45,
     height: 45,
     marginTop: 25,
     right: 0,
   },
-
   aboutContainer: {
     backgroundColor: 'rgba(223, 108, 22, 1)',
   },
-
   buttonContainer: {
     flexDirection: 'row',
     marginTop: 20,
